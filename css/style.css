@@ -320,6 +320,12 @@ section.tight{padding:64px 0}
 .ri-card{display:flex;flex-direction:column}
 .ri-canvas{width:100%;height:92px;border-radius:10px;background:var(--soft);display:block;margin-bottom:14px}
 
+.process-illustration{
+  background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);
+  padding:8px 26px;margin:26px 0 10px;
+}
+.process-illustration canvas{width:100%;height:150px;display:block}
+
 /* ============ LECTURES ============ */
 .lec-table{width:100%;border-collapse:collapse;margin-top:10px}
 .lec-table th{text-align:left;font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:0 14px 14px;border-bottom:2px solid var(--line)}
