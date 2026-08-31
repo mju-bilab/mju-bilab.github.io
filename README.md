@@ -53,14 +53,16 @@ git push -u origin main
 ## 콘텐츠 업데이트 방법
 
 - **새 소식 추가**: `js/news-data.js`의 `NEWS_DATA` 배열 맨 위에 항목 추가
-- **활동 사진/기록 추가**: `js/news-data.js`의 `ACTIVITY_DATA` 배열에 항목 추가 (실제 사진을 쓰려면 `images/` 폴더에 넣고 `js/main.js`의 `renderActivity` 함수에서 썸네일을 `<img>`로 교체)
+- **활동 사진/기록 추가**: `js/news-data.js`의 `ACTIVITY_DATA` 배열에 항목 추가. 사진을 넣으려면 `images/activity/` 폴더에 파일을 넣고 그 항목에 `photo: "images/activity/파일명.jpg"` 필드만 추가하면 자동으로 카드 썸네일에 표시됨 (없으면 기본 플레이스홀더 표시)
 - **구성원 추가/변경**: `members.html`의 `person-card` 블록 복사해서 수정
 - **논문 추가**: `publications.html`의 해당 `pub-item` 블록 복사해서 수정
 - **메뉴/링크 변경**: `js/components.js`의 `NAV` 배열 수정 (모든 페이지에 자동 반영)
 
 ## 남은 할 일 (실제 운영 전 확인 필요)
 
-- [ ] 지도교수·구성원 실제 프로필 사진 추가 (현재는 이니셜 아바타로 대체)
+- [x] 지도교수 실제 프로필 사진 적용 (`director.html`, `members.html`)
+- [ ] 지도교수 외 구성원 실제 프로필 사진 추가 (현재는 이니셜 아바타로 대체)
 - [ ] Google Scholar 프로필 정확한 URL 연결 (`director.html`)
-- [ ] 연구실 로고 이미지가 있다면 `images/`에 추가하고 헤더의 "BI" 마크를 교체
+- [x] 연구실 로고 이미지 적용 (`images/logo.png`, 헤더/푸터/파비콘)
+- [ ] Our Lab 활동 사진 추가 (`js/news-data.js`의 `ACTIVITY_DATA`에 `photo` 필드로)
 - [ ] 실제 도메인 연결 여부 결정

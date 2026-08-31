@@ -62,7 +62,10 @@ const NEWS_DATA = [
   },
 ];
 
-/* Our Lab — activity log (photos/albums placeholder-driven) */
+/* Our Lab — activity log.
+   To attach a photo to an entry, add a "photo" field pointing at a file
+   in images/ (e.g. photo: "images/activity/2025-conference.jpg") — the
+   card will show that image instead of the plain placeholder. */
 const ACTIVITY_DATA = [
   { date: "2025.06.18 – 06.20", title: "2025 대한산업공학회 춘계공동학술대회", people: ["권예지", "백세린", "김민경", "이서연"] },
   { date: "2025.08.20", title: "2024 후기 학위수여식", people: ["권예지"] },

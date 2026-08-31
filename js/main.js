@@ -26,17 +26,20 @@
   function renderActivity(elId) {
     const el = document.getElementById(elId);
     if (!el || typeof ACTIVITY_DATA === "undefined") return;
-    el.innerHTML = ACTIVITY_DATA.map(
-      (a) => `
+    el.innerHTML = ACTIVITY_DATA.map((a) => {
+      const thumb = a.photo
+        ? `<img src="${a.photo}" alt="${a.title}">`
+        : `BILAB · ${a.date.split(" ")[0].slice(0, 4)}`;
+      return `
       <div class="gallery-card">
-        <div class="gallery-thumb">BILAB · ${a.date.split(" ")[0].slice(0, 4)}</div>
+        <div class="gallery-thumb">${thumb}</div>
         <div class="gallery-body">
           <time>${a.date}</time>
           <h4>${a.title}</h4>
           <div class="tags">${a.people.map((p) => `<span>${p}</span>`).join("")}</div>
         </div>
-      </div>`
-    ).join("");
+      </div>`;
+    }).join("");
   }
 
   function initNewsToggle() {
