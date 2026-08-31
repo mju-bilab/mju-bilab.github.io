@@ -249,12 +249,15 @@ section.tight{padding:64px 0}
 .tl-item h4{font-size:1.02rem;margin-bottom:8px;color:var(--navy)}
 .tl-item .org{font-size:.84rem;color:var(--muted);margin-bottom:10px}
 .people{display:flex;flex-wrap:wrap;gap:6px}
-.people span{padding:4px 10px;border-radius:999px;font-size:.76rem;font-weight:600}
-.people span:nth-child(5n+1){background:#E9EEF6;color:#234AAD}
-.people span:nth-child(5n+2){background:#E6F7F1;color:#0C7F60}
-.people span:nth-child(5n+3){background:#FFF3D6;color:#946200}
-.people span:nth-child(5n+4){background:#F1EAFB;color:#6B3FA0}
-.people span:nth-child(5n+5){background:#FDE9EE;color:#B23A5C}
+.people span{background:var(--soft);border:1px solid var(--line);padding:4px 10px;border-radius:999px;font-size:.76rem;color:var(--navy)}
+
+/* colorful participant tags — Our Lab activity cards only */
+.gallery-body .people span{border:none;font-weight:600}
+.gallery-body .people span:nth-child(5n+1){background:#E9EEF6;color:#234AAD}
+.gallery-body .people span:nth-child(5n+2){background:#E6F7F1;color:#0C7F60}
+.gallery-body .people span:nth-child(5n+3){background:#FFF3D6;color:#946200}
+.gallery-body .people span:nth-child(5n+4){background:#F1EAFB;color:#6B3FA0}
+.gallery-body .people span:nth-child(5n+5){background:#FDE9EE;color:#B23A5C}
 
 /* ============ PUBLICATIONS ============ */
 .pub-tabs{display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap}
