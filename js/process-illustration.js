@@ -18,7 +18,6 @@
 
   const STAGE_X = [0.13, 0.32, 0.5, 0.68];
   const INSIGHT_X = 0.83;
-  const BUSINESS_X = 0.95;
   const IMPULSE_PERIOD = 2600;
 
   let w = 0, h = 0, raf = null;
@@ -170,8 +169,8 @@
 
   /* --- business impact node: briefcase + growth bars, flashes when the
      insight signal (traveling dot) arrives from the insight point --- */
-  function drawBusiness(t, insightPos, hoverBoost) {
-    const x = BUSINESS_X * w, y = h / 2;
+  function drawBusiness(t, insightPos, hoverBoost, x, k) {
+    const y = h / 2;
     const phase = (t % IMPULSE_PERIOD) / IMPULSE_PERIOD;
 
     // traveling signal dot: insight -> business
@@ -202,7 +201,7 @@
 
     if (boost > 0.05) {
       ctx.beginPath();
-      ctx.arc(x, y, 20 * scale, 0, Math.PI * 2);
+      ctx.arc(x, y, 20 * scale * k, 0, Math.PI * 2);
       ctx.strokeStyle = rgba(TEAL, 0.35 * boost);
       ctx.lineWidth = 1.4;
       ctx.stroke();
@@ -210,10 +209,16 @@
 
     const color = boost > 0.4 ? TEAL : NAVY;
 
+    // whole cluster (briefcase, bars, arrow, label) drawn in local
+    // coordinates then scaled by pulse * k, so it shrinks together on
+    // narrow canvases instead of overflowing the right edge.
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(scale * k, scale * k);
+
     // briefcase
     ctx.save();
-    ctx.translate(x, y + 3);
-    ctx.scale(scale, scale);
+    ctx.translate(0, 3);
     ctx.strokeStyle = rgba(color, 0.85);
     ctx.lineWidth = 1.6;
     ctx.beginPath();
@@ -237,34 +242,37 @@
     // growth bars, taller with more accumulated boost
     const heights = [4, 7, 10.5].map((v) => v + boost * 4);
     heights.forEach((hh, i) => {
-      const bx = x + 12 + i * 5;
+      const bx = 12 + i * 5;
       ctx.fillStyle = rgba(i === 2 ? TEAL : color, 0.55 + boost * 0.35);
-      ctx.fillRect(bx, y + 9 - hh, 3, hh);
+      ctx.fillRect(bx, 9 - hh, 3, hh);
     });
 
     // up arrow
     ctx.strokeStyle = rgba(TEAL, 0.75 + boost * 0.25);
     ctx.lineWidth = 1.4;
     ctx.beginPath();
-    ctx.moveTo(x + 26, y - 2);
-    ctx.lineTo(x + 30, y - 8 - boost * 2);
-    ctx.moveTo(x + 27.4, y - 6.4 - boost * 2);
-    ctx.lineTo(x + 30, y - 8 - boost * 2);
-    ctx.lineTo(x + 28.4, y - 4.6 - boost * 2);
+    ctx.moveTo(26, -2);
+    ctx.lineTo(30, -8 - boost * 2);
+    ctx.moveTo(27.4, -6.4 - boost * 2);
+    ctx.lineTo(30, -8 - boost * 2);
+    ctx.lineTo(28.4, -4.6 - boost * 2);
     ctx.stroke();
 
     ctx.font = "700 10px Pretendard, sans-serif";
     ctx.fillStyle = rgba(color, 0.7);
     ctx.textAlign = "center";
-    ctx.fillText("Business", x, y + 26);
+    ctx.fillText("Business", 0, 26);
+    ctx.restore();
   }
 
   function draw(t) {
     ctx.clearRect(0, 0, w, h);
     const cy = h / 2;
     const active = nearestStage();
+    const bK = Math.max(0.55, Math.min(1, w / 620));
+    const bX = w - 10 - 30 * bK;
     const businessHover =
-      mouse.active && Math.hypot(BUSINESS_X * w - mouse.x, cy - mouse.y) < 30 ? 1 : 0;
+      mouse.active && Math.hypot(bX - mouse.x, cy - mouse.y) < 30 ? 1 : 0;
 
     particles.forEach((pt) => {
       const p = (t * pt.speed + pt.offset) % 1;
@@ -279,7 +287,7 @@
 
     STAGE_X.forEach((sx, i) => drawStageIcon(i, sx * w, cy, i === active, t));
     const insightPos = drawInsight(t);
-    drawBusiness(t, insightPos, businessHover);
+    drawBusiness(t, insightPos, businessHover, bX, bK);
   }
 
   function frame(t) {

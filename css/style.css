@@ -21,7 +21,7 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
 body{
   background:var(--bg);
   color:var(--ink);
@@ -422,8 +422,10 @@ footer{background:var(--navy);color:#c8d4e8;padding:64px 0 26px}
   .burger span{background:var(--navy) !important}
   .hero h1{font-size:2.2rem}
   .hero-stats{grid-template-columns:repeat(2,1fr)}
-  .grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
+  .grid-4,.grid-3,.grid-2,.interest-grid{grid-template-columns:1fr}
   .news-row{grid-template-columns:1fr}
+  .topbar .wrap span:first-child{display:none}
+  .topbar .wrap{justify-content:flex-end}
   .tl-item{grid-template-columns:1fr}
   .cv-row{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
