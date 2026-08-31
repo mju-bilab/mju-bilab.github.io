@@ -36,7 +36,7 @@
         <div class="gallery-body">
           <time>${a.date}</time>
           <h4>${a.title}</h4>
-          <div class="tags">${a.people.map((p) => `<span>${p}</span>`).join("")}</div>
+          <div class="people">${a.people.map((p) => `<span>${p}</span>`).join("")}</div>
         </div>
       </div>`;
     }).join("");

@@ -249,7 +249,12 @@ section.tight{padding:64px 0}
 .tl-item h4{font-size:1.02rem;margin-bottom:8px;color:var(--navy)}
 .tl-item .org{font-size:.84rem;color:var(--muted);margin-bottom:10px}
 .people{display:flex;flex-wrap:wrap;gap:6px}
-.people span{background:var(--soft);border:1px solid var(--line);padding:4px 10px;border-radius:999px;font-size:.76rem;color:var(--navy)}
+.people span{padding:4px 10px;border-radius:999px;font-size:.76rem;font-weight:600}
+.people span:nth-child(5n+1){background:#E9EEF6;color:#234AAD}
+.people span:nth-child(5n+2){background:#E6F7F1;color:#0C7F60}
+.people span:nth-child(5n+3){background:#FFF3D6;color:#946200}
+.people span:nth-child(5n+4){background:#F1EAFB;color:#6B3FA0}
+.people span:nth-child(5n+5){background:#FDE9EE;color:#B23A5C}
 
 /* ============ PUBLICATIONS ============ */
 .pub-tabs{display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap}
@@ -350,7 +355,7 @@ section.tight{padding:64px 0}
 .gallery-body{padding:20px}
 .gallery-body time{font-size:.78rem;color:var(--accent);font-weight:700}
 .gallery-body h4{font-size:.96rem;margin:8px 0 10px;color:var(--navy);line-height:1.5}
-.gallery-body .tags{margin-top:2px}
+.gallery-body .people{margin-top:2px}
 
 /* ============ CONTACT ============ */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
