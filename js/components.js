@@ -1,0 +1,113 @@
+/* Shared header / footer / nav behavior for all BILAB pages */
+(function () {
+  const NAV = [
+    { href: "index.html", label: "Home", key: "home" },
+    { href: "director.html", label: "Director", key: "director" },
+    { href: "members.html", label: "Members", key: "members" },
+    { href: "research.html", label: "Research", key: "research" },
+    { href: "publications.html", label: "Publications", key: "publications" },
+    { href: "lectures.html", label: "Lectures", key: "lectures" },
+    { href: "activity.html", label: "Our Lab", key: "activity" },
+    { href: "contact.html", label: "Contact", key: "contact" },
+  ];
+
+  function headerHTML(activeKey) {
+    const links = NAV.map(
+      (item) =>
+        `<a href="${item.href}" class="${item.key === activeKey ? "active" : ""}">${item.label}</a>`
+    ).join("");
+
+    return `
+    <div class="topbar">
+      <div class="wrap">
+        <span>Dept. of Industrial &amp; Management Engineering, Myongji University</span>
+        <span class="tb-links">
+          <a href="https://mju-bilab.tistory.com/" target="_blank" rel="noopener">Tech Blog</a>
+          <span class="sep">|</span>
+          <a href="https://www.instagram.com/bilaboratory_mju/" target="_blank" rel="noopener">Instagram</a>
+        </span>
+      </div>
+    </div>
+    <header id="siteHeader">
+      <nav class="wrap">
+        <a href="index.html" class="brand">
+          <span class="mark">BI</span>
+          <span class="bt"><b>BILAB</b><span>Business Intelligence Lab · MJU</span></span>
+        </a>
+        <div class="menu" id="mainMenu">${links}</div>
+        <div class="burger" id="burger"><span></span><span></span><span></span></div>
+      </nav>
+    </header>`;
+  }
+
+  function footerHTML() {
+    return `
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-col">
+          <div class="foot-brand"><span class="mark" style="width:34px;height:34px;font-size:.8rem;">BI</span><b>BILAB</b></div>
+          <span>비즈니스 인텔리전스 연구실<br>Business Intelligence Laboratory</span>
+          <span>Dept. of Industrial &amp; Management Engineering<br>Myongji University</span>
+        </div>
+        <div class="foot-col">
+          <h5>Explore</h5>
+          <a href="research.html">Research Areas</a>
+          <a href="publications.html">Publications</a>
+          <a href="lectures.html">Lectures</a>
+          <a href="activity.html">Our Lab</a>
+        </div>
+        <div class="foot-col">
+          <h5>People</h5>
+          <a href="director.html">Director</a>
+          <a href="members.html">Members</a>
+          <a href="members.html#alumni">Alumni</a>
+        </div>
+        <div class="foot-col">
+          <h5>Contact</h5>
+          <a href="mailto:mthan@mju.ac.kr">mthan@mju.ac.kr</a>
+          <a href="mailto:mjubilab@gmail.com">mjubilab@gmail.com</a>
+          <span>제1공학관 521호 / 541호<br>경기도 용인시 처인구 명지로 116</span>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>&copy; <span id="year"></span> Business Intelligence Lab, Myongji University. All rights reserved.</span>
+        <span>+82-31-330-6448</span>
+      </div>
+    </div>`;
+  }
+
+  function mount() {
+    const headerMount = document.getElementById("site-header");
+    const footerMount = document.getElementById("site-footer");
+    const activeKey = document.body.getAttribute("data-page") || "";
+
+    if (headerMount) headerMount.innerHTML = headerHTML(activeKey);
+    if (footerMount) footerMount.innerHTML = footerHTML();
+
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const header = document.getElementById("siteHeader");
+    const onScroll = () => {
+      if (!header) return;
+      if (window.scrollY > 20) header.classList.add("scrolled");
+      else header.classList.remove("scrolled");
+    };
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+
+    const burger = document.getElementById("burger");
+    const menu = document.getElementById("mainMenu");
+    if (burger && menu) {
+      burger.addEventListener("click", () => {
+        menu.classList.toggle("open");
+        if (header) header.classList.add("scrolled");
+      });
+      menu.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => menu.classList.remove("open"))
+      );
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", mount);
+})();
