@@ -31,7 +31,7 @@
     <header id="siteHeader">
       <nav class="wrap">
         <a href="index.html" class="brand">
-          <span class="mark">BI</span>
+          <span class="mark"><img src="images/logo.png" alt="BILAB logo"></span>
           <span class="bt"><b>BILAB</b><span>Business Intelligence Lab · MJU</span></span>
         </a>
         <div class="menu" id="mainMenu">${links}</div>
@@ -45,7 +45,7 @@
     <div class="wrap">
       <div class="foot-grid">
         <div class="foot-col">
-          <div class="foot-brand"><span class="mark" style="width:34px;height:34px;font-size:.8rem;">BI</span><b>BILAB</b></div>
+          <div class="foot-brand"><span class="mark" style="width:34px;height:34px;"><img src="images/logo.png" alt="BILAB logo"></span><b>BILAB</b></div>
           <span>비즈니스 인텔리전스 연구실<br>Business Intelligence Laboratory</span>
           <span>Dept. of Industrial &amp; Management Engineering<br>Myongji University</span>
         </div>
