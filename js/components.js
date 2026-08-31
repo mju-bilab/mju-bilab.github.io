@@ -61,6 +61,7 @@
           <a href="director.html">Director</a>
           <a href="members.html">Members</a>
           <a href="members.html#alumni">Alumni</a>
+          <a href="https://ideamyongji-admin.github.io" target="_blank" rel="noopener">IDEA 사업단 ↗</a>
         </div>
         <div class="foot-col">
           <h5>Contact</h5>
