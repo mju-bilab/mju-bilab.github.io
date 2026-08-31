@@ -1,7 +1,9 @@
 /* "데이터에서 통찰로" banner illustration (research.html) — raw data
-   drifts rightward, is worked on by four researcher nodes (matching the
-   four steps in the numbered list), and converges into a glowing insight
-   point. Hovering a researcher node highlights that stage of the pipeline. */
+   (diamond chips) drifts rightward through four process-stage icons
+   (matching the four numbered steps), converges into a glowing insight
+   point, then that insight is periodically applied to a business node
+   on the right, which flashes/grows to show real-world improvement.
+   Hovering a stage icon highlights that step of the pipeline. */
 (function () {
   const canvas = document.getElementById("processCanvas");
   if (!canvas) return;
@@ -14,14 +16,16 @@
   const TEAL = [14, 165, 160];
   const NAVY = [15, 37, 68];
 
-  const STAGE_X = [0.2, 0.42, 0.64, 0.86];
-  const INSIGHT_X = 0.96;
+  const STAGE_X = [0.13, 0.32, 0.5, 0.68];
+  const INSIGHT_X = 0.83;
+  const BUSINESS_X = 0.95;
+  const IMPULSE_PERIOD = 2600;
 
   let w = 0, h = 0, raf = null;
   const mouse = { x: -999, y: -999, active: false };
-  const particles = Array.from({ length: 46 }, (_, i) => ({
+  const particles = Array.from({ length: 42 }, (_, i) => ({
     seed: Math.random() * 1000,
-    offset: i / 46,
+    offset: i / 42,
     speed: 0.00006 + Math.random() * 0.00002,
   }));
 
@@ -33,6 +37,7 @@
     if (p < 0.55) return lerpColor(DIM, ACCENT, p / 0.55);
     return lerpColor(ACCENT, TEAL, (p - 0.55) / 0.45);
   }
+  function rgba(c, a) { return `rgba(${c[0].toFixed(0)},${c[1].toFixed(0)},${c[2].toFixed(0)},${a})`; }
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
@@ -44,7 +49,7 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  function nearestStage(t) {
+  function nearestStage() {
     if (!mouse.active) return -1;
     let best = -1, bestD = 34;
     STAGE_X.forEach((sx, i) => {
@@ -54,77 +59,227 @@
     return best;
   }
 
-  function drawResearcher(x, y, active, t, idx) {
+  /* --- data chip (raw data unit) --- */
+  function drawDataChip(x, y, size, color, alpha) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(Math.PI / 4);
+    ctx.fillStyle = rgba(color, alpha);
+    ctx.fillRect(-size / 2, -size / 2, size, size);
+    ctx.restore();
+  }
+
+  /* --- four process-stage icons: discover / filter / method / interpret --- */
+  function drawStageIcon(idx, x, y, active, t) {
     const bob = Math.sin(t / 700 + idx) * 2;
     const cy = y + bob;
-    const scale = active ? 1.25 : 1;
+    const scale = active ? 1.22 : 1;
+    const color = active ? TEAL : NAVY;
+    const alpha = active ? 1 : 0.68;
+
     if (active) {
       ctx.beginPath();
-      ctx.arc(x, cy - 2, 15 * scale, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(${TEAL.join(",")},0.5)`;
+      ctx.arc(x, cy, 16 * scale, 0, Math.PI * 2);
+      ctx.strokeStyle = rgba(TEAL, 0.5);
       ctx.lineWidth = 1.5;
       ctx.stroke();
     }
-    ctx.fillStyle = active ? `rgb(${TEAL.join(",")})` : `rgb(${NAVY.join(",")})`;
-    // head
-    ctx.beginPath();
-    ctx.arc(x, cy - 6 * scale, 3.4 * scale, 0, Math.PI * 2);
-    ctx.fill();
-    // shoulders
-    ctx.beginPath();
-    ctx.arc(x, cy + 4 * scale, 6 * scale, Math.PI, 0);
-    ctx.fill();
+
+    ctx.strokeStyle = rgba(color, alpha);
+    ctx.fillStyle = rgba(color, alpha);
+    ctx.lineWidth = 1.6 * scale;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    if (idx === 0) {
+      // discover — magnifying glass
+      const r = 5.4 * scale;
+      ctx.beginPath();
+      ctx.arc(x - 1.5 * scale, cy - 1.5 * scale, r, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x + 2.6 * scale, cy + 2.6 * scale);
+      ctx.lineTo(x + 6.5 * scale, cy + 6.5 * scale);
+      ctx.stroke();
+    } else if (idx === 1) {
+      // filter — funnel
+      ctx.beginPath();
+      ctx.moveTo(x - 7 * scale, cy - 6 * scale);
+      ctx.lineTo(x + 7 * scale, cy - 6 * scale);
+      ctx.lineTo(x + 2 * scale, cy + 1 * scale);
+      ctx.lineTo(x + 2 * scale, cy + 7 * scale);
+      ctx.lineTo(x - 2 * scale, cy + 7 * scale);
+      ctx.lineTo(x - 2 * scale, cy + 1 * scale);
+      ctx.closePath();
+      ctx.stroke();
+    } else if (idx === 2) {
+      // method — hexagon (process module)
+      const r = 7 * scale;
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const a = (Math.PI / 3) * i - Math.PI / 2;
+        const px = x + Math.cos(a) * r, py = cy + Math.sin(a) * r;
+        i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(x, cy, 2 * scale, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      // interpret — small ascending bar chart
+      const bw = 2.6 * scale, gap = 1.6 * scale;
+      const heights = [5, 8.5, 12].map((v) => v * scale);
+      heights.forEach((hh, i) => {
+        const bx = x - 7 * scale + i * (bw + gap);
+        ctx.fillRect(bx, cy + 7 * scale - hh, bw, hh);
+      });
+    }
+
     ctx.font = "700 10px Pretendard, sans-serif";
-    ctx.fillStyle = active ? `rgb(${TEAL.join(",")})` : `rgba(${NAVY.join(",")},0.55)`;
+    ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(NAVY, 0.5);
     ctx.textAlign = "center";
-    ctx.fillText(String(idx + 1).padStart(2, "0"), x, cy + 22);
+    ctx.fillText(String(idx + 1).padStart(2, "0"), x, cy + 24);
   }
 
   function drawInsight(t) {
     const x = INSIGHT_X * w, y = h / 2;
-    const pulse = 1 + Math.sin(t / 550) * 0.18;
+    const pulse = 1 + Math.sin(t / 550) * 0.16;
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(t / 4000);
-    ctx.strokeStyle = `rgba(${TEAL.join(",")},0.55)`;
+    ctx.strokeStyle = rgba(TEAL, 0.55);
     ctx.lineWidth = 1.4;
     for (let i = 0; i < 6; i++) {
       const a = (i / 6) * Math.PI * 2;
       ctx.beginPath();
-      ctx.moveTo(Math.cos(a) * 9 * pulse, Math.sin(a) * 9 * pulse);
-      ctx.lineTo(Math.cos(a) * 15 * pulse, Math.sin(a) * 15 * pulse);
+      ctx.moveTo(Math.cos(a) * 8 * pulse, Math.sin(a) * 8 * pulse);
+      ctx.lineTo(Math.cos(a) * 13 * pulse, Math.sin(a) * 13 * pulse);
       ctx.stroke();
     }
     ctx.restore();
     ctx.beginPath();
-    ctx.arc(x, y, 6 * pulse, 0, Math.PI * 2);
-    ctx.fillStyle = `rgb(${TEAL.join(",")})`;
-    ctx.shadowColor = `rgb(${TEAL.join(",")})`;
-    ctx.shadowBlur = 14;
+    ctx.arc(x, y, 5.4 * pulse, 0, Math.PI * 2);
+    ctx.fillStyle = rgba(TEAL, 1);
+    ctx.shadowColor = rgba(TEAL, 1);
+    ctx.shadowBlur = 13;
     ctx.fill();
     ctx.shadowBlur = 0;
+    return { x, y };
+  }
+
+  /* --- business impact node: briefcase + growth bars, flashes when the
+     insight signal (traveling dot) arrives from the insight point --- */
+  function drawBusiness(t, insightPos, hoverBoost) {
+    const x = BUSINESS_X * w, y = h / 2;
+    const phase = (t % IMPULSE_PERIOD) / IMPULSE_PERIOD;
+
+    // traveling signal dot: insight -> business
+    const dx = insightPos.x + (x - insightPos.x) * phase;
+    const dy = insightPos.y + (y - insightPos.y) * phase - Math.sin(phase * Math.PI) * 10;
+    if (phase > 0.02) {
+      ctx.beginPath();
+      ctx.arc(dx, dy, 2.6, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(TEAL, 0.9);
+      ctx.shadowColor = rgba(TEAL, 1);
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+    ctx.strokeStyle = rgba(TEAL, 0.18);
+    ctx.setLineDash([2, 4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(insightPos.x, insightPos.y);
+    ctx.quadraticCurveTo((insightPos.x + x) / 2, y - 12, x, y);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // flash intensity as the signal arrives (last 15% of the cycle)
+    const flash = phase > 0.85 ? (phase - 0.85) / 0.15 : 0;
+    const boost = Math.max(flash, hoverBoost);
+    const scale = 1 + boost * 0.16;
+
+    if (boost > 0.05) {
+      ctx.beginPath();
+      ctx.arc(x, y, 20 * scale, 0, Math.PI * 2);
+      ctx.strokeStyle = rgba(TEAL, 0.35 * boost);
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+    }
+
+    const color = boost > 0.4 ? TEAL : NAVY;
+
+    // briefcase
+    ctx.save();
+    ctx.translate(x, y + 3);
+    ctx.scale(scale, scale);
+    ctx.strokeStyle = rgba(color, 0.85);
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.moveTo(-3, -7);
+    ctx.lineTo(-3, -9.4);
+    ctx.quadraticCurveTo(-3, -11, -1, -11);
+    ctx.lineTo(1, -11);
+    ctx.quadraticCurveTo(3, -11, 3, -9.4);
+    ctx.lineTo(3, -7);
+    ctx.stroke();
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(-8, -7, 16, 11, 2);
+    else ctx.rect(-8, -7, 16, 11);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(-8, -2.2);
+    ctx.lineTo(8, -2.2);
+    ctx.stroke();
+    ctx.restore();
+
+    // growth bars, taller with more accumulated boost
+    const heights = [4, 7, 10.5].map((v) => v + boost * 4);
+    heights.forEach((hh, i) => {
+      const bx = x + 12 + i * 5;
+      ctx.fillStyle = rgba(i === 2 ? TEAL : color, 0.55 + boost * 0.35);
+      ctx.fillRect(bx, y + 9 - hh, 3, hh);
+    });
+
+    // up arrow
+    ctx.strokeStyle = rgba(TEAL, 0.75 + boost * 0.25);
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.moveTo(x + 26, y - 2);
+    ctx.lineTo(x + 30, y - 8 - boost * 2);
+    ctx.moveTo(x + 27.4, y - 6.4 - boost * 2);
+    ctx.lineTo(x + 30, y - 8 - boost * 2);
+    ctx.lineTo(x + 28.4, y - 4.6 - boost * 2);
+    ctx.stroke();
+
+    ctx.font = "700 10px Pretendard, sans-serif";
+    ctx.fillStyle = rgba(color, 0.7);
+    ctx.textAlign = "center";
+    ctx.fillText("Business", x, y + 26);
   }
 
   function draw(t) {
     ctx.clearRect(0, 0, w, h);
     const cy = h / 2;
-    const active = nearestStage(t);
+    const active = nearestStage();
+    const businessHover =
+      mouse.active && Math.hypot(BUSINESS_X * w - mouse.x, cy - mouse.y) < 30 ? 1 : 0;
 
     particles.forEach((pt) => {
-      let p = ((t * pt.speed + pt.offset) % 1);
+      const p = (t * pt.speed + pt.offset) % 1;
       const boost = active >= 0 && Math.abs(p - STAGE_X[active]) < 0.06 ? 1 : 0;
-      const amp = (h * 0.34) * Math.pow(1 - p, 1.5);
-      const x = 0.04 * w + p * (INSIGHT_X - 0.04) * w;
+      const amp = h * 0.32 * Math.pow(1 - p, 1.5);
+      const x = 0.03 * w + p * (INSIGHT_X - 0.03) * w;
       const y = cy + Math.sin(pt.seed * 12.9) * amp + Math.sin(t / 900 + pt.seed) * (3 + boost * 2);
-      const [r, g, b] = colorForProgress(p);
-      ctx.beginPath();
-      ctx.arc(x, y, (1.5 + boost * 1.1) * (1 - p * 0.25), 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${r.toFixed(0)},${g.toFixed(0)},${b.toFixed(0)},${0.55 + boost * 0.35})`;
-      ctx.fill();
+      const color = colorForProgress(p);
+      const size = (2.6 + boost * 1.6) * (1 - p * 0.3);
+      drawDataChip(x, y, size, color, 0.6 + boost * 0.35);
     });
 
-    STAGE_X.forEach((sx, i) => drawResearcher(sx * w, cy, i === active, t, i));
-    drawInsight(t);
+    STAGE_X.forEach((sx, i) => drawStageIcon(i, sx * w, cy, i === active, t));
+    const insightPos = drawInsight(t);
+    drawBusiness(t, insightPos, businessHover);
   }
 
   function frame(t) {
