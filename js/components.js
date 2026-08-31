@@ -24,7 +24,7 @@
         <span class="tb-links">
           <a href="https://mju-bilab.tistory.com/" target="_blank" rel="noopener">Tech Blog</a>
           <span class="sep">|</span>
-          <a href="https://www.instagram.com/bilaboratory_mju/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://ideamyongji-admin.github.io" target="_blank" rel="noopener">IDEA 사업단</a>
         </span>
       </div>
     </div>
