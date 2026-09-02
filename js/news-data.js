@@ -83,3 +83,20 @@ const ACTIVITY_DATA = [
   { date: "2023.02.15", title: "2022 전기 학위수여식", people: ["김규한"] },
   { date: "2022.06.02", title: "2022 대한산업공학회 춘계공동학술대회", people: ["김규한", "김정현", "최정원"] },
 ];
+
+/* Alumni — single source of truth for both the members.html table and
+   the "Lab Alumni" count on index.html (computed as ALUMNI_DATA.length,
+   so adding/removing a row here updates both automatically). */
+const ALUMNI_DATA = [
+  { name: "김규한", dest: "KT", period: "2021.09.01 → 2023.02.28" },
+  { name: "김정현", dest: "NS홈쇼핑", period: "2021.09.01 → 2023.02.28" },
+  { name: "최정원", dest: "동국시스템즈", period: "2022.05.01 → 2023.02.28" },
+  { name: "박지훈", dest: "연세대학교", period: "2022.11.01 → 2024.02.29" },
+  { name: "서수원", dest: "롯데손해보험", period: "2023.03.01 → 2024.02.29" },
+  { name: "권예지", dest: "SK AX", period: "2023.03.01 → 2025.08.31" },
+  { name: "이슬", dest: "—", period: "2023.06.01 → 2025.02.28" },
+  { name: "이예빈", dest: "—", period: "2023.11.01 → 2025.02.28" },
+  { name: "이예진", dest: "—", period: "2023.11.01 → 2025.02.28" },
+  { name: "백세린", dest: "—", period: "2025.03.01 → 2026.02.28" },
+  { name: "김형진", dest: "LS머트리얼즈", period: "2025.08.01 → 2026.02.28" },
+];

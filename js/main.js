@@ -52,6 +52,25 @@
     }).join("");
   }
 
+  function renderAlumniTable(elId) {
+    const el = document.getElementById(elId);
+    if (!el || typeof ALUMNI_DATA === "undefined") return;
+    el.innerHTML = ALUMNI_DATA.map(
+      (a) => `
+      <tr>
+        <td class="name">${a.name}</td>
+        <td class="dest">${a.dest}</td>
+        <td class="period">${a.period}</td>
+      </tr>`
+    ).join("");
+  }
+
+  function renderAlumniCount(elId) {
+    const el = document.getElementById(elId);
+    if (!el || typeof ALUMNI_DATA === "undefined") return;
+    el.textContent = ALUMNI_DATA.length + "명";
+  }
+
   function initNewsToggle() {
     const btn = document.getElementById("newsMoreBtn");
     if (!btn) return;
@@ -83,6 +102,8 @@
     renderNews("newsList", 8);
     initNewsToggle();
     renderActivity("activityGrid");
+    renderAlumniTable("alumniTableBody");
+    renderAlumniCount("alumniCount");
     initPubTabs();
   });
 })();
