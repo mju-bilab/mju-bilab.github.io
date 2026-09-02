@@ -271,6 +271,13 @@ section.tight{padding:64px 0}
 .pub-group .pub-item:last-child{border-bottom:1px solid var(--line)}
 .pub-item .py{font-weight:800;color:var(--accent);font-size:.82rem;margin-bottom:6px;display:block}
 .pub-item h4{font-size:1rem;color:var(--ink);font-weight:700;margin-bottom:6px;line-height:1.5}
+.pub-item h4 a.pub-pdf-link{color:inherit}
+.pub-item h4 a.pub-pdf-link:hover{color:var(--accent)}
+.pdf-badge{
+  display:inline-flex;align-items:center;font-size:.68rem;font-weight:800;letter-spacing:.03em;
+  color:var(--accent-d);background:var(--soft2);padding:2px 8px;border-radius:6px;
+  margin-left:4px;white-space:nowrap;vertical-align:middle;
+}
 .pub-item .jinfo{font-size:.86rem;color:var(--muted);margin-bottom:8px}
 .pub-item .jinfo b{color:var(--navy)}
 .pub-item .authors{font-size:.84rem;color:var(--dim)}
