@@ -26,6 +26,12 @@
 
   <section>
     <div class="wrap">
+      <div class="pub-tabs member-tabs">
+        <button class="pub-tab active" data-target="current">Current Members</button>
+        <button class="pub-tab" data-target="alumni">Alumni</button>
+      </div>
+
+      <div data-member-group="current">
       <div class="section-head">
         <span class="eyebrow">Current Members</span>
         <h2>2026년 현재 7명이 함께하고 있습니다</h2>
@@ -105,11 +111,9 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+      </div>
 
-  <section class="soft-bg" id="alumni">
-    <div class="wrap">
+      <div data-member-group="alumni" style="display:none">
       <div class="section-head">
         <span class="eyebrow">Alumni</span>
         <h2>졸업생들의 발자취</h2>
@@ -123,6 +127,7 @@
         </thead>
         <tbody id="alumniTableBody"></tbody>
       </table>
+      </div>
       </div>
     </div>
   </section>

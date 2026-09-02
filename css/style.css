@@ -256,14 +256,6 @@ section.tight{padding:64px 0}
 .news-row p{color:var(--ink);font-size:.95rem;margin:0}
 .news-row p .presenter{color:var(--accent-d);font-weight:800}
 
-/* ============ STATS BAND ============ */
-.statband{background:var(--navy);color:#fff}
-.statband .grid-4{gap:0;text-align:center}
-.statband .stat{padding:44px 10px;border-right:1px solid rgba(255,255,255,.12)}
-.statband .stat:last-child{border-right:none}
-.statband .stat b{display:block;font-size:2.4rem;font-weight:800;margin-bottom:6px}
-.statband .stat span{font-size:.8rem;color:#a9bade;text-transform:uppercase;letter-spacing:.06em}
-
 /* ============ TIMELINE (projects) ============ */
 .timeline{display:flex;flex-direction:column}
 .tl-item{
@@ -286,7 +278,11 @@ section.tight{padding:64px 0}
 .gallery-body .people span:nth-child(5n+5){background:#FDE9EE;color:#B23A5C}
 
 /* ============ PUBLICATIONS ============ */
-.pub-tabs{display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap}
+.pub-tabs{
+  display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap;
+  position:sticky;top:110px;z-index:40;background:var(--bg);
+  padding:14px 0;margin-top:-14px;
+}
 .pub-tab{padding:10px 20px;border-radius:999px;border:1.5px solid var(--line);font-weight:700;font-size:.86rem;color:var(--muted)}
 .pub-tab.active{background:var(--navy);border-color:var(--ink);color:#fff}
 .pub-group{margin-bottom:12px}
@@ -465,8 +461,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .director-hero{grid-template-columns:1fr}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .contact-grid{grid-template-columns:1fr}
-  .statband .grid-4{grid-template-columns:repeat(2,1fr)}
-  .statband .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.12)}
 }
 @media (max-width:760px){
   .menu{position:fixed;top:0;right:0;height:100vh;width:78%;max-width:320px;background:var(--card);

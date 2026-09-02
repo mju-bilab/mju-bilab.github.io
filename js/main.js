@@ -68,7 +68,52 @@
   function renderAlumniCount(elId) {
     const el = document.getElementById(elId);
     if (!el || typeof ALUMNI_DATA === "undefined") return;
-    el.textContent = ALUMNI_DATA.length + "명";
+    el.setAttribute("data-count-target", ALUMNI_DATA.length);
+  }
+
+  // Animate any <b data-count-target="N"> from 0 to N once it scrolls
+  // into view (e.g. the hero stats). Falls back to the plain target
+  // value under prefers-reduced-motion or without IntersectionObserver.
+  function initCountUp() {
+    const els = document.querySelectorAll("[data-count-target]");
+    if (!els.length) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const suffixFor = (el) => el.getAttribute("data-count-suffix") || "";
+
+    function animate(el) {
+      const target = parseInt(el.getAttribute("data-count-target"), 10);
+      const suffix = suffixFor(el);
+      if (reduceMotion || Number.isNaN(target)) {
+        el.textContent = target + suffix;
+        return;
+      }
+      const dur = 900;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      els.forEach(animate);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+    els.forEach((el) => io.observe(el));
   }
 
   function initNewsToggle() {
@@ -80,21 +125,30 @@
     });
   }
 
-  function initPubTabs() {
-    const tabs = document.querySelectorAll(".pub-tab");
-    if (!tabs.length) return;
-    const groups = document.querySelectorAll("[data-pub-group]");
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        tabs.forEach((t) => t.classList.remove("active"));
-        tab.classList.add("active");
-        const target = tab.getAttribute("data-target");
-        groups.forEach((g) => {
-          g.style.display =
-            target === "all" || g.getAttribute("data-pub-group") === target ? "" : "none";
-        });
+  // Generic pill-tab filter: clicking a button with data-target="X" shows
+  // only the sibling elements whose `groupAttr` equals X (or all, for
+  // data-target="all"). Reused for Publications (data-pub-group) and
+  // Members (data-member-group) — each page only has one of the two.
+  function initTabGroups(barSelector, groupAttr) {
+    const bar = document.querySelector(barSelector);
+    if (!bar) return;
+    const tabs = bar.querySelectorAll(".pub-tab");
+    const groups = document.querySelectorAll(`[${groupAttr}]`);
+    function activate(tab) {
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+      const target = tab.getAttribute("data-target");
+      groups.forEach((g) => {
+        g.style.display =
+          target === "all" || g.getAttribute(groupAttr) === target ? "" : "none";
       });
-    });
+    }
+    tabs.forEach((tab) => tab.addEventListener("click", () => activate(tab)));
+
+    // Deep-link support, e.g. members.html#alumni opens straight to that tab.
+    const hashTarget = location.hash.slice(1);
+    const hashTab = [...tabs].find((t) => t.getAttribute("data-target") === hashTarget);
+    if (hashTab) activate(hashTab);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -104,6 +158,8 @@
     renderActivity("activityGrid");
     renderAlumniTable("alumniTableBody");
     renderAlumniCount("alumniCount");
-    initPubTabs();
+    initTabGroups(".pub-tabs", "data-pub-group");
+    initTabGroups(".member-tabs", "data-member-group");
+    initCountUp();
   });
 })();
