@@ -1,10 +1,12 @@
-/* Interactive data-network canvas for the home hero.
+/* Interactive data-network canvas for the home hero and every pagehero.
    Particles drift and link to nearby particles + the cursor — a lightweight
-   nod to graph/network analysis, BILAB's own research area. */
+   nod to graph/network analysis, BILAB's own research area. Density scales
+   with the container's area, so it's automatically lighter on the shorter
+   pageheroes than on the full home hero. */
 (function () {
-  const canvas = document.getElementById("heroCanvas");
+  const canvas = document.querySelector(".hero-canvas");
   if (!canvas) return;
-  const heroSection = canvas.closest(".hero");
+  const heroSection = canvas.closest(".hero, .pagehero");
   if (!heroSection) return;
 
   const ctx = canvas.getContext("2d");
