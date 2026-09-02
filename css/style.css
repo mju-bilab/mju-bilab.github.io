@@ -3,11 +3,14 @@
    ========================================================================== */
 
 :root{
-  --navy:#0F2544;
-  --navy2:#173A63;
-  --accent:#2F62D9;
-  --accent-d:#234AAD;
-  --teal:#0EA5A0;
+  /* "Deep Signal" palette */
+  --navy:#0E2038;
+  --navy2:#163863;
+  --accent:#3454D1;
+  --accent-d:#2A3EA0;
+  --teal:#12A594;
+  --spark:#E8590C;
+  --spark-bg:#FDE6D8;
   --ink:#1B2531;
   --muted:#5E6B7E;
   --dim:#98A2B3;
@@ -17,24 +20,24 @@
   --bg:#ffffff;
   --card:#ffffff;
   --header-bg:rgba(255,255,255,.97);
-  --icon:#0F2544;
+  --icon:#0E2038;
   --font:'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
-  --shadow:0 18px 44px rgba(15,37,68,.10);
+  --shadow:0 18px 44px rgba(14,32,56,.10);
   --radius:14px;
 }
 
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --navy:#0B1B33; --navy2:#122A50; --accent:#6E93F0; --accent-d:#8FB0FF;
-    --teal:#3FCFC6; --ink:#E7ECF7; --muted:#A9B4C9; --dim:#7C879C; --line:#233251;
+    --navy:#0A1830; --navy2:#142E54; --accent:#6E86E8; --accent-d:#93A6F2;
+    --teal:#3FCFC6; --spark:#FF8A4C; --spark-bg:#3A2415; --ink:#E7ECF7; --muted:#A9B4C9; --dim:#7C879C; --line:#233251;
     --soft:#111F38; --soft2:#16294A; --bg:#0A1729; --card:#101F38;
     --header-bg:rgba(10,23,41,.92); --icon:#E7ECF7;
     --shadow:0 18px 44px rgba(0,0,0,.35);
   }
 }
 :root[data-theme="dark"]{
-  --navy:#0B1B33; --navy2:#122A50; --accent:#6E93F0; --accent-d:#8FB0FF;
-  --teal:#3FCFC6; --ink:#E7ECF7; --muted:#A9B4C9; --dim:#7C879C; --line:#233251;
+  --navy:#0A1830; --navy2:#142E54; --accent:#6E86E8; --accent-d:#93A6F2;
+  --teal:#3FCFC6; --spark:#FF8A4C; --spark-bg:#3A2415; --ink:#E7ECF7; --muted:#A9B4C9; --dim:#7C879C; --line:#233251;
   --soft:#111F38; --soft2:#16294A; --bg:#0A1729; --card:#101F38;
   --header-bg:rgba(10,23,41,.92); --icon:#E7ECF7;
   --shadow:0 18px 44px rgba(0,0,0,.35);
@@ -250,7 +253,7 @@ section.tight{padding:64px 0}
   font-size:.68rem;font-weight:800;letter-spacing:.06em;padding:5px 10px;border-radius:6px;
   background:var(--soft2);color:var(--accent-d);height:fit-content;text-transform:uppercase;
 }
-.tag.award{background:#FFF3D6;color:#946200}
+.tag.award{background:var(--spark-bg);color:var(--spark)}
 .tag.news{background:var(--soft2);color:var(--accent-d)}
 .tag.seminar{background:#E6F7F1;color:#0C7F60}
 .news-row p{color:var(--ink);font-size:.95rem;margin:0}
@@ -306,7 +309,7 @@ section.tight{padding:64px 0}
 .pub-item .authors b{color:var(--ink);font-weight:700}
 .pub-item .ptags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
 .pub-item .ptags span{font-size:.72rem;background:var(--soft);border:1px solid var(--line);color:var(--muted);padding:3px 9px;border-radius:6px}
-.status-pill{font-size:.7rem;font-weight:800;padding:3px 10px;border-radius:999px;background:#FFF3D6;color:#946200;letter-spacing:.03em}
+.status-pill{font-size:.7rem;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--spark-bg);color:var(--spark);letter-spacing:.03em}
 
 /* ============ PEOPLE ============ */
 .person-card{

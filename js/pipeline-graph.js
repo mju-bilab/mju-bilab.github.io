@@ -12,9 +12,9 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const DIM = [152, 162, 179];
-  const ACCENT = [47, 98, 217];
-  const TEAL = [14, 165, 160];
-  const NAVY = [15, 37, 68];
+  const ACCENT = [52, 84, 209];
+  const TEAL = [18, 165, 148];
+  const NAVY = [14, 32, 56];
 
   const SOURCES = ["Patent", "GitHub", "SF Media", "Futuristic DB", "Social Media", "Job Posting"];
   const SOURCE_X = 0.14;
@@ -214,4 +214,14 @@
   resize();
   if (reduceMotion) draw(0);
   else start();
+
+  // Fill in the real publication counts once available; the fallback
+  // values above keep the graph legible before (or if) this resolves.
+  if (typeof window.getPubCounts === "function") {
+    window.getPubCounts().then((counts) => {
+      if (!counts) return;
+      PUBS[0].count = counts.refereed;
+      PUBS[1].count = counts.conf;
+    });
+  }
 })();

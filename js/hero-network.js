@@ -12,8 +12,8 @@
   const ctx = canvas.getContext("2d");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const LINE_COLOR = "143,178,255"; // accent blue
-  const MOUSE_COLOR = "56,214,204"; // teal
+  const LINE_COLOR = "110,134,232"; // accent blue, brightened for the dark hero (Deep Signal)
+  const MOUSE_COLOR = "63,207,198"; // teal, same
   const DOT_COLOR = "200,216,245";
 
   let width = 0, height = 0, dpr = 1;

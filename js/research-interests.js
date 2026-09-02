@@ -7,8 +7,8 @@
   if (!cards.length) return;
 
   const C = {
-    accent: "47,98,217",
-    teal: "14,165,160",
+    accent: "52,84,209",
+    teal: "18,165,148",
     dim: "152,162,179",
   };
 

@@ -71,6 +71,32 @@
     el.setAttribute("data-count-target", ALUMNI_DATA.length);
   }
 
+  // Publication counts are never hand-typed: publications.html's own
+  // .pub-item markup is the source of truth (see js/pub-counts.js).
+  // Feeds the homepage hero stats and, on publications.html itself,
+  // the pagehero summary line and each group's item-count label.
+  async function initPubStats() {
+    if (typeof window.getPubCounts !== "function") return;
+    const counts = await window.getPubCounts();
+    if (!counts) return;
+
+    const refStat = document.getElementById("statRefereed");
+    if (refStat) refStat.setAttribute("data-count-target", counts.refereed);
+    const confStat = document.getElementById("statConf");
+    if (confStat) confStat.setAttribute("data-count-target", counts.conf);
+
+    const summary = document.getElementById("pubSummary");
+    if (summary) {
+      summary.textContent = `국제저널 ${counts.refereed}편 · 진행중 연구 ${counts.wip}건 · 학술대회 발표 ${counts.conf}건`;
+    }
+    const refereedCount = document.getElementById("refereedCount");
+    if (refereedCount) refereedCount.textContent = counts.refereed + "편";
+    const wipCount = document.getElementById("wipCount");
+    if (wipCount) wipCount.textContent = counts.wip + "건";
+    const confCount = document.getElementById("confCount");
+    if (confCount) confCount.textContent = counts.conf + "건";
+  }
+
   // Animate any <b data-count-target="N"> from 0 to N once it scrolls
   // into view (e.g. the hero stats). Falls back to the plain target
   // value under prefers-reduced-motion or without IntersectionObserver.
@@ -151,7 +177,7 @@
     if (hashTab) activate(hashTab);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", async () => {
     renderNews("newsListPreview", 6);
     renderNews("newsList", 8);
     initNewsToggle();
@@ -160,6 +186,7 @@
     renderAlumniCount("alumniCount");
     initTabGroups(".pub-tabs", "data-pub-group");
     initTabGroups(".member-tabs", "data-member-group");
+    await initPubStats();
     initCountUp();
   });
 })();
