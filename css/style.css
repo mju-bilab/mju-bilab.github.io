@@ -364,6 +364,12 @@ section.tight{padding:64px 0}
 }
 .process-illustration canvas{width:100%;height:150px;display:block}
 
+.pipeline-illustration{
+  background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);
+  padding:8px 26px;margin:26px 0 10px;
+}
+.pipeline-illustration canvas{width:100%;height:230px;display:block}
+
 /* ============ LECTURES ============ */
 .lec-table{width:100%;border-collapse:collapse;margin-top:10px}
 .lec-table th{text-align:left;font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:0 14px 14px;border-bottom:2px solid var(--line)}
