@@ -7,6 +7,16 @@
     return "NEWS";
   }
 
+  // Conference posts consistently read "...에 <이름[, 이름...]> 학부연구생이
+  // 참가하였습니다" — bold the presenting student's name(s) right before
+  // that phrase so the byline stands out from the rest of the sentence.
+  function highlightPresenters(text) {
+    return text.replace(
+      /([가-힣]{2,4}(?:,\s*[가-힣]{2,4})*)(\s*학부연구생(?:이|들이)\s*참가)/,
+      '<b class="presenter">$1</b>$2'
+    );
+  }
+
   function renderNews(elId, limit) {
     const el = document.getElementById(elId);
     if (!el || typeof NEWS_DATA === "undefined") return;
@@ -17,7 +27,7 @@
       <div class="news-row">
         <time>${n.date}</time>
         <span class="tag ${n.tag}">${tagLabel(n.tag)}</span>
-        <p>${n.text}</p>
+        <p>${n.tag === "conference" ? highlightPresenters(n.text) : n.text}</p>
       </div>`
       )
       .join("");
