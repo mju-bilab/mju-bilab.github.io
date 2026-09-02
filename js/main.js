@@ -98,30 +98,72 @@
   }
 
   // Animate any <b data-count-target="N"> from 0 to N once it scrolls
-  // into view (e.g. the hero stats). Falls back to the plain target
-  // value under prefers-reduced-motion or without IntersectionObserver.
+  // into view (e.g. the hero stats), each digit rolling into place like
+  // an odometer. Falls back to the plain target value under
+  // prefers-reduced-motion or without IntersectionObserver.
   function initCountUp() {
     const els = document.querySelectorAll("[data-count-target]");
     if (!els.length) return;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const suffixFor = (el) => el.getAttribute("data-count-suffix") || "";
 
+    // Builds a hidden "0-9" strip per digit inside `el` and returns each
+    // strip alongside the digit it should land on. A visually-hidden
+    // sr-only span carries the real "19편" text so screen readers don't
+    // have to parse ten stacked digits per window.
+    function buildOdometer(el, target, suffix) {
+      el.textContent = "";
+      el.classList.add("odo-digits");
+
+      const sr = document.createElement("span");
+      sr.className = "sr-only";
+      sr.textContent = target + suffix;
+      el.appendChild(sr);
+
+      const visual = document.createElement("span");
+      visual.setAttribute("aria-hidden", "true");
+      el.appendChild(visual);
+
+      const strips = String(target)
+        .split("")
+        .map((d) => {
+          const win = document.createElement("span");
+          win.className = "odo-window";
+          const strip = document.createElement("span");
+          strip.className = "odo-strip";
+          for (let n = 0; n <= 9; n++) {
+            const s = document.createElement("span");
+            s.textContent = String(n);
+            strip.appendChild(s);
+          }
+          win.appendChild(strip);
+          visual.appendChild(win);
+          return { strip, digit: Number(d) };
+        });
+
+      if (suffix) {
+        const sfx = document.createElement("span");
+        sfx.className = "odo-suffix";
+        sfx.textContent = suffix;
+        visual.appendChild(sfx);
+      }
+      return strips;
+    }
+
     function animate(el) {
       const target = parseInt(el.getAttribute("data-count-target"), 10);
       const suffix = suffixFor(el);
-      if (reduceMotion || Number.isNaN(target)) {
+      if (Number.isNaN(target)) return;
+      if (reduceMotion) {
         el.textContent = target + suffix;
         return;
       }
-      const dur = 900;
-      const start = performance.now();
-      function step(now) {
-        const p = Math.min(1, (now - start) / dur);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(eased * target) + suffix;
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
+      const strips = buildOdometer(el, target, suffix);
+      strips.forEach(({ strip, digit }, i) => {
+        setTimeout(() => {
+          strip.style.transform = `translateY(-${digit}em)`;
+        }, 180 + i * 160);
+      });
     }
 
     if (!("IntersectionObserver" in window)) {

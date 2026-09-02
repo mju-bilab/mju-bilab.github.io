@@ -154,6 +154,111 @@
     });
   }
 
+  // Recursively wraps the text inside a node in per-word <span>s (skipping
+  // existing tags like <br>/<em> instead of destroying them), tagging each
+  // word with a staggered transition-delay via a shared counter.
+  function wrapWords(node, counter) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const parts = node.textContent.split(/(\s+)/);
+      const frag = document.createDocumentFragment();
+      parts.forEach((part) => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
+          return;
+        }
+        const span = document.createElement("span");
+        span.className = "rv-word";
+        span.textContent = part;
+        span.style.transitionDelay = counter.i * 45 + "ms";
+        counter.i++;
+        frag.appendChild(span);
+      });
+      node.parentNode.replaceChild(frag, node);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      Array.from(node.childNodes).forEach((child) => wrapWords(child, counter));
+    }
+  }
+
+  // Headlines marked .split-reveal fade/blur in word-by-word as they
+  // scroll into view, instead of all at once — used sparingly, on a
+  // handful of key headlines rather than every heading on the site.
+  function initSplitReveal() {
+    const els = document.querySelectorAll(".split-reveal");
+    if (!els.length) return;
+    if (reduceMotion || !("IntersectionObserver" in window)) return;
+
+    els.forEach((el) => {
+      const counter = { i: 0 };
+      Array.from(el.childNodes).forEach((child) => wrapWords(child, counter));
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("split-in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: "0px 0px -60px 0px" }
+    );
+    els.forEach((el) => io.observe(el));
+  }
+
+  // A slim desktop-only rail of dots, one per [data-rail-label] element on
+  // the page, tracking scroll position and jumping to that section on
+  // click. On Publications, a group hidden behind the pub-tab filter is
+  // revealed first (by clicking its tab) so the jump always lands somewhere visible.
+  function initSectionRail() {
+    const targets = Array.from(document.querySelectorAll("[data-rail-label]"));
+    if (targets.length < 2) return;
+
+    const nav = document.createElement("nav");
+    nav.className = "section-rail";
+    nav.setAttribute("aria-label", "섹션 바로가기");
+
+    const links = targets.map((t) => {
+      const a = document.createElement("a");
+      a.href = "#" + t.id;
+      a.setAttribute("aria-label", t.getAttribute("data-rail-label"));
+      const label = document.createElement("span");
+      label.className = "rail-label";
+      label.textContent = t.getAttribute("data-rail-label");
+      a.appendChild(label);
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const group = t.closest("[data-pub-group]");
+        if (group && getComputedStyle(group).display === "none") {
+          const tabBtn = document.querySelector(
+            `.pub-tab[data-target="${group.getAttribute("data-pub-group")}"]`
+          );
+          if (tabBtn) tabBtn.click();
+        }
+        t.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      });
+      nav.appendChild(a);
+      return a;
+    });
+
+    document.body.appendChild(nav);
+    if (!("IntersectionObserver" in window)) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const idx = targets.indexOf(entry.target);
+          if (idx === -1 || !entry.isIntersecting) return;
+          links.forEach((l) => l.classList.remove("active"));
+          links[idx].classList.add("active");
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+    );
+    targets.forEach((t) => io.observe(t));
+  }
+
   // Subtle cursor-driven 3D tilt on people/activity cards.
   function initTilt() {
     if (reduceMotion) return;
@@ -210,6 +315,8 @@
 
     initThemeToggle();
     initScrollReveal();
+    initSplitReveal();
+    initSectionRail();
     initBackToTop();
     initTilt();
   }
