@@ -129,7 +129,12 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+      // threshold 0 (not a percentage) so this fires as soon as any part of
+      // a section peeks into view — a percentage threshold like 0.12 can
+      // never be satisfied by a section taller than the viewport itself
+      // (e.g. Publications' 32-item list on a phone screen), leaving it
+      // stuck invisible forever.
+      { threshold: 0, rootMargin: "0px 0px -60px 0px" }
     );
     targets.forEach((t) => io.observe(t));
   }
