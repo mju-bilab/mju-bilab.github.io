@@ -30,7 +30,7 @@
         <span class="tb-links">
           <a href="https://mju-bilab.tistory.com/" target="_blank" rel="noopener">Tech Blog</a>
           <span class="sep">|</span>
-          <a href="https://ideamyongji-admin.github.io" target="_blank" rel="noopener">IDEA 사업단</a>
+          <a href="https://ideamyongji.github.io" target="_blank" rel="noopener">IDEA 사업단</a>
           <span class="sep">|</span>
           <button type="button" id="themeToggle" class="theme-toggle" aria-label="다크 모드로 전환">Dark</button>
         </span>
@@ -69,7 +69,7 @@
           <a href="${url("director.html")}">Director</a>
           <a href="${url("members.html")}">Members</a>
           <a href="${url("members.html")}#alumni">Alumni</a>
-          <a href="https://ideamyongji-admin.github.io" target="_blank" rel="noopener">IDEA 사업단 ↗</a>
+          <a href="https://ideamyongji.github.io" target="_blank" rel="noopener">IDEA 사업단 ↗</a>
         </div>
         <div class="foot-col">
           <h5>Contact</h5>
