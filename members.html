@@ -7,7 +7,21 @@
 <title>Members | BILAB</title>
 <meta name="description" content="BILAB 현재 구성원 및 졸업생(Alumni) 소개.">
 <link rel="icon" href="images/logo.png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="apple-touch-icon" href="images/logo.png">
+<link rel="canonical" href="https://mju-bilab.github.io/members.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BILAB · Business Intelligence Lab, Myongji University">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="Members | BILAB">
+<meta property="og:description" content="BILAB 현재 구성원 및 졸업생(Alumni) 소개.">
+<meta property="og:url" content="https://mju-bilab.github.io/members.html">
+<meta property="og:image" content="https://mju-bilab.github.io/images/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Members | BILAB">
+<meta name="twitter:description" content="BILAB 현재 구성원 및 졸업생(Alumni) 소개.">
+<meta name="twitter:image" content="https://mju-bilab.github.io/images/logo.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -35,26 +49,26 @@
       <div data-member-group="current">
       <div class="section-head">
         <span class="eyebrow">Current Members</span>
-        <h2>2026년 현재 7명이 함께하고 있습니다</h2>
+        <h2><span id="memberCount">7</span>명이 함께하고 있습니다</h2>
       </div>
 
-      <div class="grid-3">
-        <div class="person-card" style="grid-column:span 1;">
-          <div class="avatar"><img src="images/director-mintak-han.jpg" alt="한민탁 교수"></div>
-          <div>
-            <h4>한민탁</h4>
-            <div class="role">Director of BILAB @ MJU</div>
-            <div class="join">Joined 2021.03.01</div>
-          </div>
+      <div class="person-card lead-card">
+        <div class="avatar"><img src="images/director-mintak-han.jpg" alt="한민탁 교수"></div>
+        <div class="lead-body">
+          <h4>한민탁</h4>
+          <div class="role">Director of BILAB @ MJU</div>
+          <div class="join">Joined 2021.03.01</div>
           <div class="tags">
             <span>Future Foresight</span><span>Technology Roadmap</span><span>Review Mining</span>
             <span>Graph Neural Network</span><span>Consumer Behavior</span><span>Agentic AI</span>
           </div>
           <div class="contact"><a href="mailto:mthan@mju.ac.kr">mthan@mju.ac.kr</a></div>
         </div>
+      </div>
 
+      <div class="grid-3 member-grid">
         <div class="person-card">
-          <div class="avatar">김</div>
+          <div class="avatar">민경</div>
           <div>
             <h4>김민경</h4>
             <div class="role">Chief Research Assistant</div>
@@ -64,7 +78,7 @@
         </div>
 
         <div class="person-card">
-          <div class="avatar">이</div>
+          <div class="avatar">서연</div>
           <div>
             <h4>이서연</h4>
             <div class="role">Research Assistant</div>
@@ -74,7 +88,7 @@
         </div>
 
         <div class="person-card">
-          <div class="avatar">김</div>
+          <div class="avatar">진경</div>
           <div>
             <h4>김진경</h4>
             <div class="role">Research Assistant</div>
@@ -84,7 +98,7 @@
         </div>
 
         <div class="person-card">
-          <div class="avatar">허</div>
+          <div class="avatar">재성</div>
           <div>
             <h4>허재성</h4>
             <div class="role">Research Assistant (PD)</div>
@@ -95,7 +109,7 @@
         </div>
 
         <div class="person-card">
-          <div class="avatar">정</div>
+          <div class="avatar">의주</div>
           <div>
             <h4>정의주</h4>
             <div class="role">Research Assistant</div>
@@ -104,7 +118,7 @@
         </div>
 
         <div class="person-card">
-          <div class="avatar">이</div>
+          <div class="avatar">혜정</div>
           <div>
             <h4>이혜정</h4>
             <div class="role">Research Assistant</div>
@@ -121,7 +135,7 @@
         <p>BILAB을 거쳐간 졸업생들이 학계와 산업계 각지에서 활약하고 있습니다</p>
       </div>
 
-      <div style="overflow-x:auto;">
+      <div class="table-scroll">
       <table class="alumni-table">
         <thead>
           <tr><th>Name</th><th>Current Path</th><th>Period</th></tr>
@@ -149,6 +163,7 @@
 <footer><div id="site-footer"></div></footer>
 
 <script src="js/news-data.js"></script>
+<script src="js/theme-colors.js"></script>
 <script src="js/components.js"></script>
 <script src="js/hero-network.js"></script>
 <script src="js/main.js"></script>

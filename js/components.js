@@ -11,10 +11,16 @@
     { href: "contact.html", label: "Contact", key: "contact" },
   ];
 
+  // 404.html is served by GitHub Pages for arbitrary deep paths, where a
+  // relative "research.html" resolves against that path instead of the site
+  // root. Such pages set data-abs-paths and get "/"-rooted links here.
+  const ABS = document.body && document.body.hasAttribute("data-abs-paths");
+  const url = (href) => (ABS ? "/" + href : href);
+
   function headerHTML(activeKey) {
     const links = NAV.map(
       (item) =>
-        `<a href="${item.href}" class="${item.key === activeKey ? "active" : ""}">${item.label}</a>`
+        `<a href="${url(item.href)}" class="${item.key === activeKey ? "active" : ""}">${item.label}</a>`
     ).join("");
 
     return `
@@ -32,8 +38,8 @@
     </div>
     <header id="siteHeader">
       <nav class="wrap">
-        <a href="index.html" class="brand">
-          <span class="mark"><img src="images/logo.png" alt="BILAB logo"></span>
+        <a href="${url("index.html")}" class="brand">
+          <span class="mark"><img src="${url("images/logo.png")}" alt="BILAB logo"></span>
           <span class="bt"><b>BILAB</b><span>Business Intelligence Lab · MJU</span></span>
         </a>
         <div class="menu" id="mainMenu">${links}</div>
@@ -47,22 +53,22 @@
     <div class="wrap">
       <div class="foot-grid">
         <div class="foot-col">
-          <div class="foot-brand"><span class="mark" style="width:34px;height:34px;"><img src="images/logo.png" alt="BILAB logo"></span><b>BILAB</b></div>
+          <div class="foot-brand"><span class="mark mark-sm"><img src="${url("images/logo.png")}" alt="BILAB logo"></span><b>BILAB</b></div>
           <span>비즈니스 인텔리전스 연구실<br>Business Intelligence Laboratory</span>
           <span>Dept. of Industrial &amp; Management Engineering<br>Myongji University</span>
         </div>
         <div class="foot-col">
           <h5>Explore</h5>
-          <a href="research.html">Research Areas</a>
-          <a href="publications.html">Publications</a>
-          <a href="lectures.html">Lectures</a>
-          <a href="activity.html">Our Lab</a>
+          <a href="${url("research.html")}">Research Areas</a>
+          <a href="${url("publications.html")}">Publications</a>
+          <a href="${url("lectures.html")}">Lectures</a>
+          <a href="${url("activity.html")}">Our Lab</a>
         </div>
         <div class="foot-col">
           <h5>People</h5>
-          <a href="director.html">Director</a>
-          <a href="members.html">Members</a>
-          <a href="members.html#alumni">Alumni</a>
+          <a href="${url("director.html")}">Director</a>
+          <a href="${url("members.html")}">Members</a>
+          <a href="${url("members.html")}#alumni">Alumni</a>
           <a href="https://ideamyongji-admin.github.io" target="_blank" rel="noopener">IDEA 사업단 ↗</a>
         </div>
         <div class="foot-col">
@@ -303,18 +309,60 @@
     const burger = document.getElementById("burger");
     const menu = document.getElementById("mainMenu");
     if (burger && menu) {
-      burger.addEventListener("click", () => {
-        const open = menu.classList.toggle("open");
+      // Below 1024px the menu is a modal panel, so it behaves like one:
+      // a click-catching scrim, ESC to dismiss, the page behind it locked
+      // against scrolling, and Tab looping inside it rather than wandering
+      // into the content the scrim is covering.
+      const overlay = document.createElement("div");
+      overlay.className = "nav-overlay";
+      document.body.appendChild(overlay);
+
+      const desktop = window.matchMedia("(min-width:1025px)");
+
+      function setNav(open, restoreFocus) {
+        menu.classList.toggle("open", open);
+        overlay.classList.toggle("show", open);
+        document.documentElement.classList.toggle("nav-open", open);
         burger.setAttribute("aria-expanded", String(open));
         burger.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
-        if (header) header.classList.add("scrolled");
+        if (open) {
+          if (header) header.classList.add("scrolled");
+          const first = menu.querySelector("a");
+          if (first) first.focus();
+        } else if (restoreFocus) {
+          burger.focus();
+        }
+      }
+
+      burger.addEventListener("click", () =>
+        setNav(!menu.classList.contains("open"), true)
+      );
+      overlay.addEventListener("click", () => setNav(false, true));
+
+      document.addEventListener("keydown", (e) => {
+        if (!menu.classList.contains("open")) return;
+        if (e.key === "Escape") {
+          setNav(false, true);
+          return;
+        }
+        if (e.key !== "Tab") return;
+        const stops = [burger, ...menu.querySelectorAll("a")];
+        const i = stops.indexOf(document.activeElement);
+        if (i === -1) return;
+        e.preventDefault();
+        stops[(i + (e.shiftKey ? -1 : 1) + stops.length) % stops.length].focus();
       });
+
+      // Resizing up to the desktop layout turns the panel back into an
+      // inline row — drop the modal state so the scroll lock doesn't stick.
+      const onBreakpoint = () => {
+        if (desktop.matches && menu.classList.contains("open")) setNav(false, false);
+      };
+      if (desktop.addEventListener) desktop.addEventListener("change", onBreakpoint);
+      else desktop.addListener(onBreakpoint);
+
       menu.querySelectorAll("a").forEach((a) =>
-        a.addEventListener("click", () => {
-          menu.classList.remove("open");
-          burger.setAttribute("aria-expanded", "false");
-          burger.setAttribute("aria-label", "메뉴 열기");
-        })
+        a.addEventListener("click", () => setNav(false, false))
       );
     }
 

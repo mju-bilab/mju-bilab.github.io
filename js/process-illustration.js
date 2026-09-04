@@ -11,10 +11,18 @@
   const ctx = canvas.getContext("2d");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const DIM = [152, 162, 179];
-  const ACCENT = [52, 84, 209];
-  const TEAL = [18, 165, 148];
-  const NAVY = [14, 32, 56];
+  // Palette is theme-derived, not fixed: INK replaces what used to be a
+  // hardcoded dark-navy foreground, which rendered navy-on-navy (i.e.
+  // invisible) once the --soft panel behind this canvas went dark.
+  // See js/theme-colors.js.
+  let DIM, ACCENT, TEAL, INK;
+  function syncPalette() {
+    const p = (window.BILAB_THEME && window.BILAB_THEME.current) || {
+      ink: [14, 32, 56], dim: [152, 162, 179], accent: [52, 84, 209], teal: [18, 165, 148],
+    };
+    DIM = p.dim; ACCENT = p.accent; TEAL = p.teal; INK = p.ink;
+  }
+  syncPalette();
 
   const STAGE_X = [0.13, 0.32, 0.5, 0.68];
   const INSIGHT_X = 0.83;
@@ -73,7 +81,7 @@
     const bob = Math.sin(t / 700 + idx) * 2;
     const cy = y + bob;
     const scale = active ? 1.22 : 1;
-    const color = active ? TEAL : NAVY;
+    const color = active ? TEAL : INK;
     const alpha = active ? 1 : 0.68;
 
     if (active) {
@@ -136,7 +144,7 @@
     }
 
     ctx.font = "700 10px Pretendard, sans-serif";
-    ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(NAVY, 0.5);
+    ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(INK, 0.62);
     ctx.textAlign = "center";
     ctx.fillText(String(idx + 1).padStart(2, "0"), x, cy + 24);
   }
@@ -207,7 +215,7 @@
       ctx.stroke();
     }
 
-    const color = boost > 0.4 ? TEAL : NAVY;
+    const color = boost > 0.4 ? TEAL : INK;
 
     // whole cluster (briefcase, bars, arrow, label) drawn in local
     // coordinates then scaled by pulse * k, so it shrinks together on
@@ -320,6 +328,14 @@
     mouse.x = -999;
     mouse.y = -999;
   });
+  // Repaint when the theme flips; a paused or reduced-motion canvas has
+  // no next frame to pick the new palette up on.
+  if (window.BILAB_THEME) {
+    window.BILAB_THEME.subscribe(() => {
+      syncPalette();
+      draw(performance.now());
+    });
+  }
   window.addEventListener("resize", debounce(resize, 150));
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) stop();

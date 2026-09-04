@@ -11,10 +11,18 @@
   const ctx = canvas.getContext("2d");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const DIM = [152, 162, 179];
-  const ACCENT = [52, 84, 209];
-  const TEAL = [18, 165, 148];
-  const NAVY = [14, 32, 56];
+  // Palette is theme-derived, not fixed: INK replaces what used to be a
+  // hardcoded dark-navy foreground, which rendered navy-on-navy (i.e.
+  // invisible) once the --soft panel behind this canvas went dark.
+  // See js/theme-colors.js.
+  let DIM, ACCENT, TEAL, INK;
+  function syncPalette() {
+    const p = (window.BILAB_THEME && window.BILAB_THEME.current) || {
+      ink: [14, 32, 56], dim: [152, 162, 179], accent: [52, 84, 209], teal: [18, 165, 148],
+    };
+    DIM = p.dim; ACCENT = p.accent; TEAL = p.teal; INK = p.ink;
+  }
+  syncPalette();
 
   const SOURCES = ["Patent", "GitHub", "SF Media", "Futuristic DB", "Social Media", "Job Posting"];
   const SOURCE_X = 0.14;
@@ -135,7 +143,7 @@
       ctx.arc(s.x, s.y, active ? 4.4 : 3, 0, Math.PI * 2);
       ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(ACCENT, 0.7);
       ctx.fill();
-      ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(NAVY, 0.65);
+      ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(INK, 0.8);
       ctx.fillText(s.label, s.x + 9 * k, s.y);
     });
 
@@ -151,7 +159,7 @@
     ctx.fill();
     ctx.textAlign = "center";
     ctx.font = `700 ${10.5 * k}px Pretendard, sans-serif`;
-    ctx.fillStyle = rgba(NAVY, 0.8);
+    ctx.fillStyle = rgba(INK, 0.85);
     ctx.fillText("Research Projects", hub.x, hub.y - 20 * k);
     ctx.font = `800 ${13 * k}px Pretendard, sans-serif`;
     ctx.fillStyle = allActive ? rgba(TEAL, 1) : rgba(ACCENT, 1);
@@ -166,7 +174,7 @@
       ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(TEAL, 0.75);
       ctx.fill();
       ctx.font = `700 ${10 * k}px Pretendard, sans-serif`;
-      ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(NAVY, 0.65);
+      ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(INK, 0.8);
       ctx.fillText(p.label, p.x - 10 * k, p.y - 7 * k);
       ctx.font = `800 ${12 * k}px Pretendard, sans-serif`;
       ctx.fillText(p.count + "편", p.x - 10 * k, p.y + 8 * k);
@@ -205,6 +213,14 @@
     mouse.x = -999;
     mouse.y = -999;
   });
+  // Repaint when the theme flips; a paused or reduced-motion canvas has
+  // no next frame to pick the new palette up on.
+  if (window.BILAB_THEME) {
+    window.BILAB_THEME.subscribe(() => {
+      syncPalette();
+      draw(performance.now());
+    });
+  }
   window.addEventListener("resize", debounce(resize, 150));
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) stop();

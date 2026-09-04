@@ -33,20 +33,65 @@
       .join("");
   }
 
+  // Stable colour index for a person's name. Position-based colouring
+  // (nth-child) gave the same student a different colour on every card, so
+  // the colour carried no information; hashing the name fixes it in place.
+  function chipIndex(name) {
+    let h = 0;
+    for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 100000;
+    return h % 5;
+  }
+
+  function peopleHTML(names) {
+    return names
+      .map((p) => `<span data-chip="${chipIndex(p)}">${p}</span>`)
+      .join("");
+  }
+
+  // Until real photos land, the thumbnail carries the one thing we do know
+  // about an entry — what kind of event it was. Ten identical grey boxes
+  // told the reader nothing. An entry with a `photo` still wins.
+  const KIND_ICONS = {
+    conference:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H4z"/><path d="M9 19h6"/><path d="M12 15v4"/></svg>',
+    commencement:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8l10-4 10 4-10 4z"/><path d="M6 10v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>',
+    seminar:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v11H8l-5 4z"/><path d="M8 10h8"/></svg>',
+  };
+  const KIND_LABELS = {
+    conference: "Conference",
+    commencement: "Commencement",
+    seminar: "Seminar",
+    etc: "Activity",
+  };
+
+  function activityKind(a) {
+    if (a.kind) return a.kind;
+    const t = a.title;
+    if (/학위수여식|졸업/.test(t)) return "commencement";
+    if (/세미나|Seminar/i.test(t)) return "seminar";
+    if (/학술대회|Conference|Association|Symposium/i.test(t)) return "conference";
+    return "etc";
+  }
+
   function renderActivity(elId) {
     const el = document.getElementById(elId);
     if (!el || typeof ACTIVITY_DATA === "undefined") return;
     el.innerHTML = ACTIVITY_DATA.map((a) => {
+      const kind = activityKind(a);
+      const year = a.date.split(" ")[0].slice(0, 4);
       const thumb = a.photo
         ? `<img src="${a.photo}" alt="${a.title}">`
-        : `BILAB · ${a.date.split(" ")[0].slice(0, 4)}`;
+        : `<span class="thumb-kind">${KIND_ICONS[kind] || ""}
+             <b>${KIND_LABELS[kind]}</b><i>${year}</i></span>`;
       return `
       <div class="gallery-card">
-        <div class="gallery-thumb">${thumb}</div>
+        <div class="gallery-thumb" data-kind="${kind}">${thumb}</div>
         <div class="gallery-body">
           <time>${a.date}</time>
           <h4>${a.title}</h4>
-          <div class="people">${a.people.map((p) => `<span>${p}</span>`).join("")}</div>
+          <div class="people">${peopleHTML(a.people)}</div>
         </div>
       </div>`;
     }).join("");
@@ -63,6 +108,30 @@
         <td class="period">${a.period}</td>
       </tr>`
     ).join("");
+  }
+
+  // Counts the person cards actually on the page rather than trusting a
+  // hand-typed number in the headline, which drifts every time someone joins.
+  function renderMemberCount() {
+    const el = document.getElementById("memberCount");
+    if (!el) return;
+    const n = document.querySelectorAll('[data-member-group="current"] .person-card').length;
+    if (n) el.textContent = String(n);
+  }
+
+  // Same idea for the homepage "Research Projects" stat: research.html's
+  // own .tl-item list is the source of truth.
+  async function renderProjectCount() {
+    const el = document.getElementById("projectCount");
+    if (!el) return;
+    try {
+      const res = await fetch("research.html");
+      const doc = new DOMParser().parseFromString(await res.text(), "text/html");
+      const n = doc.querySelectorAll(".timeline .tl-item").length;
+      if (n) el.setAttribute("data-count-target", String(n));
+    } catch (e) {
+      /* leave whatever the markup already declares */
+    }
   }
 
   function renderAlumniCount(elId) {
@@ -121,6 +190,7 @@
       el.appendChild(sr);
 
       const visual = document.createElement("span");
+      visual.className = "odo-visual";
       visual.setAttribute("aria-hidden", "true");
       el.appendChild(visual);
 
@@ -226,6 +296,8 @@
     renderActivity("activityGrid");
     renderAlumniTable("alumniTableBody");
     renderAlumniCount("alumniCount");
+    renderMemberCount();
+    await renderProjectCount();
     initTabGroups(".pub-tabs", "data-pub-group");
     initTabGroups(".member-tabs", "data-member-group");
     await initPubStats();
