@@ -17,20 +17,20 @@
     );
   }
 
-  function renderNews(elId, limit) {
-    const el = document.getElementById(elId);
-    if (!el || typeof NEWS_DATA === "undefined") return;
-    const items = limit ? NEWS_DATA.slice(0, limit) : NEWS_DATA;
-    el.innerHTML = items
-      .map(
-        (n) => `
+  function newsRowHTML(n) {
+    return `
       <div class="news-row">
         <time>${n.date}</time>
         <span class="tag ${n.tag}">${tagLabel(n.tag)}</span>
         <p>${n.tag === "conference" ? highlightPresenters(n.text) : n.text}</p>
-      </div>`
-      )
-      .join("");
+      </div>`;
+  }
+
+  function renderNews(elId, limit) {
+    const el = document.getElementById(elId);
+    if (!el || typeof NEWS_DATA === "undefined") return;
+    const items = limit ? NEWS_DATA.slice(0, limit) : NEWS_DATA;
+    el.innerHTML = items.map(newsRowHTML).join("");
   }
 
   // Stable colour index for a person's name. Position-based colouring
@@ -254,11 +254,49 @@
     els.forEach((el) => io.observe(el));
   }
 
+  // Appends the remaining items instead of re-rendering the whole list, so
+  // the already-visible rows never flash/rebuild — only the newly-added
+  // rows animate in (forced to the .news-row hidden state via inline style,
+  // then released a frame later so the existing .reveal-in transition on
+  // .news-row carries them in, matching how the initial page load reveals
+  // this list — see the STAGGERED GROUP REVEAL rules in css/style.css).
   function initNewsToggle() {
     const btn = document.getElementById("newsMoreBtn");
     if (!btn) return;
     btn.addEventListener("click", () => {
-      renderNews("newsList", null);
+      const el = document.getElementById("newsList");
+      if (!el || typeof NEWS_DATA === "undefined") return;
+      const shown = el.querySelectorAll(".news-row").length;
+      const rest = NEWS_DATA.slice(shown);
+      if (!rest.length) {
+        btn.style.display = "none";
+        return;
+      }
+
+      const wrap = document.createElement("div");
+      wrap.innerHTML = rest.map(newsRowHTML).join("");
+      const newRows = Array.from(wrap.children);
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        newRows.forEach((row) => {
+          row.style.opacity = "0";
+          row.style.transform = "translateY(14px)";
+        });
+      }
+      newRows.forEach((row) => el.appendChild(row));
+
+      if (!reduceMotion) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            newRows.forEach((row) => {
+              row.style.opacity = "";
+              row.style.transform = "";
+            });
+          });
+        });
+      }
+
       btn.style.display = "none";
     });
   }

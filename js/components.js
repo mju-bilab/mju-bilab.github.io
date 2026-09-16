@@ -58,21 +58,21 @@
           <span>Dept. of Industrial &amp; Management Engineering<br>Myongji University</span>
         </div>
         <div class="foot-col">
-          <h5>Explore</h5>
+          <h2>Explore</h2>
           <a href="${url("research.html")}">Research Areas</a>
           <a href="${url("publications.html")}">Publications</a>
           <a href="${url("lectures.html")}">Lectures</a>
           <a href="${url("activity.html")}">Our Lab</a>
         </div>
         <div class="foot-col">
-          <h5>People</h5>
+          <h2>People</h2>
           <a href="${url("director.html")}">Director</a>
           <a href="${url("members.html")}">Members</a>
           <a href="${url("members.html")}#alumni">Alumni</a>
           <a href="https://ideamyongji.github.io" target="_blank" rel="noopener">IDEA 사업단 ↗</a>
         </div>
         <div class="foot-col">
-          <h5>Contact</h5>
+          <h2>Contact</h2>
           <a href="mailto:mthan@mju.ac.kr">mthan@mju.ac.kr</a>
           <a href="mailto:mjubilab@gmail.com">mjubilab@gmail.com</a>
           <span>제1공학관 521호 / 541호<br>경기도 용인시 처인구 명지로 116</span>
