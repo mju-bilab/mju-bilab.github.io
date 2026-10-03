@@ -129,4 +129,6 @@ if (reduced) {
     renderer.setAnimationLoop(document.hidden ? null : frame);
   });
 }
-requestAnimationFrame(() => canvas.classList.add("ready"));
+// 3D가 떴으면 준비 표시 (늦게 떠도 CSS 대체 구를 걷어냄)
+canvas.classList.add("ready");
+document.body.classList.remove("no-webgl");
