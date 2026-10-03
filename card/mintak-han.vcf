@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Han;Mintak;;;Ph.D.
+FN:한민탁 (Mintak Han)
+ORG:명지대학교 Myongji University;산업경영공학과 Dept. of Industrial & Management Engineering
+TITLE:부교수 Associate Professor
+TEL;TYPE=WORK,VOICE:+82-31-330-6448
+EMAIL;TYPE=INTERNET,WORK:mthan@mju.ac.kr
+ADR;TYPE=WORK:;제1공학관 521호;명지로 116 처인구;용인시;경기도;17058;대한민국
+URL:https://mju-bilab.github.io/
+END:VCARD

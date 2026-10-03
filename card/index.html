@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141a46">
+<title>한민탁 Mintak Han | BILAB</title>
+<meta name="description" content="명지대학교 산업경영공학과 부교수 한민탁(Mintak Han) — 연락처와 연구 분야.">
+<link rel="icon" href="../images/logo.png">
+<link rel="canonical" href="https://mju-bilab.github.io/card/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="한민탁 Mintak Han, Ph.D.">
+<meta property="og:description" content="명지대학교 산업경영공학과 부교수 · Business Intelligence Lab">
+<meta property="og:url" content="https://mju-bilab.github.io/card/">
+<meta property="og:image" content="https://mju-bilab.github.io/images/director-mintak-han.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Iris Glass tokens */
+:root{
+  --hero-night:#141a46; --night-2:#0d1030;
+  --heading-d:#e6e9ff; --ink-d:#f1f5f8; --muted-d:#a9b0c6;
+  --accent-d:#a9b4f5; --highlight-d:#f0a6dc;
+  --grad-start:#2b3f7e; --grad-mid:#7462c2; --grad-end:#b9a3ec;
+  --glow-pink:#e889c6; --glow-cyan:#7fd3ec;
+  --glass:rgba(28,34,80,.5); --glass-edge:rgba(230,233,255,.22);
+  --display:"Bricolage Grotesque","Noto Sans KR",system-ui,sans-serif;
+  --sans:Inter,"Noto Sans KR",system-ui,-apple-system,sans-serif;
+  --kr:"Noto Sans KR",Inter,system-ui,sans-serif;
+  --radius-sm:12px; --radius-md:20px; --radius-lg:32px;
+  --shadow-glass:0 8px 32px -8px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--night-2);-webkit-text-size-adjust:100%}
+body{min-height:100vh;color:var(--ink-d);font-family:var(--sans);background:var(--night-2);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+:focus-visible{outline:none;box-shadow:0 0 0 2px var(--night-2),0 0 0 4px var(--accent-d);border-radius:9999px}
+
+/* 배경: 네온 빛 + 3D 캔버스 */
+.backdrop{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60% 45% at 92% 6%,rgba(232,137,198,.55),rgba(232,137,198,0) 70%),
+    radial-gradient(55% 40% at 0% 60%,rgba(127,211,236,.38),rgba(127,211,236,0) 70%),
+    radial-gradient(70% 50% at 70% 110%,rgba(116,98,194,.5),rgba(116,98,194,0) 70%),
+    var(--hero-night)}
+#scene{position:fixed;inset:0;width:100vw;height:100vh;z-index:1;pointer-events:none;opacity:0;transition:opacity 1.2s ease}
+#scene.ready{opacity:1}
+.fallback-orb{position:fixed;z-index:1;width:min(62vw,340px);aspect-ratio:1;right:-8vw;top:14vh;border-radius:50%;pointer-events:none;
+  background:
+    radial-gradient(circle at 34% 28%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 20%),
+    radial-gradient(circle at 70% 78%,rgba(127,211,236,.9) 0,rgba(127,211,236,0) 42%),
+    conic-gradient(from 210deg,#e889c6,#b9a3ec 22%,#7fd3ec 45%,#e6e9ff 60%,#f0a6dc 78%,#e889c6);
+  box-shadow:inset -18px -24px 44px rgba(43,63,126,.45),inset 8px 10px 24px rgba(255,255,255,.7);display:none}
+body.no-webgl .fallback-orb{display:block}
+
+main{position:relative;z-index:2;max-width:520px;margin:0 auto;padding:max(20px,env(safe-area-inset-top)) 16px calc(40px + env(safe-area-inset-bottom))}
+
+/* 상단 바 */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 0 0}
+.top img{height:30px;width:auto}
+.top a.lab{font:600 12px/1 var(--display);letter-spacing:.08em;color:var(--heading-d);padding:9px 14px;border-radius:9999px;
+  background:var(--glass);border:1px solid var(--glass-edge);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow-glass)}
+
+/* 히어로 */
+.hero{min-height:calc(100svh - 70px);display:flex;flex-direction:column;justify-content:flex-end;padding:28vh 0 8px}
+.glass{background:var(--glass);border:1px solid var(--glass-edge);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);box-shadow:var(--shadow-glass)}
+.profile{border-radius:var(--radius-lg);padding:22px 22px 24px;display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:center}
+.profile .photo{width:96px;height:120px;border-radius:var(--radius-sm);overflow:hidden;border:1px solid rgba(255,255,255,.35);box-shadow:0 12px 28px -12px rgba(0,0,0,.7)}
+.profile .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.eyebrow{display:inline-block;font:500 12px/1 var(--sans);letter-spacing:.06em;color:var(--heading-d);padding:7px 11px;border-radius:9999px;
+  background:rgba(255,255,255,.1);border:1px solid var(--glass-edge);margin-bottom:12px}
+h1{font:700 30px/1.05 var(--kr);letter-spacing:.04em;color:#fff}
+.en{font:700 17px/1.2 var(--display);letter-spacing:-.01em;margin-top:6px;
+  background:linear-gradient(90deg,#fff,var(--accent-d) 50%,var(--highlight-d));-webkit-background-clip:text;background-clip:text;color:transparent}
+.role{font:400 14px/1.5 var(--kr);color:var(--muted-d);margin-top:8px}
+.role b{color:var(--ink-d);font-weight:500}
+
+/* 액션 */
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 16px;border-radius:9999px;font:500 15px/1 var(--kr);
+  transition:transform .2s ease,background-color .2s ease}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-grad{color:#fff;background:linear-gradient(120deg,var(--grad-start),var(--grad-mid));box-shadow:0 18px 36px -16px rgba(116,98,194,.9),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-glass{color:var(--heading-d)}
+.btn.wide{grid-column:1 / -1}
+@media (hover:hover){.btn:hover{transform:translateY(-1px)}}
+.btn:active{transform:scale(.97)}
+
+.scroll-cue{display:flex;justify-content:center;margin-top:22px;color:var(--muted-d);font:500 12px/1 var(--sans);letter-spacing:.08em;gap:8px;align-items:center}
+.scroll-cue i{width:1px;height:22px;background:linear-gradient(var(--muted-d),transparent)}
+
+/* 섹션 */
+section.block{margin-top:56px}
+h2{font:600 26px/1.15 var(--display);letter-spacing:-.015em;color:var(--heading-d)}
+h2 span{background:linear-gradient(90deg,var(--accent-d),#c7b6f7 50%,var(--highlight-d));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font:400 15px/1.6 var(--kr);color:var(--muted-d);margin-top:10px}
+.interests{display:grid;gap:12px;margin-top:20px}
+.interest{border-radius:var(--radius-md);padding:18px 18px 18px 64px;position:relative}
+.interest .no{position:absolute;left:18px;top:18px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font:700 13px/1 var(--display);color:#fff;
+  background:linear-gradient(135deg,var(--grad-start),var(--grad-mid))}
+.interest h3{font:600 17px/1.3 var(--display);color:#fff;letter-spacing:-.005em}
+.interest p{font:400 14px/1.55 var(--kr);color:var(--muted-d);margin-top:6px}
+
+.info{border-radius:var(--radius-md);margin-top:20px;padding:6px 18px}
+.info-row{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid rgba(230,233,255,.12);font:400 14px/1.5 var(--kr)}
+.info-row:last-child{border-bottom:0}
+.info-row dt{font:600 12px/1.9 var(--sans);letter-spacing:.06em;color:var(--accent-d);text-transform:uppercase}
+.info-row dd a{color:var(--ink-d);text-decoration:underline;text-decoration-color:rgba(169,180,245,.5);text-underline-offset:3px}
+
+.links{display:grid;gap:10px;margin-top:20px}
+.link{display:flex;align-items:center;justify-content:space-between;border-radius:var(--radius-md);padding:18px;font:500 15px/1.3 var(--kr);color:var(--ink-d)}
+.link small{display:block;font:400 13px/1.4 var(--sans);color:var(--muted-d);margin-top:3px}
+.link .arr{font:500 18px/1 var(--sans);color:var(--accent-d);transition:transform .2s ease}
+@media (hover:hover){.link:hover .arr{transform:translate(2px,-2px)}}
+
+footer{margin-top:56px;text-align:center;font:400 12px/1.6 var(--sans);color:var(--muted-d)}
+footer img{height:26px;width:auto;margin:0 auto 10px;opacity:.85}
+
+/* 스크롤 등장 */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  #scene{transition:none}
+  .btn,.link .arr{transition:none}
+}
+@media (min-width:640px){
+  main{padding-top:32px}
+  .hero{padding-top:30vh}
+  h1{font-size:34px}
+}
+</style>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="fallback-orb" aria-hidden="true"></div>
+
+<main>
+  <div class="top">
+    <img src="assets/mju-signature-white.png" alt="명지대학교">
+    <a class="lab" href="../index.html">BILAB ↗</a>
+  </div>
+
+  <section class="hero">
+    <div class="profile glass reveal">
+      <div class="photo"><img src="../images/director-mintak-han.jpg" alt="한민탁 교수 사진"></div>
+      <div>
+        <span class="eyebrow">Business Intelligence Lab</span>
+        <h1>한민탁</h1>
+        <div class="en">Mintak Han, Ph.D.</div>
+        <p class="role"><b>부교수</b> · 산업경영공학과<br>명지대학교 Myongji University</p>
+      </div>
+    </div>
+
+    <div class="actions reveal">
+      <a class="btn btn-grad" href="mailto:mthan@mju.ac.kr">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
+        이메일
+      </a>
+      <a class="btn btn-glass glass" href="tel:+82313306448">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+        전화
+      </a>
+      <a class="btn btn-glass glass wide" href="mintak-han.vcf" download="mintak-han.vcf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/><path d="M19 3v6M16 6h6"/></svg>
+        연락처 저장
+      </a>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true"><i></i>SCROLL</div>
+  </section>
+
+  <section class="block">
+    <h2 class="reveal">Research <span>Interests</span></h2>
+    <p class="lead reveal">데이터와 AI로 산업의 의사결정을 돕는 방법을 연구합니다.</p>
+    <div class="interests">
+      <article class="interest glass reveal"><span class="no">01</span><h3>Text Analytics</h3><p>비정형 텍스트 데이터로부터 산업·사회적 인사이트를 추출하는 방법론</p></article>
+      <article class="interest glass reveal"><span class="no">02</span><h3>Graph Machine Learning</h3><p>그래프 구조 데이터를 활용한 예측·추천·네트워크 분석</p></article>
+      <article class="interest glass reveal"><span class="no">03</span><h3>Agentic AI for R&amp;D Management</h3><p>AI 에이전트를 활용한 연구개발 관리와 의사결정 지원</p></article>
+      <article class="interest glass reveal"><span class="no">04</span><h3>Interaction Design for Human &amp; AI</h3><p>인간과 AI의 상호작용 설계를 통한 협업 인텔리전스</p></article>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 class="reveal">Get in <span>Touch</span></h2>
+    <dl class="info glass reveal">
+      <div class="info-row"><dt>Email</dt><dd><a href="mailto:mthan@mju.ac.kr">mthan@mju.ac.kr</a></dd></div>
+      <div class="info-row"><dt>Tel</dt><dd><a href="tel:+82313306448">031-330-6448</a></dd></div>
+      <div class="info-row"><dt>Office</dt><dd>명지대학교 자연캠퍼스 제1공학관 521호</dd></div>
+      <div class="info-row"><dt>Address</dt><dd>(17058) 경기도 용인시 처인구 명지로 116</dd></div>
+    </dl>
+    <div class="links">
+      <a class="link glass reveal" href="../index.html"><span>BILAB 연구실 홈페이지<small>mju-bilab.github.io</small></span><span class="arr" aria-hidden="true">↗</span></a>
+      <a class="link glass reveal" href="../director.html"><span>교수 소개 · 학력과 경력<small>Director</small></span><span class="arr" aria-hidden="true">↗</span></a>
+      <a class="link glass reveal" href="../publications.html"><span>논문 목록<small>Publications</small></span><span class="arr" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <img src="assets/mju-signature-white.png" alt="명지대학교">
+    Business Intelligence Lab · Dept. of Industrial &amp; Management Engineering<br>Myongji University
+  </footer>
+</main>
+
+<script>
+/* 스크롤 등장 */
+(function(){
+  const els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) { els.forEach(e => e.classList.add("in")); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }), { rootMargin: "0px 0px -8% 0px" });
+  els.forEach(e => io.observe(e));
+})();
+</script>
+<script>
+/* 3D를 불러오지 못하면(오래된 기기·CDN 차단) CSS 구로 대신 */
+setTimeout(() => {
+  if (!document.getElementById("scene").classList.contains("ready")) document.body.classList.add("no-webgl");
+}, 5000);
+</script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+<script type="module" src="scene.js"></script>
+</body>
+</html>
