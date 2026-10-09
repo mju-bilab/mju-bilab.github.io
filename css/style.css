@@ -22,6 +22,8 @@
   --line:#E6EAF1;
   /* text-on-tint pairs — the tint alone never carries meaning */
   --spark-ink:#9A3412;
+  /* Lumenizer nav label: brand amber, darkened to keep 5:1 on light surfaces */
+  --lumen-ink:#B45309;
   --ok-bg:#E6F7F1;
   --ok-ink:#0A6E53;
   /* per-person chip palette (see js/main.js chipIndex) */
@@ -50,7 +52,7 @@
     --soft:#111F38; --soft2:#16294A; --bg:#0A1729; --card:#101F38;
     --header-bg:rgba(10,23,41,.78); --glass:rgba(16,31,56,.62); --glass-border:rgba(255,255,255,.08); --icon:#E7ECF7;
     --shadow:0 18px 44px rgba(0,0,0,.35);
-    --dim-deco:#5C6780; --spark-ink:#FF8A4C;
+    --dim-deco:#5C6780; --spark-ink:#FF8A4C; --lumen-ink:#FBBF24;
     --ok-bg:#12362F; --ok-ink:#5FD9BE;
     --chip0-bg:#1B2F55; --chip0-ink:#A8C0FF;
     --chip1-bg:#12362F; --chip1-ink:#5FD9BE;
@@ -65,7 +67,7 @@
   --soft:#111F38; --soft2:#16294A; --bg:#0A1729; --card:#101F38;
   --header-bg:rgba(10,23,41,.78); --glass:rgba(16,31,56,.62); --glass-border:rgba(255,255,255,.08); --icon:#E7ECF7;
   --shadow:0 18px 44px rgba(0,0,0,.35);
-  --dim-deco:#5C6780; --spark-ink:#FF8A4C;
+  --dim-deco:#5C6780; --spark-ink:#FF8A4C; --lumen-ink:#FBBF24;
   --ok-bg:#12362F; --ok-ink:#5FD9BE;
   --chip0-bg:#1B2F55; --chip0-ink:#A8C0FF;
   --chip1-bg:#12362F; --chip1-ink:#5FD9BE;
@@ -197,6 +199,10 @@ header.scrolled .brand .bt span{color:var(--muted)}
 .menu a.active{color:#fff}
 header.scrolled .menu a{color:var(--ink)}
 header.scrolled .menu a.active{color:var(--accent)}
+/* Lumenizer tab in its brand amber: bright on the navy hero, --lumen-ink on the scrolled bar */
+.menu a.nav-lumen,.menu a.nav-lumen.active{color:#FBBF24}
+.menu a.nav-lumen::after{background:#FBBF24}
+header.scrolled .menu a.nav-lumen,header.scrolled .menu a.nav-lumen.active{color:var(--lumen-ink)}
 
 .menu .hassub{position:relative}
 .menu .hassub>.top{font-weight:600;font-size:.9rem;color:#e7edf6;padding:6px 0;cursor:pointer;display:flex;align-items:center;gap:4px}
@@ -217,6 +223,8 @@ header.scrolled .menu .hassub>.top{color:var(--ink)}
   .menu a:hover::after{width:100%}
   .menu a:hover{color:#fff}
   header.scrolled .menu a:hover{color:var(--accent)}
+  .menu a.nav-lumen:hover{color:#FDE68A}
+  header.scrolled .menu a.nav-lumen:hover{color:var(--lumen-ink)}
   .menu .hassub>.top:hover{color:var(--accent)}
   .menu .hassub:hover .sub{opacity:1;visibility:visible;transform:translateX(-50%) translateY(6px)}
   .menu .sub a:hover{background:var(--soft);color:var(--accent) !important}
@@ -820,6 +828,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     transform:translateX(100%);transition:transform .3s;box-shadow:-14px 0 44px rgba(10,23,41,.22);}
   .menu.open{transform:translateX(0)}
   .menu a,.menu .hassub>.top{color:var(--ink) !important;width:100%;padding:14px 2px}
+  .menu a.nav-lumen{color:var(--lumen-ink) !important}
   .menu>a{border-bottom:1px solid var(--line)}
   .menu>a:last-child{border-bottom:none}
   .menu a::after{display:none}

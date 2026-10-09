@@ -5,7 +5,7 @@
     { href: "director.html", label: "Director", key: "director" },
     { href: "members.html", label: "Members", key: "members" },
     { href: "research.html", label: "Research", key: "research" },
-    { href: "lumenizer.html", label: "Lumenizer", key: "lumenizer" },
+    { href: "lumenizer.html", label: "Lumenizer", key: "lumenizer", cls: "nav-lumen" },
     { href: "publications.html", label: "Publications", key: "publications" },
     { href: "lectures.html", label: "Lectures", key: "lectures" },
     { href: "activity.html", label: "Our Lab", key: "activity" },
@@ -21,7 +21,7 @@
   function headerHTML(activeKey) {
     const links = NAV.map(
       (item) =>
-        `<a href="${url(item.href)}" class="${item.key === activeKey ? "active" : ""}">${item.label}</a>`
+        `<a href="${url(item.href)}" class="${[item.key === activeKey ? "active" : "", item.cls || ""].join(" ").trim()}">${item.label}</a>`
     ).join("");
 
     return `
