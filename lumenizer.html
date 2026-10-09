@@ -5,7 +5,7 @@
 <script>try{var t=localStorage.getItem('bilab-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lumenizer | BILAB</title>
-<meta name="description" content="Lumenizer는 BILAB이 만든 연구실용 AI 논문 리더입니다. PDF 위에서 번역·설명·근거 인용 채팅·요약·핵심 문장 표시를 한 번에 제공합니다.">
+<meta name="description" content="Lumenizer는 BILAB이 만든 연구실용 AI 논문 리더입니다. PDF 위에서 번역·설명·근거 인용 채팅·요약을 제공하고, 논문 탐색부터 연구 공백 찾기·분석 설계·랩 미팅 발표 자료·학회 포스터까지 연구 과정을 돕습니다.">
 <link rel="icon" href="images/logo.png">
 <link rel="apple-touch-icon" href="images/logo.png">
 <link rel="canonical" href="https://mju-bilab.github.io/lumenizer.html">
@@ -13,12 +13,12 @@
 <meta property="og:site_name" content="BILAB · Business Intelligence Lab, Myongji University">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:title" content="Lumenizer | BILAB">
-<meta property="og:description" content="논문을 밝혀 읽는 연구실 AI. 번역·설명·근거 인용 채팅·요약·핵심 문장 표시를 PDF 위에서 한 번에.">
+<meta property="og:description" content="논문을 밝혀 읽는 연구실 AI. PDF 위의 번역·설명·근거 인용 채팅부터 연구 공백 찾기, 분석 설계, 랩 미팅 발표 자료와 학회 포스터까지.">
 <meta property="og:url" content="https://mju-bilab.github.io/lumenizer.html">
 <meta property="og:image" content="https://mju-bilab.github.io/media/lumenizer/hero.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Lumenizer | BILAB">
-<meta name="twitter:description" content="논문을 밝혀 읽는 연구실 AI. 번역·설명·근거 인용 채팅·요약·핵심 문장 표시를 PDF 위에서 한 번에.">
+<meta name="twitter:description" content="논문을 밝혀 읽는 연구실 AI. PDF 위의 번역·설명·근거 인용 채팅부터 연구 공백 찾기, 분석 설계, 랩 미팅 발표 자료와 학회 포스터까지.">
 <meta name="twitter:image" content="https://mju-bilab.github.io/media/lumenizer/hero.jpg">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -40,7 +40,7 @@
         <span class="sr-only">Lumenizer</span>
       </h1>
       <p class="lz-tagline">논문을 밝혀 읽는 연구실 AI</p>
-      <p>PDF 위에서 번역하고, 모르는 문장과 수식을 설명받고, 근거가 달린 답을 듣고, 핵심 문장을 표시합니다. BILAB 대학원생들이 논문을 더 빨리, 더 깊이 읽도록 연구실에서 직접 만든 도구입니다.</p>
+      <p>PDF 위에서 번역하고, 모르는 문장과 수식을 설명받고, 근거가 달린 답을 듣습니다. 읽은 논문으로 연구 공백을 찾아 아이디어를 검증하고, 분석을 설계해 랩 미팅 발표 자료와 학회 포스터까지 만듭니다. BILAB 대학원생들의 연구 전 과정을 돕도록 연구실에서 직접 만든 도구입니다.</p>
       <div class="lz-actions">
         <a href="https://bilab-research-assistant.vercel.app" class="btn lz-btn-light" target="_blank" rel="noopener">Lumenizer 열기 ↗</a>
         <a href="#features" class="btn lz-btn-ghost">기능 둘러보기</a>
@@ -60,7 +60,7 @@
       <ul class="lz-points">
         <li><b>원문 그대로</b><span>번역·설명이 PDF 위에 바로 나타나 원문과 함께 봅니다</span></li>
         <li><b>근거가 있는 AI</b><span>답변의 번호를 누르면 논문 속 근거 위치로 이동합니다</span></li>
-        <li><b>연구실이 함께</b><span>논문·요약·메모를 연구실 구성원과 공유합니다</span></li>
+        <li><b>연구실이 함께</b><span>논문·요약·메모·분석 결과를 연구실 구성원과 공유합니다</span></li>
       </ul>
     </div>
   </section>
@@ -153,6 +153,95 @@
     </div>
   </section>
 
+  <section id="workflow">
+    <div class="wrap">
+      <div class="section-head" data-rail-label="Research workflow">
+        <span class="eyebrow">Research Workflow</span>
+        <h2>읽은 다음, 연구로</h2>
+        <p>논문을 찾는 것부터 학회에서 발표하는 것까지 이어집니다. 모든 판단에는 실제 논문 근거가 붙고, AI는 연구를 대신하지 않고 판단을 돕습니다.</p>
+        <ol class="lz-journey" aria-label="연구 과정"><li>논문 탐색</li><li>읽기</li><li>연구 공백</li><li>아이디어 검증</li><li>분석 설계</li><li>랩 미팅 발표</li><li>원고·학회 포스터</li></ol>
+      </div>
+
+      <article class="lz-feature" id="discover" data-rail-label="Discover &amp; Compare">
+        <div class="lz-copy">
+          <span class="eyebrow">05 · Discover &amp; Compare</span>
+          <h3>찾고 싶은 연구를 문장으로, 모은 논문은 한 장의 표로</h3>
+          <p>연구 주제를 한국어 문장으로 설명하면 OpenAlex·arXiv에서 실제 논문을 찾아 관련도 순으로 정리하고, 논문마다 왜 읽을 만한지 한 줄로 알려 줍니다. 컬렉션에 모은 논문은 연구 문제·방법·데이터·평가지표·결과·한계를 같은 기준으로 비교한 표로 만듭니다.</p>
+          <ul>
+            <li>내 라이브러리를 바탕으로 읽을 만한 논문을 추천합니다</li>
+            <li>비교표는 Markdown·CSV(엑셀)로 내보내 관련 연구 작성에 씁니다</li>
+            <li>BibTeX와 APA·IEEE 등 인용 형식을 바로 복사합니다</li>
+          </ul>
+        </div>
+        <figure class="lz-frame">
+          <video class="lz-video" muted loop playsinline preload="none" poster="media/lumenizer/discover.jpg" aria-label="논문 탐색과 비교표: 한국어 문장으로 논문을 검색하고, 컬렉션의 논문 세 편을 비교표로 정리하는 모습">
+            <source src="media/lumenizer/discover.webm" type="video/webm">
+            <source src="media/lumenizer/discover.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </article>
+
+      <article class="lz-feature lz-flip" id="design" data-rail-label="Research Design">
+        <div class="lz-copy">
+          <span class="eyebrow">06 · Research Design</span>
+          <h3>연구 공백을 찾고, 아이디어를 검증하고, 분석을 설계합니다</h3>
+          <p>컬렉션 논문들의 한계와 후속 연구를 주제별로 묶어 공백 지도를 만들고, 이후 논문이 이미 다뤘는지까지 확인합니다. 내 아이디어는 가장 가까운 선행 연구와 비교해 참신성과 위험 요소를 짚고, 분석 설계는 비슷한 연구의 표준 데이터셋·비교 모델·평가지표에 맞춰 점검합니다.</p>
+          <ul>
+            <li>공백마다 &lsquo;열린 공백·일부 다뤄짐·이미 해결됨&rsquo;과 근거 논문을 보여 줍니다</li>
+            <li>설계에서 빠진 비교·검증을 체크리스트로 정리합니다</li>
+            <li>결과는 나만 보거나 랩 미팅을 위해 연구실에 공유합니다</li>
+          </ul>
+        </div>
+        <figure class="lz-frame">
+          <video class="lz-video" muted loop playsinline preload="none" poster="media/lumenizer/research.jpg" aria-label="연구 설계: 공백 지도와 근거 논문, 아이디어 검증의 가장 가까운 선행 연구, 분석 설계의 단계별 권장 흐름을 차례로 보는 모습">
+            <source src="media/lumenizer/research.webm" type="video/webm">
+            <source src="media/lumenizer/research.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </article>
+
+      <article class="lz-feature" id="deck" data-rail-label="Lab Meeting Deck">
+        <div class="lz-copy">
+          <span class="eyebrow">07 · Lab Meeting Deck</span>
+          <h3>검토한 내용을 연구실 디자인 그대로 발표 자료로</h3>
+          <p>공백 지도에서 고른 공백, AI가 제안한 후보 중 골라 다듬은 아이디어, 분석 설계 점검 결과를 묶어 14장짜리 랩 미팅 발표 자료를 만듭니다. 연구실이 정한 슬라이드 디자인 시스템을 올려 두면 색·글꼴·로고가 그대로 적용됩니다.</p>
+          <ul>
+            <li>슬라이드마다 발표자 노트를 함께 씁니다</li>
+            <li>편집 가능한 PowerPoint와 PDF로 받고, 바로 발표 모드로 띄웁니다</li>
+            <li>수치와 참고문헌은 분석 결과에서 그대로 가져옵니다</li>
+          </ul>
+        </div>
+        <figure class="lz-frame">
+          <video class="lz-video" muted loop playsinline preload="none" poster="media/lumenizer/deck.jpg" aria-label="발표 자료: 공백 선택부터 분석 설계까지 끝낸 단계를 훑어본 뒤, 슬라이드를 넘겨 보고 발표 모드로 띄우는 모습">
+            <source src="media/lumenizer/deck.webm" type="video/webm">
+            <source src="media/lumenizer/deck.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </article>
+
+      <article class="lz-feature lz-flip" id="writing" data-rail-label="Writing &amp; Poster">
+        <div class="lz-copy">
+          <span class="eyebrow">08 · Writing &amp; Poster</span>
+          <h3>원고에 맞는 인용, 투고 전 사전 리뷰, 학회 포스터까지</h3>
+          <p>원고 문단을 붙여 넣으면 인용이 필요한 문장마다 실제 논문을 찾아 추천하고, 원고 PDF를 올리면 참신성·엄밀성·명확성 기준으로 문장 단위 의견을 줍니다. 같은 원고로 A0 학회 포스터 초안도 만듭니다. 그림·표는 원고에서 잘라 쓰고, 수치는 원고에 있는 것만 씁니다.</p>
+          <ul>
+            <li>포스터는 글자를 눌러 바로 고치고, 그림을 바꾸고, 스타일을 고릅니다</li>
+            <li>편집 가능한 PowerPoint와 인쇄용 A0 PDF로 받습니다</li>
+            <li>원고는 본인만 보고, PDF 파일은 분석 직후 삭제됩니다</li>
+          </ul>
+        </div>
+        <figure class="lz-frame">
+          <video class="lz-video" muted loop playsinline preload="none" poster="media/lumenizer/writing.jpg" aria-label="원고 도우미: 원고 문단의 인용 추천 결과를 보고, 학회 포스터 탭에서 포스터 스타일을 바꿔 보며 훑어보는 모습">
+            <source src="media/lumenizer/writing.webm" type="video/webm">
+            <source src="media/lumenizer/writing.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </article>
+
+      <p class="lz-credit">영상 속 논문: A. Vaswani et al., "Attention Is All You Need," NeurIPS 2017 (<a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">arXiv:1706.03762</a>); J. Devlin et al., "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding," NAACL 2019 (<a href="https://arxiv.org/abs/1810.04805" target="_blank" rel="noopener">arXiv:1810.04805</a>); J. Howard &amp; S. Ruder, "Universal Language Model Fine-tuning for Text Classification," ACL 2018 (<a href="https://arxiv.org/abs/1801.06146" target="_blank" rel="noopener">arXiv:1801.06146</a>). 학술 소개 목적으로만 사용했습니다. 영상 속 연구 아이디어·발표 자료·포스터는 기능 시연을 위해 만든 예시입니다.</p>
+    </div>
+  </section>
+
   <section id="how" data-rail-label="How it works">
     <div class="wrap">
       <div class="section-head">
@@ -174,6 +263,11 @@
           <span class="lz-num">3</span>
           <h3>한 번 만든 결과는 함께</h3>
           <p>번역·요약·설명 결과를 연구실 단위로 저장해, 같은 논문을 여는 동료는 기다림 없이 바로 봅니다.</p>
+        </div>
+        <div class="lz-card">
+          <span class="lz-num">4</span>
+          <h3>휴대폰에서도</h3>
+          <p>이동 중에도 휴대폰으로 논문을 읽고 결과를 확인합니다. 메뉴는 화면 아래 탭에 있고, 발표 자료는 화면을 넘기며 발표합니다.</p>
         </div>
       </div>
     </div>
