@@ -5,6 +5,7 @@
     { href: "director.html", label: "Director", key: "director" },
     { href: "members.html", label: "Members", key: "members" },
     { href: "research.html", label: "Research", key: "research" },
+    { href: "lumenizer.html", label: "Lumenizer", key: "lumenizer" },
     { href: "publications.html", label: "Publications", key: "publications" },
     { href: "lectures.html", label: "Lectures", key: "lectures" },
     { href: "activity.html", label: "Our Lab", key: "activity" },
