@@ -11,6 +11,7 @@ bilab/
 ├── director.html       지도교수 소개
 ├── members.html         현재 구성원 · 졸업생(Alumni)
 ├── research.html         연구 분야 · 연구 과제
+├── lumenizer.html        Lumenizer(연구실 AI 논문 리더) 소개 · 기능 영상
 ├── publications.html    논문(저널/진행중/학술대회)
 ├── lectures.html         강의 목록
 ├── activity.html         Our Lab (활동 아카이브 · 세미나)
@@ -27,8 +28,11 @@ bilab/
 │   ├── hero-network.js     히어로 파티클 네트워크
 │   ├── pipeline-graph.js   Research 파이프라인 그래프
 │   ├── process-illustration.js  Research 프로세스 일러스트
-│   └── research-interests.js    연구 관심분야 카드 일러스트
+│   ├── research-interests.js    연구 관심분야 카드 일러스트
+│   └── lumenizer.js        Lumenizer 페이지 영상: 화면에 보일 때만 재생, reduced-motion이면 정지
 ├── files/publications/index.json   논문별 PDF 파일명 + DOI
+├── media/lumenizer/      Lumenizer 기능 영상(MP4·WebM)과 포스터 이미지
+│                         (paper-reader 저장소의 scripts/demo로 다시 녹화)
 └── images/
 ```
 
