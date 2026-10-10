@@ -5,7 +5,7 @@
 <script>try{var t=localStorage.getItem('bilab-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lumenizer | BILAB</title>
-<meta name="description" content="Lumenizer는 BILAB이 만든 연구실용 AI 논문 리더입니다. PDF 위에서 번역·설명·근거 인용 채팅·요약을 제공하고, 논문 탐색부터 연구 공백 찾기·분석 설계·랩 미팅 발표 자료·학회 포스터까지 연구 과정을 돕습니다.">
+<meta name="description" content="Lumenizer는 BILAB이 만든 연구실용 AI 논문 리더입니다. PDF 위에서 번역·설명·근거 인용 채팅·요약을 제공하고, 논문 탐색과 지식맵부터 연구 공백 찾기·분석 설계·랩 미팅 발표 자료·학회 포스터까지 연구 과정을 돕습니다.">
 <link rel="icon" href="images/logo.png">
 <link rel="apple-touch-icon" href="images/logo.png">
 <link rel="canonical" href="https://mju-bilab.github.io/lumenizer.html">
@@ -13,12 +13,12 @@
 <meta property="og:site_name" content="BILAB · Business Intelligence Lab, Myongji University">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:title" content="Lumenizer | BILAB">
-<meta property="og:description" content="논문을 밝혀 읽는 연구실 AI. PDF 위의 번역·설명·근거 인용 채팅부터 연구 공백 찾기, 분석 설계, 랩 미팅 발표 자료와 학회 포스터까지.">
+<meta property="og:description" content="논문을 밝혀 읽는 연구실 AI. PDF 위의 번역·설명·근거 인용 채팅부터 지식맵, 연구 공백 찾기, 분석 설계, 랩 미팅 발표 자료와 학회 포스터까지.">
 <meta property="og:url" content="https://mju-bilab.github.io/lumenizer.html">
 <meta property="og:image" content="https://mju-bilab.github.io/media/lumenizer/hero.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Lumenizer | BILAB">
-<meta name="twitter:description" content="논문을 밝혀 읽는 연구실 AI. PDF 위의 번역·설명·근거 인용 채팅부터 연구 공백 찾기, 분석 설계, 랩 미팅 발표 자료와 학회 포스터까지.">
+<meta name="twitter:description" content="논문을 밝혀 읽는 연구실 AI. PDF 위의 번역·설명·근거 인용 채팅부터 지식맵, 연구 공백 찾기, 분석 설계, 랩 미팅 발표 자료와 학회 포스터까지.">
 <meta name="twitter:image" content="https://mju-bilab.github.io/media/lumenizer/hero.jpg">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -159,7 +159,7 @@
         <span class="eyebrow">Research Workflow</span>
         <h2>읽은 다음, 연구로</h2>
         <p>논문을 찾는 것부터 학회에서 발표하는 것까지 이어집니다. 모든 판단에는 실제 논문 근거가 붙고, AI는 연구를 대신하지 않고 판단을 돕습니다.</p>
-        <ol class="lz-journey" aria-label="연구 과정"><li>논문 탐색</li><li>읽기</li><li>연구 공백</li><li>아이디어 검증</li><li>분석 설계</li><li>랩 미팅 발표</li><li>원고·학회 포스터</li></ol>
+        <ol class="lz-journey" aria-label="연구 과정"><li>논문 탐색</li><li>읽기</li><li>지식맵</li><li>연구 공백</li><li>아이디어 검증</li><li>분석 설계</li><li>랩 미팅 발표</li><li>원고·학회 포스터</li></ol>
       </div>
 
       <article class="lz-feature" id="discover" data-rail-label="Discover &amp; Compare">
@@ -181,9 +181,28 @@
         </figure>
       </article>
 
-      <article class="lz-feature lz-flip" id="design" data-rail-label="Research Design">
+      <article class="lz-feature lz-flip" id="knowledge" data-rail-label="Knowledge Map">
         <div class="lz-copy">
-          <span class="eyebrow">06 · Research Design</span>
+          <span class="eyebrow">06 · Knowledge Map</span>
+          <h3>여러 논문이 함께 다루는 개념을 한눈에 보는 지식맵</h3>
+          <p>자동 하이라이트로 추출한 핵심 문장의 키워드를 논문과 연결합니다. 여러 논문이 함께 다루는 주요 개념이 지도 가운데로 모여, 읽은 논문들이 어떤 개념으로 이어지는지 한눈에 파악합니다. 개념을 누르면 그 개념이 나온 핵심 문장을 논문별로 보여 줍니다.</p>
+          <ul>
+            <li>같은 개념의 다른 표기(약어·하위 개념)는 하나로 묶습니다</li>
+            <li>핵심 문장을 누르면 논문의 해당 쪽으로 바로 이동합니다</li>
+            <li>기여·방법·결과·한계 색으로 개념을 구분하고 골라 봅니다</li>
+          </ul>
+        </div>
+        <figure class="lz-frame">
+          <video class="lz-video" muted loop playsinline preload="none" poster="media/lumenizer/knowledge.jpg" aria-label="지식맵: 컬렉션의 논문 세 편으로 지식맵을 열고, 여러 논문이 공유하는 개념을 눌러 근거 문장을 본 뒤 지도를 확대해 보는 모습">
+            <source src="media/lumenizer/knowledge.webm" type="video/webm">
+            <source src="media/lumenizer/knowledge.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </article>
+
+      <article class="lz-feature" id="design" data-rail-label="Research Design">
+        <div class="lz-copy">
+          <span class="eyebrow">07 · Research Design</span>
           <h3>연구 공백을 찾고, 아이디어를 검증하고, 분석을 설계합니다</h3>
           <p>컬렉션 논문들의 한계와 후속 연구를 주제별로 묶어 공백 지도를 만들고, 이후 논문이 이미 다뤘는지까지 확인합니다. 내 아이디어는 가장 가까운 선행 연구와 비교해 참신성과 위험 요소를 짚고, 분석 설계는 비슷한 연구의 표준 데이터셋·비교 모델·평가지표에 맞춰 점검합니다.</p>
           <ul>
@@ -200,9 +219,9 @@
         </figure>
       </article>
 
-      <article class="lz-feature" id="deck" data-rail-label="Lab Meeting Deck">
+      <article class="lz-feature lz-flip" id="deck" data-rail-label="Lab Meeting Deck">
         <div class="lz-copy">
-          <span class="eyebrow">07 · Lab Meeting Deck</span>
+          <span class="eyebrow">08 · Lab Meeting Deck</span>
           <h3>검토한 내용을 연구실 디자인 그대로 발표 자료로</h3>
           <p>공백 지도에서 고른 공백, AI가 제안한 후보 중 골라 다듬은 아이디어, 분석 설계 점검 결과를 묶어 14장짜리 랩 미팅 발표 자료를 만듭니다. 연구실이 정한 슬라이드 디자인 시스템을 올려 두면 색·글꼴·로고가 그대로 적용됩니다.</p>
           <ul>
@@ -219,9 +238,9 @@
         </figure>
       </article>
 
-      <article class="lz-feature lz-flip" id="writing" data-rail-label="Writing &amp; Poster">
+      <article class="lz-feature" id="writing" data-rail-label="Writing &amp; Poster">
         <div class="lz-copy">
-          <span class="eyebrow">08 · Writing &amp; Poster</span>
+          <span class="eyebrow">09 · Writing &amp; Poster</span>
           <h3>원고에 맞는 인용, 투고 전 사전 리뷰, 학회 포스터까지</h3>
           <p>원고 문단을 붙여 넣으면 인용이 필요한 문장마다 실제 논문을 찾아 추천하고, 원고 PDF를 올리면 참신성·엄밀성·명확성 기준으로 문장 단위 의견을 줍니다. 같은 원고로 A0 학회 포스터 초안도 만듭니다. 그림·표는 원고에서 잘라 쓰고, 수치는 원고에 있는 것만 씁니다.</p>
           <ul>
