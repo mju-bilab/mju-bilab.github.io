@@ -6,6 +6,7 @@
     { href: "members.html", label: "Members", key: "members" },
     { href: "research.html", label: "Research", key: "research" },
     { href: "lumenizer.html", label: "Lumenizer", key: "lumenizer", cls: "nav-lumen" },
+    { href: "kaeda.html", label: "KAEDA", key: "kaeda", cls: "nav-kaeda" },
     { href: "publications.html", label: "Publications", key: "publications" },
     { href: "lectures.html", label: "Lectures", key: "lectures" },
     { href: "activity.html", label: "Our Lab", key: "activity" },

@@ -24,6 +24,8 @@
   --spark-ink:#9A3412;
   /* Lumenizer nav label: brand amber, darkened to keep 5:1 on light surfaces */
   --lumen-ink:#B45309;
+  /* KAEDA nav label: brand crimson, 5:1+ on light surfaces */
+  --kaeda-ink:#B32442;
   --ok-bg:#E6F7F1;
   --ok-ink:#0A6E53;
   /* per-person chip palette (see js/main.js chipIndex) */
@@ -52,7 +54,7 @@
     --soft:#111F38; --soft2:#16294A; --bg:#0A1729; --card:#101F38;
     --header-bg:rgba(10,23,41,.78); --glass:rgba(16,31,56,.62); --glass-border:rgba(255,255,255,.08); --icon:#E7ECF7;
     --shadow:0 18px 44px rgba(0,0,0,.35);
-    --dim-deco:#5C6780; --spark-ink:#FF8A4C; --lumen-ink:#FBBF24;
+    --dim-deco:#5C6780; --spark-ink:#FF8A4C; --lumen-ink:#FBBF24; --kaeda-ink:#F29AAB;
     --ok-bg:#12362F; --ok-ink:#5FD9BE;
     --chip0-bg:#1B2F55; --chip0-ink:#A8C0FF;
     --chip1-bg:#12362F; --chip1-ink:#5FD9BE;
@@ -67,7 +69,7 @@
   --soft:#111F38; --soft2:#16294A; --bg:#0A1729; --card:#101F38;
   --header-bg:rgba(10,23,41,.78); --glass:rgba(16,31,56,.62); --glass-border:rgba(255,255,255,.08); --icon:#E7ECF7;
   --shadow:0 18px 44px rgba(0,0,0,.35);
-  --dim-deco:#5C6780; --spark-ink:#FF8A4C; --lumen-ink:#FBBF24;
+  --dim-deco:#5C6780; --spark-ink:#FF8A4C; --lumen-ink:#FBBF24; --kaeda-ink:#F29AAB;
   --ok-bg:#12362F; --ok-ink:#5FD9BE;
   --chip0-bg:#1B2F55; --chip0-ink:#A8C0FF;
   --chip1-bg:#12362F; --chip1-ink:#5FD9BE;
@@ -203,6 +205,11 @@ header.scrolled .menu a.active{color:var(--accent)}
 .menu a.nav-lumen,.menu a.nav-lumen.active{color:#FBBF24}
 .menu a.nav-lumen::after{background:#FBBF24}
 header.scrolled .menu a.nav-lumen,header.scrolled .menu a.nav-lumen.active{color:var(--lumen-ink)}
+/* KAEDA tab in its brand rose: bright on the navy hero, --kaeda-ink on the scrolled bar */
+.menu a.nav-kaeda,.menu a.nav-kaeda.active{color:#F29AAB}
+.menu a.nav-kaeda::after{background:#F29AAB}
+header.scrolled .menu a.nav-kaeda,header.scrolled .menu a.nav-kaeda.active{color:var(--kaeda-ink)}
+header.scrolled .menu a.nav-kaeda::after{background:var(--kaeda-ink)}
 
 .menu .hassub{position:relative}
 .menu .hassub>.top{font-weight:600;font-size:.9rem;color:#e7edf6;padding:6px 0;cursor:pointer;display:flex;align-items:center;gap:4px}
@@ -225,6 +232,8 @@ header.scrolled .menu .hassub>.top{color:var(--ink)}
   header.scrolled .menu a:hover{color:var(--accent)}
   .menu a.nav-lumen:hover{color:#FDE68A}
   header.scrolled .menu a.nav-lumen:hover{color:var(--lumen-ink)}
+  .menu a.nav-kaeda:hover{color:#F8C3CE}
+  header.scrolled .menu a.nav-kaeda:hover{color:var(--kaeda-ink)}
   .menu .hassub>.top:hover{color:var(--accent)}
   .menu .hassub:hover .sub{opacity:1;visibility:visible;transform:translateX(-50%) translateY(6px)}
   .menu .sub a:hover{background:var(--soft);color:var(--accent) !important}
@@ -829,6 +838,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .menu.open{transform:translateX(0)}
   .menu a,.menu .hassub>.top{color:var(--ink) !important;width:100%;padding:14px 2px}
   .menu a.nav-lumen{color:var(--lumen-ink) !important}
+  .menu a.nav-kaeda{color:var(--kaeda-ink) !important}
   .menu>a{border-bottom:1px solid var(--line)}
   .menu>a:last-child{border-bottom:none}
   .menu a::after{display:none}
@@ -907,3 +917,18 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .lz-points,.lz-cards{grid-template-columns:minmax(0,1fr)}
   .lz-showcase{margin-top:-40px}
 }
+
+/* ---------- KAEDA page (kaeda.html) — reuses the lz-* layout, KAEDA brand accents ---------- */
+.kd-hero .kd-title{display:flex;align-items:center;gap:14px;margin:6px 0 4px;color:#fff}
+.kd-mark{width:52px;height:52px;flex:none;border-radius:13px;background:#F6F3EA;padding:7px;box-shadow:0 0 0 1px rgba(255,255,255,.2)}
+.kd-word{font-size:clamp(2rem,1.6rem + 1.8vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:1}
+.kd-word small{font-size:.42em;font-weight:700;letter-spacing:.32em;margin-left:12px;color:#F29AAB;vertical-align:middle}
+.pagehero .kd-tagline{color:#fff;font-size:1.15rem;font-weight:700;margin-top:12px}
+.kd-btn-light{background:#fff;color:var(--navy)}
+@media (hover:hover){ .kd-btn-light:hover{background:#F29AAB;color:#0E2038} }
+.kd-feature .lz-copy li::before,.kd-feature li::before{background:#B32442}
+.kd-img{display:block;width:100%;height:auto;aspect-ratio:1280/800;object-fit:cover;object-position:top;background:#F6F3EA}
+.kd-phone{max-width:300px;margin:0 auto;border-radius:30px;overflow:hidden;border:8px solid #16202A;box-shadow:var(--shadow)}
+.kd-phone img{display:block;width:100%;height:auto}
+.kd-num{display:inline-flex;width:30px;height:30px;border-radius:9px;align-items:center;justify-content:center;background:#760933;color:#F6F3EA;font-weight:800;margin-bottom:14px}
+.kd-note{margin-top:28px;font-size:.88rem;color:var(--muted)}
