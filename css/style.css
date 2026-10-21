@@ -932,3 +932,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .kd-phone img{display:block;width:100%;height:auto}
 .kd-num{display:inline-flex;width:30px;height:30px;border-radius:9px;align-items:center;justify-content:center;background:#760933;color:#F6F3EA;font-weight:800;margin-bottom:14px}
 .kd-note{margin-top:28px;font-size:.88rem;color:var(--muted)}
+/* KAEDA differentiator card (들은 과목 체크): brand crimson, readable in light and dark */
+.kd-key{border:2px solid var(--kaeda-ink);background:color-mix(in srgb,var(--kaeda-ink) 8%,var(--card))}
+.kd-key-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.kd-key-head .kd-num{margin-bottom:0;background:var(--kaeda-ink);color:var(--card)}
+.kd-key h3{color:var(--kaeda-ink)}
+.kd-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;background:var(--kaeda-ink);color:var(--card);font-size:.75rem;font-weight:700;letter-spacing:.02em}
