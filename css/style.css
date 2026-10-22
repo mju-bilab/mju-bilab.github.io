@@ -890,6 +890,23 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .lz-chrome i{width:10px;height:10px;border-radius:50%;background:var(--dim-deco)}
 .lz-chrome span{margin-left:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lz-video{display:block;width:100%;height:auto;aspect-ratio:1120/700;background:#fff}
+/* phone-only "view large" button + full-screen dialog (built by js/lumenizer.js) */
+.lz-frame{position:relative}
+.lz-zoom-btn{display:none;position:absolute;right:10px;bottom:10px;width:44px;height:44px;border:0;border-radius:12px;align-items:center;justify-content:center;background:rgba(14,32,56,.78);color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lz-zoom-btn:focus-visible,.lz-zoom-close:focus-visible{outline:3px solid #FBBF24;outline-offset:2px}
+@media (max-width:900px){
+  .lz-zoom-btn{display:inline-flex}
+  .lz-frame .lz-video{cursor:zoom-in}
+}
+.lz-zoom-open,.lz-zoom-open body{overflow:hidden}
+.lz-zoom{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#000;overflow:hidden}
+.lz-zoom::backdrop{background:#000}
+.lz-zoom-video{position:absolute;top:50%;left:50%;width:100vw;height:100vh;height:100dvh;object-fit:contain;background:#000;transform:translate(-50%,-50%)}
+/* held upright: lay the video on its side so it fills the long edge */
+@media (orientation:portrait){
+  .lz-zoom-video{width:100vh;width:100dvh;height:100vw;transform:translate(-50%,-50%) rotate(90deg)}
+}
+.lz-zoom-close{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));z-index:1;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .lz-points{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:34px}
 .lz-points b{display:block;color:var(--ink);margin-bottom:4px}
 .lz-points span{color:var(--muted);font-size:.92rem}
