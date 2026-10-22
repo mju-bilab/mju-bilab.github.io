@@ -86,25 +86,37 @@ function setupZoom(videos, reduce) {
   }
 
   function cleanup() {
+    if (!source) return; // already cleaned up (close button, then the dialog's close event)
     document.documentElement.classList.remove("lz-zoom-open");
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     try {
       screen.orientation && screen.orientation.unlock && screen.orientation.unlock();
     } catch (e) {}
-    if (source && zv.readyState > 0) source.currentTime = zv.currentTime;
+    // Carry the position back so the page video continues where the large view left off.
+    const t = zv.readyState > 0 ? zv.currentTime : null;
     zv.pause();
     zv.replaceChildren(); // stop downloading the full-size copy
     zv.load();
-    if (source && resume) source.play().catch(() => {});
+    const v = source;
+    if (t !== null) {
+      if (v.readyState > 0) v.currentTime = t;
+      else v.addEventListener("loadedmetadata", () => (v.currentTime = t), { once: true });
+    }
+    if (resume) v.play().catch(() => {});
     if (opener) opener.focus();
     source = opener = null;
   }
 
-  dialog.querySelector(".lz-zoom-close").addEventListener("click", () => dialog.close());
-  dialog.addEventListener("close", cleanup); // also covers Esc / Android back
+  function close() {
+    if (dialog.open) dialog.close();
+    cleanup(); // right away: the close event can lag behind (it waits for a rendered frame)
+  }
+
+  dialog.querySelector(".lz-zoom-close").addEventListener("click", close);
+  dialog.addEventListener("close", cleanup); // Esc / Android back
   // Leaving fullscreen with the system gesture closes the whole view, not just fullscreen.
   document.addEventListener("fullscreenchange", () => {
-    if (!document.fullscreenElement && dialog.open) dialog.close();
+    if (!document.fullscreenElement && dialog.open) close();
   });
 
   videos.forEach((v) => {
