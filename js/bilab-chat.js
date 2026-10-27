@@ -89,9 +89,15 @@
     '.dots i:nth-child(2) { animation-delay: .18s; } .dots i:nth-child(3) { animation-delay: .36s; }',
     '@keyframes b { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }',
     '.foot { padding: 0 16px 10px; font-size: 11px; color: var(--muted); }',
+    // 휴대폰: 닫혀 있을 때는 오른쪽 아래 동그란 버튼만 (본문을 가리지 않게),
+    // 열리면 화면 폭을 채웁니다. 입력창 16px 은 iOS 자동 확대를 막습니다.
     '@media (max-width: 480px) {',
-    '  .wrap { right: 12px; bottom: 12px; left: 12px; }',
-    '  .panel { width: auto; height: calc(100vh - 24px); } }',
+    '  .wrap { right: 16px; bottom: 16px; }',
+    '  .wrap.open { right: 12px; bottom: 12px; left: 12px; }',
+    '  .launch { width: 52px; height: 52px; padding: 0; justify-content: center; font-size: 20px; }',
+    '  .launch .lbl { display: none; }',
+    '  .panel { width: auto; height: calc(100vh - 24px); height: calc(100dvh - 24px); }',
+    '  .form textarea { font-size: 16px; } }',
     '@media (prefers-reduced-motion: reduce) { .dots i { animation: none; } }',
   ].join('\n');
 
@@ -104,7 +110,7 @@
     '<style>:host{ --accent:' + ACCENT + '; }\n' + STYLE + '</style>' +
     '<div class="wrap">' +
       '<button class="launch" type="button" aria-label="' + TITLE + ' 열기">' +
-        '<span aria-hidden="true">💬</span><span>무엇이든 물어보세요</span>' +
+        '<span aria-hidden="true">💬</span><span class="lbl">무엇이든 물어보세요</span>' +
       '</button>' +
       '<section class="panel" role="dialog" aria-modal="false" aria-label="' + TITLE + '">' +
         '<header class="head"><div><h2>' + TITLE + '</h2>' +

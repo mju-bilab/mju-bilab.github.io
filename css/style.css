@@ -109,6 +109,10 @@ body{
   font-family:var(--font);
   line-height:1.7;
   -webkit-font-smoothing:antialiased;
+  /* Korean wraps between words (keep-all), not mid-syllable-run; a long
+     URL or email can still break so nothing overflows on a phone */
+  word-break:keep-all;
+  overflow-wrap:break-word;
 }
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
@@ -128,8 +132,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   margin-bottom:12px;
 }
 
-h1,h2,h3,h4{font-weight:800;color:var(--ink);letter-spacing:-.01em}
-p{color:var(--muted)}
+h1,h2,h3,h4{font-weight:800;color:var(--ink);letter-spacing:-.01em;text-wrap:balance}
+p{color:var(--muted);text-wrap:pretty}
 
 .btn{
   display:inline-flex;align-items:center;gap:8px;
@@ -139,7 +143,7 @@ p{color:var(--muted)}
 }
 .btn-primary{background:var(--navy);color:#fff}
 .btn-outline{border:1.5px solid var(--line);color:var(--ink)}
-.btn-arrow{font-weight:700;color:var(--accent)}
+.btn-arrow{font-weight:700;color:var(--accent);display:inline-block;padding:10px 0;margin:-10px 0}
 /* Hover-only feedback is gated behind a real pointer everywhere in this
    file: on touch, :hover latches after a tap (there's no pointer to "leave"),
    so a card/button/link would look permanently pressed/lifted until the
@@ -164,6 +168,7 @@ p{color:var(--muted)}
   font:inherit;font-size:.78rem;color:#cdd8ea;opacity:.85;background:none;border:none;
   cursor:pointer;padding:0;
 }
+.topbar .tb-links a,.theme-toggle{display:inline-flex;align-items:center;min-height:36px;padding:0 4px}
 @media (hover:hover) and (pointer:fine){
   .topbar a:hover{opacity:1}
   .theme-toggle:hover{opacity:1}
@@ -326,6 +331,7 @@ section.tight{padding:64px 0}
 
 /* ============ ABOUT / INTRO ============ */
 .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.about-grid h2{margin-bottom:18px}
 .about-grid p{margin-bottom:16px;font-size:1.02rem}
 .about-figure{
   background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:34px;
@@ -733,7 +739,8 @@ html.nav-open{overflow:hidden}
 
 /* ============ BACK TO TOP ============ */
 .back-to-top{
-  position:fixed;right:22px;bottom:22px;z-index:50;
+  /* stacked above the chat launcher (js/bilab-chat.js), which owns the corner */
+  position:fixed;right:22px;bottom:88px;z-index:50;
   width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
   background:var(--card);color:var(--ink);font-size:1.1rem;font-weight:700;
   box-shadow:var(--shadow);cursor:pointer;
@@ -783,6 +790,17 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .center-block{text-align:center;margin-top:34px}
 .center-block-lg{text-align:center;margin-top:60px}
 .table-scroll{overflow-x:auto}
+@media (max-width:640px){
+  .lec-table thead,.alumni-table thead{display:none}
+  .lec-table,.lec-table tbody,.alumni-table,.alumni-table tbody{display:block}
+  .lec-table tr,.alumni-table tr{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .lec-table td,.alumni-table td{padding:0;border:none}
+  .lec-table td.cname{flex:1 1 100%;margin-bottom:4px}
+  .lec-table td.sem{margin-left:auto}
+  .alumni-table td.name{order:1}
+  .alumni-table td.period{order:2;margin-left:auto}
+  .alumni-table td.dest{order:3;flex:1 1 100%}
+}
 .card-note{margin-top:16px;color:var(--dim);font-size:.84rem}
 .cname-en{color:var(--dim);font-weight:500}
 .pub-item .authors{margin-top:8px}
@@ -844,8 +862,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     background:var(--card);border-left:1px solid var(--line);border-top:1px solid var(--line);
     flex-direction:column;align-items:stretch;padding:20px 26px 40px;gap:2px;
     overflow-y:auto;overscroll-behavior:contain;
-    transform:translateX(100%);transition:transform .3s;box-shadow:-14px 0 44px rgba(10,23,41,.22);}
-  .menu.open{transform:translateX(0)}
+    transform:translateX(100%);visibility:hidden;transition:transform .3s,visibility 0s .3s;}
+  .menu.open{transform:translateX(0);visibility:visible;transition:transform .3s;box-shadow:-14px 0 44px rgba(10,23,41,.22)}
   .menu a,.menu .hassub>.top{color:var(--ink) !important;width:100%;padding:14px 2px}
   .menu a.nav-lumen{color:var(--lumen-ink) !important}
   .menu a.nav-kaeda{color:var(--kaeda-ink) !important}
@@ -878,8 +896,15 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .topbar .wrap{justify-content:flex-end}
   .tl-item{grid-template-columns:1fr}
   .cv-row{grid-template-columns:1fr}
-  .foot-grid{grid-template-columns:1fr}
+  /* footer: brand and contact full width, the two link lists side by side */
+  .foot-grid{grid-template-columns:1fr 1fr;gap:30px 20px}
+  .foot-grid>:first-child,.foot-grid>:last-child{grid-column:1 / -1}
   .gallery-grid{grid-template-columns:1fr}
+  /* tab bars stay one row and scroll sideways instead of wrapping */
+  .pub-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:8px;padding:10px;margin-left:-6px;margin-right:-6px}
+  .pub-tabs::-webkit-scrollbar{display:none}
+  .pub-tab{flex:none;padding:9px 16px;font-size:.84rem}
+  .back-to-top{right:16px;bottom:80px}
   .cta{padding:36px;flex-direction:column;align-items:flex-start}
   section{padding:56px 0}
   .pagehero{padding:130px 0 44px}
