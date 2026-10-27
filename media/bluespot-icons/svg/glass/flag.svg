@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 마일스톤 · 출발</title>
+<defs><linearGradient id="g-coral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fc99a7"/><stop offset="1" stop-color="#de667d"/></linearGradient><linearGradient id="g-navy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#807aec"/><stop offset="1" stop-color="#4740d1"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#9e99f1" stop-opacity=".5"/><stop offset="1" stop-color="#4F46E5" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><path d="M66 42 H200 L174 92 L200 142 H66 Z" fill="#fff" stroke="#fff" stroke-width="12" stroke-linejoin="round"/></mask>
+    <g id="back"><circle cx="160" cy="98" r="58" fill="url(#g-coral)"/><path d="M58 30 V226" fill="none" stroke="#4F46E5" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <path d="M66 42 H200 L174 92 L200 142 H66 Z" fill="none" stroke="url(#rim)" stroke-width="3.5" stroke-linejoin="round"/>
+    <g filter="url(#lift)" opacity=".96"><path d="M118.0 70.0 L123.9 83.9 L138.9 85.2 L127.5 95.1 L130.9 109.8 L118.0 102.0 L105.1 109.8 L108.5 95.1 L97.1 85.2 L112.1 83.9 Z" fill="#ffffff"/></g>
+  </g></g>
+</svg>

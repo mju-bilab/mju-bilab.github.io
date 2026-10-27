@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 주식 · 증시</title>
+<defs><linearGradient id="g-mint" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6ddfb6"/><stop offset="1" stop-color="#2fbc8e"/></linearGradient><linearGradient id="g-coral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fc99a7"/><stop offset="1" stop-color="#de667d"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#8fe7c7" stop-opacity=".5"/><stop offset="1" stop-color="#34D399" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><rect x="24" y="148" width="208" height="82" rx="26" fill="#fff"/></mask>
+    <g id="back"><path d="M76 34 V176" fill="none" stroke="#34D399" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><rect x="60" y="62" width="32" height="90" rx="10" fill="url(#g-mint)"/><path d="M128 56 V200" fill="none" stroke="#FB7185" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><rect x="112" y="92" width="32" height="84" rx="10" fill="url(#g-coral)"/><path d="M180 24 V160" fill="none" stroke="#34D399" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><rect x="164" y="44" width="32" height="92" rx="10" fill="url(#g-mint)"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <rect x="24" y="148" width="208" height="82" rx="26" fill="none" stroke="url(#rim)" stroke-width="3.5"/>
+    <g filter="url(#lift)" opacity=".96"><path d="M50 202 L96 180 L140 192 L206 166" fill="none" stroke="#ffffff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g></g>
+</svg>

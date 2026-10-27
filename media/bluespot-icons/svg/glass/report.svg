@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 리포트 · 문서</title>
+<defs><linearGradient id="g-sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#70cffa"/><stop offset="1" stop-color="#33a9e2"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#92dbfb" stop-opacity=".5"/><stop offset="1" stop-color="#38BDF8" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><rect x="40" y="60" width="136" height="172" rx="24" fill="#fff"/></mask>
+    <g id="back"><rect x="94" y="28" width="126" height="166" rx="24" fill="url(#g-sky)"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <rect x="40" y="60" width="136" height="172" rx="24" fill="none" stroke="url(#rim)" stroke-width="3.5"/>
+    <g filter="url(#lift)" opacity=".96"><path d="M70 96 H146" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M70 124 H146" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M70 152 H118" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="70" y="180" width="18" height="30" rx="6" fill="#ffffff"/><rect x="96" y="168" width="18" height="42" rx="6" fill="#ffffff"/><rect x="122" y="188" width="18" height="22" rx="6" fill="#ffffff"/></g>
+  </g></g>
+</svg>

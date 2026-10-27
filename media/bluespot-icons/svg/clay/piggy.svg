@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 저축 · 자산</title>
+<defs><linearGradient id="g-yellow" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe29a"/><stop offset=".55" stop-color="#FFD15C"/><stop offset="1" stop-color="#e4bd5b"/></linearGradient><linearGradient id="g-pink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffc2d7"/><stop offset=".55" stop-color="#FF9DBF"/><stop offset="1" stop-color="#e48fb2"/></linearGradient><linearGradient id="g-navy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8796da"/><stop offset=".55" stop-color="#3D55C4"/><stop offset="1" stop-color="#3950b7"/></linearGradient>
+    
+    <filter id="clay" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+      <feOffset in="SourceAlpha" dx="-7" dy="-8.75" result="o1"/><feGaussianBlur in="o1" stdDeviation="7" result="b1"/>
+      <feComposite in="SourceAlpha" in2="b1" operator="out" result="e1"/><feFlood flood-color="#14204a" flood-opacity="0.26"/><feComposite in2="e1" operator="in" result="shade"/>
+      <feOffset in="SourceAlpha" dx="6.3" dy="7.700000000000001" result="o2"/><feGaussianBlur in="o2" stdDeviation="5.95" result="b2"/>
+      <feComposite in="SourceAlpha" in2="b2" operator="out" result="e2"/><feFlood flood-color="#ffffff" flood-opacity="0.8"/><feComposite in2="e2" operator="in" result="light"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="shade"/><feMergeNode in="light"/></feMerge>
+    </filter>
+    <filter id="clay-front" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="sb"/><feOffset in="sb" dy="7" result="so"/><feFlood flood-color="#14204a" flood-opacity="0.22"/><feComposite in2="so" operator="in" result="sh"/>
+      <feOffset in="SourceAlpha" dx="-7" dy="-9" result="o1"/><feGaussianBlur in="o1" stdDeviation="7" result="b1"/>
+      <feComposite in="SourceAlpha" in2="b1" operator="out" result="e1"/><feFlood flood-color="#14204a" flood-opacity=".18"/><feComposite in2="e1" operator="in" result="shade"/>
+      <feOffset in="SourceAlpha" dx="6" dy="8" result="o2"/><feGaussianBlur in="o2" stdDeviation="6" result="b2"/>
+      <feComposite in="SourceAlpha" in2="b2" operator="out" result="e2"/><feFlood flood-color="#ffffff" flood-opacity=".9"/><feComposite in2="e2" operator="in" result="light"/>
+      <feMerge><feMergeNode in="sh"/><feMergeNode in="SourceGraphic"/><feMergeNode in="shade"/><feMergeNode in="light"/></feMerge>
+    </filter>
+    <filter id="clay-s" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="sb"/><feOffset in="sb" dy="3" result="so"/><feFlood flood-color="#14204a" flood-opacity="0.2"/><feComposite in2="so" operator="in" result="sh"/>
+      <feOffset in="SourceAlpha" dx="-2.5" dy="-3" result="o1"/><feGaussianBlur in="o1" stdDeviation="2.2" result="b1"/>
+      <feComposite in="SourceAlpha" in2="b1" operator="out" result="e1"/><feFlood flood-color="#14204a" flood-opacity=".28"/><feComposite in2="e1" operator="in" result="shade"/>
+      <feOffset in="SourceAlpha" dx="2" dy="2.5" result="o2"/><feGaussianBlur in="o2" stdDeviation="2" result="b2"/>
+      <feComposite in="SourceAlpha" in2="b2" operator="out" result="e2"/><feFlood flood-color="#ffffff" flood-opacity=".75"/><feComposite in2="e2" operator="in" result="light"/>
+      <feMerge><feMergeNode in="sh"/><feMergeNode in="SourceGraphic"/><feMergeNode in="shade"/><feMergeNode in="light"/></feMerge>
+    </filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".22"/></filter>
+  </defs>
+<g filter="url(#drop)"><g><g filter="url(#clay)"><circle cx="148" cy="48" r="28" fill="url(#g-yellow)"/><rect x="70" y="176" width="28" height="46" rx="12" fill="url(#g-pink)"/><rect x="140" y="176" width="28" height="46" rx="12" fill="url(#g-pink)"/><path d="M70 104 L60 66 L104 86 Z" fill="url(#g-pink)" stroke="url(#g-pink)" stroke-width="10" stroke-linejoin="round"/></g><g filter="url(#clay-front)"><ellipse cx="122" cy="142" rx="88" ry="66" fill="url(#g-pink)"/><ellipse cx="206" cy="146" rx="20" ry="24" fill="url(#g-pink)"/></g><g filter="url(#clay-s)"><circle cx="160" cy="124" r="8" fill="url(#g-navy)"/><path d="M104 96 H140" fill="none" stroke="#3D55C4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="202" cy="140" r="4" fill="url(#g-navy)"/><circle cx="212" cy="152" r="4" fill="url(#g-navy)"/></g></g></g>
+</svg>

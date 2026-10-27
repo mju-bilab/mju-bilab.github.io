@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Blue Spot Icons</title>
+<link rel="icon" href="../../images/logo.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{--ink:#13294B;--muted:#5B6B85;--line:#E3E8F2;--accent:#2E5BFF;--card:#fff;--bg:#F5F7FC}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--ink);word-break:keep-all;line-height:1.6}
+  .wrap{max-width:1180px;margin:0 auto;padding:40px 20px 80px}
+  .eyebrow{font-size:.74rem;font-weight:800;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+  h1{font-size:clamp(1.6rem,1.2rem + 2vw,2.3rem);margin:6px 0 8px}
+  .lead{color:var(--muted);max-width:640px}
+  .bar{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:28px 0 22px;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px;position:sticky;top:10px;z-index:5}
+  .grp{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .grp b{font-size:.78rem;color:var(--muted);margin-right:4px}
+  .grp button{font:inherit;font-size:.84rem;font-weight:700;padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);background:none;color:var(--muted);cursor:pointer}
+  .grp button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;padding:18px;border-radius:20px;transition:background .25s}
+  .grid[data-bg="white"]{background:#fff}
+  .grid[data-bg="sky"]{background:#E8F1FF}
+  .grid[data-bg="navy"]{background:#13294B}
+  .grid[data-bg="gradient"]{background:linear-gradient(135deg,#7CB6FF,#4F6BF5 55%,#8B5CF6)}
+  .ic{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px 10px;border-radius:14px;border:none;background:none;cursor:pointer;font:inherit;color:inherit}
+  .ic img{width:100%;max-width:128px;aspect-ratio:1}
+  .ic span{font-size:.82rem;font-weight:700}
+  .ic small{font-size:.72rem;opacity:.7}
+  .grid[data-bg="navy"] .ic,.grid[data-bg="gradient"] .ic{color:#fff}
+  .ic:hover{background:rgba(120,140,190,.12)}
+  .ic:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  h2{font-size:1.15rem;margin:34px 0 10px}
+  .note{color:var(--muted);font-size:.9rem}
+  .samples{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:14px}
+  .card{aspect-ratio:4/5;border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}
+  .card .tag{font-size:.7rem;font-weight:800;letter-spacing:.16em}
+  .card h3{font-size:1.35rem;line-height:1.35}
+  .card img{width:58%;align-self:flex-end;margin:-10px -6px -6px 0}
+  .card.c1{background:linear-gradient(160deg,#EAF2FF,#CFE0FF);color:#13294B}
+  .card.c1 .tag{color:#2E5BFF}
+  .card.c2{background:linear-gradient(160deg,#1B3A78,#13294B);color:#fff}
+  .card.c2 .tag{color:#7DD3FC}
+  .card.c3{background:linear-gradient(160deg,#FFF4E8,#FFE1EC);color:#4A2340}
+  .card.c3 .tag{color:#E0457B}
+  .grp-wide{flex:1 1 100%;gap:8px}
+  .grp select,.grp input{font:inherit;font-size:.86rem;padding:7px 12px;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+  .grp input{flex:1;min-width:160px}
+  .grp #all{margin-left:auto}
+  .empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)}
+  /* motion preview — what the icon could do in a reel or animated card */
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes pulse{0%,100%{transform:scale(1)}40%{transform:scale(1.1)}60%{transform:scale(.97)}}
+  @keyframes swing{0%,100%{transform:rotate(0)}20%{transform:rotate(12deg)}40%{transform:rotate(-10deg)}60%{transform:rotate(6deg)}80%{transform:rotate(-3deg)}}
+  @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(6px,-8px)}}
+  .grid.moving .ic img{animation:float 2.6s ease-in-out infinite}
+  .grid.moving .ic[data-m="spin"] img{animation:spin 6s linear infinite}
+  .grid.moving .ic[data-m="pulse"] img{animation:pulse 1.4s ease-in-out infinite}
+  .grid.moving .ic[data-m="swing"] img{animation:swing 2s ease-in-out infinite;transform-origin:50% 15%}
+  .grid.moving .ic[data-m="drift"] img{animation:drift 2.2s ease-in-out infinite}
+  @media (prefers-reduced-motion:reduce){.grid.moving .ic img{animation:none !important}}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:.88rem;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Blue Spot · Card News Kit</span>
+  <h1>Blue Spot 아이콘 세트</h1>
+  <p class="lead">주간 비즈니스 트렌드 리포트와 인스타그램 카드뉴스용 아이콘 <span id="count"></span>종입니다. 같은 모양을 3D 클레이 · 글래스모피즘 · 배지(롱섀도) 세 가지 질감으로 만들었습니다. 아이콘을 누르면 배경이 투명한 PNG로, 형식을 GIF로 바꾸면 움직이는 GIF(고른 배경색 포함)로 내려받습니다.</p>
+
+  <div class="bar">
+    <div class="grp" data-key="style"><b>스타일</b>
+      <button type="button" data-v="clay" aria-pressed="true">3D 클레이</button>
+      <button type="button" data-v="glass" aria-pressed="false">글래스</button>
+      <button type="button" data-v="badge" aria-pressed="false">배지</button>
+    </div>
+    <div class="grp" data-key="bg"><b>배경</b>
+      <button type="button" data-v="white" aria-pressed="true">흰색</button>
+      <button type="button" data-v="sky" aria-pressed="false">연파랑</button>
+      <button type="button" data-v="navy" aria-pressed="false">네이비</button>
+      <button type="button" data-v="gradient" aria-pressed="false">그라데이션</button>
+    </div>
+    <div class="grp" data-key="format"><b>형식</b>
+      <button type="button" data-v="png" aria-pressed="true">PNG</button>
+      <button type="button" data-v="gif" aria-pressed="false">GIF (움직임)</button>
+    </div>
+    <div class="grp" data-key="size"><b>크기</b>
+      <button type="button" data-v="512" aria-pressed="false">512</button>
+      <button type="button" data-v="1024" aria-pressed="true">1024</button>
+      <button type="button" data-v="2048" aria-pressed="false">2048</button>
+    </div>
+    <div class="grp" data-key="motion"><b>움직임</b>
+      <button type="button" data-v="off" aria-pressed="true">끔</button>
+      <button type="button" data-v="on" aria-pressed="false">켬</button>
+    </div>
+    <div class="grp grp-wide">
+      <select id="cat" aria-label="분류"></select>
+      <input id="q" type="search" placeholder="검색 (예: AI, 소비, 물류)" aria-label="아이콘 검색">
+      <button type="button" id="all">보이는 아이콘 모두 내려받기</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid" data-bg="white"></div>
+
+  <h2>카드뉴스 적용 예시</h2>
+  <p class="note">인스타그램 4:5 비율(1080×1350) 표지에 얹었을 때의 느낌입니다.</p>
+  <div class="samples" id="samples"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="icons.js"></script>
+<script>
+(function () {
+  const { ICONS } = window.BlueSpotIcons;
+  const { CATS } = window.BlueSpotIcons;
+  const state = { style: "clay", bg: "white", size: 1024, motion: "off", format: "png" };
+  const MOTION = { gear: "spin", like: "pulse", health: "pulse", fire: "pulse", bell: "swing", alert: "swing", rocket: "drift", airplane: "drift", car: "drift", truck: "drift" };
+  const catSel = document.getElementById("cat");
+  const q = document.getElementById("q");
+  catSel.innerHTML = `<option value="">전체 분류</option>` + Object.keys(CATS).map((c) => `<option>${c}</option>`).join("");
+  document.getElementById("count").textContent = ICONS.length;
+  const visible = () => {
+    const term = q.value.trim().toLowerCase();
+    return ICONS.filter((ic) => (!catSel.value || ic.cat === catSel.value) &&
+      (!term || (ic.ko + " " + ic.id + " " + ic.cat).toLowerCase().includes(term)));
+  };
+  const grid = document.getElementById("grid");
+  const src = (style, id) => `svg/${style}/${id}.svg`;
+
+  function render() {
+    grid.dataset.bg = state.bg;
+    grid.classList.toggle("moving", state.motion === "on");
+    const list = visible();
+    grid.innerHTML = list.length ? list.map((ic) =>
+      `<button type="button" class="ic" data-id="${ic.id}" data-m="${MOTION[ic.id] || ""}" aria-label="${ic.ko} PNG 내려받기">
+        <img src="${src(state.style, ic.id)}" alt=""><span>${ic.ko}</span><small>${ic.id}</small>
+      </button>`).join("") : `<p class="empty">찾는 아이콘이 없습니다</p>`;
+    const pick = (id) => src(state.style, id);
+    document.getElementById("samples").innerHTML = `
+      <div class="card c1"><span class="tag">BLUE SPOT · WEEK 01</span><h3>이번 주<br>AI 비즈니스 트렌드</h3><img src="${pick("ai")}" alt=""></div>
+      <div class="card c2"><span class="tag">BLUE SPOT · DATA</span><h3>숫자로 보는<br>모빌리티 시장의 변화</h3><img src="${pick("car")}" alt=""></div>
+      <div class="card c3"><span class="tag">BLUE SPOT · ISSUE</span><h3>MZ가 반응한<br>신제품 3가지</h3><img src="${pick("like")}" alt=""></div>`;
+  }
+
+  document.querySelectorAll(".grp").forEach((g) => {
+    g.addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (!b) return;
+      g.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      const v = b.dataset.v;
+      state[g.dataset.key] = g.dataset.key === "size" ? +v : v;
+      if (g.dataset.key === "format" && v === "gif") toast("GIF는 고른 배경색이 들어가고, 최대 1024px로 만들어집니다");
+      if (g.dataset.key !== "size" && g.dataset.key !== "format") render();
+    });
+  });
+  catSel.addEventListener("change", render);
+  q.addEventListener("input", render);
+
+  // rasterise the SVG to a transparent PNG of the chosen size
+  grid.addEventListener("click", (e) => {
+    const b = e.target.closest(".ic");
+    if (b) download(b.dataset.id);
+  });
+  document.getElementById("all").addEventListener("click", async () => {
+    const list = visible();
+    toast(`${list.length}개 내려받는 중… (브라우저가 여러 파일 허용을 물으면 허용해 주세요)`);
+    for (const ic of list) {
+      if (state.format === "gif") await makeGif(ic.id, true);
+      else { download(ic.id, true); await new Promise((r) => setTimeout(r, 250)); }
+    }
+  });
+  function download(id, quiet) {
+    if (state.format === "gif") return makeGif(id, quiet);
+    const img = new Image();
+    img.onload = () => {
+      const cv = document.createElement("canvas");
+      cv.width = cv.height = state.size;
+      cv.getContext("2d").drawImage(img, 0, 0, state.size, state.size);
+      cv.toBlob((blob) => {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `bluespot-${state.style}-${id}-${state.size}.png`;
+        save(blob, a.download, quiet);
+      }, "image/png");
+    };
+    img.src = src(state.style, id);
+  }
+
+  function save(blob, name, quiet) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    if (!quiet) toast(`${name} 저장`);
+  }
+
+  // ---- animated GIF ----
+  // Same motions as the CSS preview, written as a function of loop progress
+  // t (0..1) so the last frame flows back into the first. GIF transparency
+  // is all-or-nothing (soft shadows and frosted glass would fringe), so
+  // frames are drawn on the chosen background colour.
+  const LOOP = { float: 2.4, spin: 1.2, pulse: 1.4, swing: 1.6, drift: 2.2 };
+  const BG = { white: ["#ffffff"], sky: ["#E8F1FF"], navy: ["#13294B"], gradient: ["#7CB6FF", "#4F6BF5", "#8B5CF6"] };
+  function pose(kind, t, S) {
+    const w = Math.sin(2 * Math.PI * t), bump = (1 - Math.cos(2 * Math.PI * t)) / 2;
+    switch (kind) {
+      case "spin": return { rot: (t * Math.PI) / 4 };                // 45° = one gear tooth, so it loops
+      case "pulse": return { scale: 1 + 0.09 * bump };
+      case "swing": return { rot: (10 * w * Math.PI) / 180, oy: 0.15 };
+      case "drift": return { dx: 0.035 * S * w, dy: -0.05 * S * bump };
+      default: return { dy: -0.06 * S * bump };
+    }
+  }
+  let gifenc;
+  async function makeGif(id, quiet) {
+    if (!gifenc) gifenc = await import("https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.esm.js");
+    const { GIFEncoder, quantize, applyPalette } = gifenc;
+    const S = Math.min(state.size, 1024);
+    const kind = MOTION[id] || "float";
+    const fps = 25, frames = Math.round(LOOP[kind] * fps);
+    if (!quiet) toast(`GIF 만드는 중… (${frames}프레임)`);
+    const img = new Image();
+    img.src = src(state.style, id);
+    await img.decode();
+    // rasterise once at full size, then move the bitmap per frame
+    const art = document.createElement("canvas");
+    art.width = art.height = S;
+    art.getContext("2d").drawImage(img, 0, 0, S, S);
+    const cv = document.createElement("canvas");
+    cv.width = cv.height = S;
+    const ctx = cv.getContext("2d", { willReadFrequently: true });
+    const stops = BG[state.bg];
+    const fill = () => {
+      if (stops.length === 1) ctx.fillStyle = stops[0];
+      else {
+        const g = ctx.createLinearGradient(0, 0, S, S);
+        stops.forEach((c, i) => g.addColorStop(i / (stops.length - 1), c));
+        ctx.fillStyle = g;
+      }
+      ctx.fillRect(0, 0, S, S);
+    };
+    const gif = GIFEncoder();
+    let palette;
+    for (let f = 0; f < frames; f++) {
+      const p = pose(kind, f / frames, S);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      fill();
+      const k = 0.86 * (p.scale || 1);                                 // headroom for the motion
+      const ox = S / 2, oy = S * (p.oy ?? 0.5);
+      ctx.translate(ox + (p.dx || 0), oy + (p.dy || 0));
+      ctx.rotate(p.rot || 0);
+      ctx.scale(k, k);
+      ctx.drawImage(art, -ox, -oy);
+      const { data } = ctx.getImageData(0, 0, S, S);
+      if (!palette) palette = quantize(data, 256);                      // one palette: no colour flicker
+      gif.writeFrame(applyPalette(data, palette), S, S, { palette: f ? undefined : palette, delay: 1000 / fps });
+      if (f % 8 === 7) await new Promise((r) => setTimeout(r));          // keep the page responsive
+    }
+    gif.finish();
+    save(new Blob([gif.bytes()], { type: "image/gif" }), `bluespot-${state.style}-${id}-${S}.gif`, quiet);
+  }
+
+  let t;
+  function toast(msg) {
+    const el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(t);
+    t = setTimeout(() => el.classList.remove("show"), 1800);
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

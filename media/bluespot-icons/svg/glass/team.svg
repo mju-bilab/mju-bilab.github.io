@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 팀 · 인재</title>
+<defs><linearGradient id="g-sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#70cffa"/><stop offset="1" stop-color="#33a9e2"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#92dbfb" stop-opacity=".5"/><stop offset="1" stop-color="#38BDF8" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><circle cx="98" cy="98" r="38" fill="#fff"/><path d="M34 226 Q34 150 98 150 Q162 150 162 226 Z" fill="#fff" stroke="#fff" stroke-width="10" stroke-linejoin="round"/></mask>
+    <g id="back"><circle cx="170" cy="76" r="32" fill="url(#g-sky)"/><path d="M118 196 Q118 128 170 128 Q222 128 222 196 Z" fill="url(#g-sky)" stroke="url(#g-sky)" stroke-width="10" stroke-linejoin="round"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <circle cx="98" cy="98" r="38" fill="none" stroke="url(#rim)" stroke-width="3.5"/><path d="M34 226 Q34 150 98 150 Q162 150 162 226 Z" fill="none" stroke="url(#rim)" stroke-width="3.5" stroke-linejoin="round"/>
+    <g filter="url(#lift)" opacity=".96"><circle cx="86" cy="96" r="6" fill="#ffffff"/><circle cx="110" cy="96" r="6" fill="#ffffff"/><path d="M88 112 Q98 120 108 112" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g></g>
+</svg>

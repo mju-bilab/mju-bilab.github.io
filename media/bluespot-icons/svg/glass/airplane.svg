@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 여행 · 해외</title>
+<defs><linearGradient id="g-sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#70cffa"/><stop offset="1" stop-color="#33a9e2"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#92dbfb" stop-opacity=".5"/><stop offset="1" stop-color="#38BDF8" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><path d="M128 26 Q142 26 142 52 V104 L222 150 V174 L142 150 V196 L170 216 V232 L128 220 L86 232 V216 L114 196 V150 L34 174 V150 L114 104 V52 Q114 26 128 26 Z" fill="#fff" stroke="#fff" stroke-width="8" stroke-linejoin="round"/></mask>
+    <g id="back"><circle cx="128" cy="128" r="86" fill="url(#g-sky)"/></g>
+  </defs>
+<g filter="url(#drop)"><g transform="rotate(45 128 128)">
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <path d="M128 26 Q142 26 142 52 V104 L222 150 V174 L142 150 V196 L170 216 V232 L128 220 L86 232 V216 L114 196 V150 L34 174 V150 L114 104 V52 Q114 26 128 26 Z" fill="none" stroke="url(#rim)" stroke-width="3.5" stroke-linejoin="round"/>
+    <g filter="url(#lift)" opacity=".96"></g>
+  </g></g>
+</svg>

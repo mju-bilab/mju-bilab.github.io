@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 앱 · 서비스</title>
+<defs><linearGradient id="g-sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#70cffa"/><stop offset="1" stop-color="#33a9e2"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#92dbfb" stop-opacity=".5"/><stop offset="1" stop-color="#38BDF8" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><rect x="48" y="56" width="112" height="176" rx="28" fill="#fff"/></mask>
+    <g id="back"><rect x="108" y="32" width="104" height="172" rx="28" fill="url(#g-sky)"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <rect x="48" y="56" width="112" height="176" rx="28" fill="none" stroke="url(#rim)" stroke-width="3.5"/>
+    <g filter="url(#lift)" opacity=".96"><rect x="88" y="72" width="32" height="8" rx="4" fill="#ffffff"/><rect x="70" y="102" width="30" height="30" rx="9" fill="#ffffff"/><rect x="108" y="102" width="30" height="30" rx="9" fill="#ffffff"/><rect x="70" y="142" width="30" height="30" rx="9" fill="#ffffff"/><rect x="108" y="142" width="30" height="30" rx="9" fill="#ffffff"/><rect x="86" y="208" width="36" height="8" rx="4" fill="#ffffff"/></g>
+  </g></g>
+</svg>

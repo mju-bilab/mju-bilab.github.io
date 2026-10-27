@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 물류 · 배송</title>
+<defs><linearGradient id="g-orange" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fcb173"/><stop offset="1" stop-color="#de833c"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#fdc394" stop-opacity=".5"/><stop offset="1" stop-color="#FB923C" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><path d="M156 98 H196 L232 140 V184 H156 Z" fill="#fff" stroke="#fff" stroke-width="12" stroke-linejoin="round"/></mask>
+    <g id="back"><rect x="22" y="62" width="140" height="122" rx="20" fill="url(#g-orange)"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <path d="M156 98 H196 L232 140 V184 H156 Z" fill="none" stroke="url(#rim)" stroke-width="3.5" stroke-linejoin="round"/>
+    <g filter="url(#lift)" opacity=".96"><circle cx="72" cy="196" r="22" fill="#ffffff"/><circle cx="190" cy="196" r="22" fill="#ffffff"/><path d="M172 112 H190 L212 140 H172 Z" fill="#ffffff"/></g>
+  </g></g>
+</svg>

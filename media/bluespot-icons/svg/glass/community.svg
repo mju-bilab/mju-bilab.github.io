@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 커뮤니티 · SNS</title>
+<defs><linearGradient id="g-blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#72a5f9"/><stop offset="1" stop-color="#3575e0"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#93bafa" stop-opacity=".5"/><stop offset="1" stop-color="#3B82F6" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><rect x="30" y="92" width="144" height="106" rx="36" fill="#fff"/><path d="M60 188 L42 228 L100 194 Z" fill="#fff"/></mask>
+    <g id="back"><rect x="98" y="34" width="128" height="96" rx="34" fill="url(#g-blue)"/><path d="M178 122 L214 158 L154 128 Z" fill="url(#g-blue)"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <rect x="30" y="92" width="144" height="106" rx="36" fill="none" stroke="url(#rim)" stroke-width="3.5"/><path d="M60 188 L42 228 L100 194 Z" fill="none" stroke="url(#rim)" stroke-width="3.5"/>
+    <g filter="url(#lift)" opacity=".96"><circle cx="72" cy="145" r="10" fill="#ffffff"/><circle cx="102" cy="145" r="10" fill="#ffffff"/><circle cx="132" cy="145" r="10" fill="#ffffff"/></g>
+  </g></g>
+</svg>

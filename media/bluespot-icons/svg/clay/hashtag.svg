@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 해시태그 · 바이럴</title>
+<defs><linearGradient id="g-pink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffc2d7"/><stop offset=".55" stop-color="#FF9DBF"/><stop offset="1" stop-color="#e48fb2"/></linearGradient><linearGradient id="g-violet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c2b2f9"/><stop offset=".55" stop-color="#9C83F5"/><stop offset="1" stop-color="#8d78e2"/></linearGradient><linearGradient id="g-cream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8f9ff"/><stop offset=".55" stop-color="#F3F6FF"/><stop offset="1" stop-color="#d9deeb"/></linearGradient>
+    
+    <filter id="clay" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+      <feOffset in="SourceAlpha" dx="-7" dy="-8.75" result="o1"/><feGaussianBlur in="o1" stdDeviation="7" result="b1"/>
+      <feComposite in="SourceAlpha" in2="b1" operator="out" result="e1"/><feFlood flood-color="#14204a" flood-opacity="0.26"/><feComposite in2="e1" operator="in" result="shade"/>
+      <feOffset in="SourceAlpha" dx="6.3" dy="7.700000000000001" result="o2"/><feGaussianBlur in="o2" stdDeviation="5.95" result="b2"/>
+      <feComposite in="SourceAlpha" in2="b2" operator="out" result="e2"/><feFlood flood-color="#ffffff" flood-opacity="0.8"/><feComposite in2="e2" operator="in" result="light"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="shade"/><feMergeNode in="light"/></feMerge>
+    </filter>
+    <filter id="clay-front" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="sb"/><feOffset in="sb" dy="7" result="so"/><feFlood flood-color="#14204a" flood-opacity="0.22"/><feComposite in2="so" operator="in" result="sh"/>
+      <feOffset in="SourceAlpha" dx="-7" dy="-9" result="o1"/><feGaussianBlur in="o1" stdDeviation="7" result="b1"/>
+      <feComposite in="SourceAlpha" in2="b1" operator="out" result="e1"/><feFlood flood-color="#14204a" flood-opacity=".18"/><feComposite in2="e1" operator="in" result="shade"/>
+      <feOffset in="SourceAlpha" dx="6" dy="8" result="o2"/><feGaussianBlur in="o2" stdDeviation="6" result="b2"/>
+      <feComposite in="SourceAlpha" in2="b2" operator="out" result="e2"/><feFlood flood-color="#ffffff" flood-opacity=".9"/><feComposite in2="e2" operator="in" result="light"/>
+      <feMerge><feMergeNode in="sh"/><feMergeNode in="SourceGraphic"/><feMergeNode in="shade"/><feMergeNode in="light"/></feMerge>
+    </filter>
+    <filter id="clay-s" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="sb"/><feOffset in="sb" dy="3" result="so"/><feFlood flood-color="#14204a" flood-opacity="0.2"/><feComposite in2="so" operator="in" result="sh"/>
+      <feOffset in="SourceAlpha" dx="-2.5" dy="-3" result="o1"/><feGaussianBlur in="o1" stdDeviation="2.2" result="b1"/>
+      <feComposite in="SourceAlpha" in2="b1" operator="out" result="e1"/><feFlood flood-color="#14204a" flood-opacity=".28"/><feComposite in2="e1" operator="in" result="shade"/>
+      <feOffset in="SourceAlpha" dx="2" dy="2.5" result="o2"/><feGaussianBlur in="o2" stdDeviation="2" result="b2"/>
+      <feComposite in="SourceAlpha" in2="b2" operator="out" result="e2"/><feFlood flood-color="#ffffff" flood-opacity=".75"/><feComposite in2="e2" operator="in" result="light"/>
+      <feMerge><feMergeNode in="sh"/><feMergeNode in="SourceGraphic"/><feMergeNode in="shade"/><feMergeNode in="light"/></feMerge>
+    </filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".22"/></filter>
+  </defs>
+<g filter="url(#drop)"><g><g filter="url(#clay)"><circle cx="180" cy="70" r="46" fill="url(#g-pink)"/><circle cx="70" cy="196" r="34" fill="url(#g-violet)"/></g><g filter="url(#clay-front)"><rect x="40" y="40" width="176" height="176" rx="50" fill="url(#g-cream)"/></g><g filter="url(#clay-s)"><path d="M108 78 L96 178" fill="none" stroke="#FF9DBF" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M158 78 L146 178" fill="none" stroke="#FF9DBF" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M74 108 H182" fill="none" stroke="#FF9DBF" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M70 148 H178" fill="none" stroke="#FF9DBF" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></g></g></g>
+</svg>

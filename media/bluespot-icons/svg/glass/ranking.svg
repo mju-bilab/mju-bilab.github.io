@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 랭킹 · 순위</title>
+<defs><linearGradient id="g-sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#70cffa"/><stop offset="1" stop-color="#33a9e2"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#92dbfb" stop-opacity=".5"/><stop offset="1" stop-color="#38BDF8" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><rect x="90" y="92" width="76" height="132" rx="16" fill="#fff"/></mask>
+    <g id="back"><rect x="22" y="136" width="76" height="88" rx="16" fill="url(#g-sky)"/><rect x="158" y="158" width="76" height="66" rx="16" fill="url(#g-sky)"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <rect x="90" y="92" width="76" height="132" rx="16" fill="none" stroke="url(#rim)" stroke-width="3.5"/>
+    <g filter="url(#lift)" opacity=".96"><path d="M118 128 L130 120 V174" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M128.0 34.0 L134.5 51.1 L152.7 52.0 L138.5 63.4 L143.3 81.0 L128.0 71.0 L112.7 81.0 L117.5 63.4 L103.3 52.0 L121.5 51.1 Z" fill="#ffffff"/></g>
+  </g></g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 반응 · 인기</title>
+<defs><linearGradient id="g-coral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fc99a7"/><stop offset="1" stop-color="#de667d"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#fdb1bc" stop-opacity=".5"/><stop offset="1" stop-color="#FB7185" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><rect x="134" y="34" width="88" height="76" rx="38" fill="#fff"/></mask>
+    <g id="back"><path d="M120 214 C60 172 32 140 32 104 C32 76 54 56 80 56 C98 56 112 66 120 80 C128 66 142 56 160 56 C186 56 208 76 208 104 C208 140 180 172 120 214 Z" fill="url(#g-coral)"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <rect x="134" y="34" width="88" height="76" rx="38" fill="none" stroke="url(#rim)" stroke-width="3.5"/>
+    <g filter="url(#lift)" opacity=".96"><path d="M178 92 C160 80 152 72 152 62 C152 53 158 47 165 47 C171 47 175 51 178 55 C181 51 185 47 191 47 C198 47 204 53 204 62 C204 72 196 80 178 92 Z" fill="#ffffff"/></g>
+  </g></g>
+</svg>

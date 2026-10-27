@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 뉴스 · 이슈</title>
+<defs><linearGradient id="g-coral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fc99a7"/><stop offset="1" stop-color="#de667d"/></linearGradient><linearGradient id="g-navy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#807aec"/><stop offset="1" stop-color="#4740d1"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#9e99f1" stop-opacity=".5"/><stop offset="1" stop-color="#4F46E5" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><rect x="30" y="94" width="58" height="68" rx="22" fill="#fff"/><ellipse cx="186" cy="128" rx="26" ry="82" fill="#fff"/></mask>
+    <g id="back"><path d="M64 100 L184 48 V208 L64 156 Z" fill="url(#g-coral)" stroke="url(#g-coral)" stroke-width="12" stroke-linejoin="round"/><path d="M84 160 L98 210" fill="none" stroke="#4F46E5" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <rect x="30" y="94" width="58" height="68" rx="22" fill="none" stroke="url(#rim)" stroke-width="3.5"/><ellipse cx="186" cy="128" rx="26" ry="82" fill="none" stroke="url(#rim)" stroke-width="3.5"/>
+    <g filter="url(#lift)" opacity=".96"><path d="M186 98 V158" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g></g>
+</svg>

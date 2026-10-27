@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 성과 · 수상</title>
+<defs><linearGradient id="g-yellow" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fcd161"/><stop offset="1" stop-color="#deab27"/></linearGradient><linearGradient id="g-orange" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fcb173"/><stop offset="1" stop-color="#de833c"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#fdc394" stop-opacity=".5"/><stop offset="1" stop-color="#FB923C" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><path d="M74 44 H182 V100 C182 140 158 162 128 162 C98 162 74 140 74 100 Z" fill="#fff"/><rect x="114" y="156" width="28" height="40" rx="8" fill="#fff"/><rect x="84" y="192" width="88" height="30" rx="12" fill="#fff"/></mask>
+    <g id="back"><circle cx="170" cy="80" r="50" fill="url(#g-yellow)"/><path d="M78 72 H56 Q40 72 40 90 Q40 124 82 130" fill="none" stroke="#FB923C" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/><path d="M178 72 H200 Q216 72 216 90 Q216 124 174 130" fill="none" stroke="#FB923C" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <path d="M74 44 H182 V100 C182 140 158 162 128 162 C98 162 74 140 74 100 Z" fill="none" stroke="url(#rim)" stroke-width="3.5"/><rect x="114" y="156" width="28" height="40" rx="8" fill="none" stroke="url(#rim)" stroke-width="3.5"/><rect x="84" y="192" width="88" height="30" rx="12" fill="none" stroke="url(#rim)" stroke-width="3.5"/>
+    <g filter="url(#lift)" opacity=".96"><path d="M128.0 76.0 L134.5 93.1 L152.7 94.0 L138.5 105.4 L143.3 123.0 L128.0 113.0 L112.7 123.0 L117.5 105.4 L103.3 94.0 L121.5 93.1 Z" fill="#ffffff"/></g>
+  </g></g>
+</svg>

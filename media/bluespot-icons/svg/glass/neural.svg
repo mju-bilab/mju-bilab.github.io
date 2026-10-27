@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 딥러닝 · 네트워크</title>
+<defs><linearGradient id="g-violet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ab8af9"/><stop offset="1" stop-color="#7c54e0"/></linearGradient><linearGradient id="g-pink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f799ca"/><stop offset="1" stop-color="#d867a8"/></linearGradient><linearGradient id="g-sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#70cffa"/><stop offset="1" stop-color="#33a9e2"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#bfa5fa" stop-opacity=".5"/><stop offset="1" stop-color="#8B5CF6" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><circle cx="128" cy="128" r="54" fill="#fff"/></mask>
+    <g id="back"><path d="M64 70 L128 128 M64 186 L128 128 M196 64 L128 128 M196 192 L128 128" fill="none" stroke="#8B5CF6" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><circle cx="64" cy="70" r="26" fill="url(#g-violet)"/><circle cx="64" cy="186" r="26" fill="url(#g-pink)"/><circle cx="196" cy="64" r="26" fill="url(#g-sky)"/><circle cx="196" cy="192" r="26" fill="url(#g-violet)"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <circle cx="128" cy="128" r="54" fill="none" stroke="url(#rim)" stroke-width="3.5"/>
+    <g filter="url(#lift)" opacity=".96"><path d="M128 101.96000000000001 C130.48 120.56 135.44 125.52 154.04 128 C135.44 130.48 130.48 135.44 128 154.04 C125.52 135.44 120.56 130.48 101.96000000000001 128 C120.56 125.52 125.52 120.56 128 101.96000000000001 Z" fill="#ffffff"/></g>
+  </g></g>
+</svg>

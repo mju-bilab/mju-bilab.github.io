@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+<title>Blue Spot — 저축 · 자산</title>
+<defs><linearGradient id="g-yellow" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fcd161"/><stop offset="1" stop-color="#deab27"/></linearGradient><linearGradient id="g-pink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f799ca"/><stop offset="1" stop-color="#d867a8"/></linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".7"/><stop offset=".6" stop-color="#f9b1d7" stop-opacity=".5"/><stop offset="1" stop-color="#F472B6" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1b2f6b" flood-opacity=".2"/></filter>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0b1640" flood-opacity=".34"/></filter>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><ellipse cx="122" cy="142" rx="88" ry="66" fill="#fff"/><ellipse cx="206" cy="146" rx="20" ry="24" fill="#fff"/></mask>
+    <g id="back"><circle cx="148" cy="48" r="28" fill="url(#g-yellow)"/><rect x="70" y="176" width="28" height="46" rx="12" fill="url(#g-pink)"/><rect x="140" y="176" width="28" height="46" rx="12" fill="url(#g-pink)"/><path d="M70 104 L60 66 L104 86 Z" fill="url(#g-pink)" stroke="url(#g-pink)" stroke-width="10" stroke-linejoin="round"/></g>
+  </defs>
+<g filter="url(#drop)"><g>
+    <use href="#back"/>
+    <g mask="url(#m)"><use href="#back" filter="url(#blur)" opacity=".85"/><rect x="-64" y="-64" width="384" height="384" fill="url(#frost)"/></g>
+    <ellipse cx="122" cy="142" rx="88" ry="66" fill="none" stroke="url(#rim)" stroke-width="3.5"/><ellipse cx="206" cy="146" rx="20" ry="24" fill="none" stroke="url(#rim)" stroke-width="3.5"/>
+    <g filter="url(#lift)" opacity=".96"><circle cx="160" cy="124" r="8" fill="#ffffff"/><path d="M104 96 H140" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="202" cy="140" r="4" fill="#ffffff"/><circle cx="212" cy="152" r="4" fill="#ffffff"/></g>
+  </g></g>
+</svg>
