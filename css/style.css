@@ -26,6 +26,8 @@
   --lumen-ink:#B45309;
   /* KAEDA nav label: brand crimson, 5:1+ on light surfaces */
   --kaeda-ink:#B32442;
+  /* Blue Spot nav label: sky blue, darkened to keep 5:1 on light surfaces */
+  --blue-ink:#0369A1;
   --ok-bg:#E6F7F1;
   --ok-ink:#0A6E53;
   /* per-person chip palette (see js/main.js chipIndex) */
@@ -54,7 +56,7 @@
     --soft:#111F38; --soft2:#16294A; --bg:#0A1729; --card:#101F38;
     --header-bg:rgba(10,23,41,.78); --glass:rgba(16,31,56,.62); --glass-border:rgba(255,255,255,.08); --icon:#E7ECF7;
     --shadow:0 18px 44px rgba(0,0,0,.35);
-    --dim-deco:#5C6780; --spark-ink:#FF8A4C; --lumen-ink:#FBBF24; --kaeda-ink:#F29AAB;
+    --dim-deco:#5C6780; --spark-ink:#FF8A4C; --lumen-ink:#FBBF24; --kaeda-ink:#F29AAB; --blue-ink:#7DD3FC;
     --ok-bg:#12362F; --ok-ink:#5FD9BE;
     --chip0-bg:#1B2F55; --chip0-ink:#A8C0FF;
     --chip1-bg:#12362F; --chip1-ink:#5FD9BE;
@@ -69,7 +71,7 @@
   --soft:#111F38; --soft2:#16294A; --bg:#0A1729; --card:#101F38;
   --header-bg:rgba(10,23,41,.78); --glass:rgba(16,31,56,.62); --glass-border:rgba(255,255,255,.08); --icon:#E7ECF7;
   --shadow:0 18px 44px rgba(0,0,0,.35);
-  --dim-deco:#5C6780; --spark-ink:#FF8A4C; --lumen-ink:#FBBF24; --kaeda-ink:#F29AAB;
+  --dim-deco:#5C6780; --spark-ink:#FF8A4C; --lumen-ink:#FBBF24; --kaeda-ink:#F29AAB; --blue-ink:#7DD3FC;
   --ok-bg:#12362F; --ok-ink:#5FD9BE;
   --chip0-bg:#1B2F55; --chip0-ink:#A8C0FF;
   --chip1-bg:#12362F; --chip1-ink:#5FD9BE;
@@ -210,6 +212,11 @@ header.scrolled .menu a.nav-lumen,header.scrolled .menu a.nav-lumen.active{color
 .menu a.nav-kaeda::after{background:#F29AAB}
 header.scrolled .menu a.nav-kaeda,header.scrolled .menu a.nav-kaeda.active{color:var(--kaeda-ink)}
 header.scrolled .menu a.nav-kaeda::after{background:var(--kaeda-ink)}
+/* Blue Spot tab in sky blue: bright on the navy hero, --blue-ink on the scrolled bar */
+.menu a.nav-blue,.menu a.nav-blue.active{color:#7DD3FC}
+.menu a.nav-blue::after{background:#7DD3FC}
+header.scrolled .menu a.nav-blue,header.scrolled .menu a.nav-blue.active{color:var(--blue-ink)}
+header.scrolled .menu a.nav-blue::after{background:var(--blue-ink)}
 
 .menu .hassub{position:relative}
 .menu .hassub>.top{font:inherit;font-weight:600;font-size:.9rem;color:#e7edf6;padding:6px 0;cursor:pointer;display:flex;align-items:center;gap:5px;
@@ -243,6 +250,8 @@ header.scrolled .menu .hassub.active>.top{color:var(--accent)}
   header.scrolled .menu a.nav-lumen:hover{color:var(--lumen-ink)}
   .menu a.nav-kaeda:hover{color:#F8C3CE}
   header.scrolled .menu a.nav-kaeda:hover{color:var(--kaeda-ink)}
+  .menu a.nav-blue:hover{color:#BAE6FD}
+  header.scrolled .menu a.nav-blue:hover{color:var(--blue-ink)}
   .menu .hassub>.top:hover{color:#fff}
   .menu .hassub>.top:hover::after{width:100%}
   header.scrolled .menu .hassub>.top:hover{color:var(--accent)}
@@ -840,6 +849,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .menu a,.menu .hassub>.top{color:var(--ink) !important;width:100%;padding:14px 2px}
   .menu a.nav-lumen{color:var(--lumen-ink) !important}
   .menu a.nav-kaeda{color:var(--kaeda-ink) !important}
+  .menu a.nav-blue{color:var(--blue-ink) !important}
   .menu>a{border-bottom:1px solid var(--line)}
   .menu>a:last-child{border-bottom:none}
   .menu a::after{display:none}

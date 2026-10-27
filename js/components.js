@@ -12,8 +12,8 @@
     },
     { href: "lumenizer.html", label: "Lumenizer", key: "lumenizer", cls: "nav-lumen" },
     { href: "kaeda.html", label: "KAEDA", key: "kaeda", cls: "nav-kaeda" },
+    { href: "bluespot.html", label: "Blue Spot", key: "bluespot", cls: "nav-blue" },
     { href: "lectures.html", label: "Lectures", key: "lectures" },
-    { href: "bluespot.html", label: "Blue Spot", key: "bluespot" },
     { href: "activity.html", label: "Our Lab", key: "activity" },
     { href: "contact.html", label: "Contact", key: "contact" },
   ];
