@@ -18,9 +18,12 @@
   function reportRowHTML(r, latest) {
     const wk = weekParts(r.week);
     const tags = (r.tags || []).map((t) => `<span>${esc(t)}</span>`).join("");
+    // "리포트 보기" opens the in-site viewer (report.html), which also
+    // works on phones and in-app browsers that can't show a PDF themselves
+    const view = `report.html?w=${encodeURIComponent(r.week)}`;
     const pdf = r.pdf
       ? `<div class="report-actions">
-           <a href="${esc(r.pdf)}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">리포트 보기 →</a>
+           <a href="${view}" class="btn btn-primary btn-sm">리포트 보기 →</a>
            <a href="${esc(r.pdf)}" download class="btn btn-outline btn-sm">PDF 다운로드</a>
          </div>`
       : "";
@@ -29,7 +32,7 @@
         <div class="report-week"><b>${esc(wk.w)}</b><span>${esc(wk.y)}</span></div>
         <div class="report-body">
           <time>${esc(r.date)}${latest ? ' <em class="tag news">Latest</em>' : ""}</time>
-          <h3>${esc(r.title)}</h3>
+          <h3>${r.pdf ? `<a href="${view}">${esc(r.title)}</a>` : esc(r.title)}</h3>
           ${r.summary ? `<p>${esc(r.summary)}</p>` : ""}
           ${tags ? `<div class="people report-tags">${tags}</div>` : ""}
           ${pdf}

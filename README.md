@@ -11,6 +11,7 @@ bilab/
 ├── members.html         People: Director · Members · Alumni 탭 (#director / #members / #alumni)
 ├── director.html       → members.html#director 로 이동 (예전 링크·명함 QR 호환용)
 ├── research.html         연구 분야 · 연구 과제
+├── report.html         Blue Spot 트렌드 리포트 PDF 뷰어 (report.html?w=2026-W44)
 ├── lumenizer.html        Lumenizer(연구실 AI 논문 리더) 소개 · 기능 영상
 ├── publications.html    논문(저널/진행중/학술대회)
 ├── lectures.html         강의 목록

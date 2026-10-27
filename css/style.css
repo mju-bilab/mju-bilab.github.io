@@ -1081,6 +1081,78 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .cn-prev{left:6px}
   .cn-next{right:6px}
 }
+/* ============ TREND REPORT VIEWER (report.html, js/report-viewer.js) ============ */
+.rv-hero{padding-bottom:44px}
+.rv-back{display:flex;width:fit-content;font-size:.84rem;font-weight:700;color:#a9bade;margin-bottom:16px;padding:6px 0}
+.rv-hero .rv-meta{margin-top:8px;font-size:.88rem;font-weight:700;color:#8fb2ff}
+.rv-hero .rv-summary:empty{display:none}
+.rv-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.rv-tags span{padding:4px 11px;border-radius:999px;font-size:.76rem;font-weight:600;color:#dbe6fb;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14)}
+@media (hover:hover) and (pointer:fine){ .rv-back:hover{color:#fff} }
+
+.rv-shell{background:var(--soft2);padding:0 0 48px}
+/* sticky under the fixed site chrome (36px topbar + 74px header) */
+.rv-bar{position:sticky;top:110px;z-index:30;display:flex;align-items:center;justify-content:center;gap:10px 22px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--glass);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);
+  border-bottom:1px solid var(--line)}
+.rv-bar[hidden]{display:none}
+.rv-group{display:flex;align-items:center;gap:4px}
+.rv-btn,.rv-zoom{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;border-radius:10px;
+  color:var(--ink);background:none;border:none;cursor:pointer;font:inherit}
+.rv-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rv-btn:disabled{opacity:.3;cursor:default}
+.rv-btn[aria-pressed="true"]{color:var(--accent)}
+.rv-zoom{min-width:64px;font-size:.84rem;font-weight:700;font-variant-numeric:tabular-nums}
+.rv-counter{min-width:64px;text-align:center;font-size:.88rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.rv-actions{padding-left:14px;border-left:1px solid var(--line)}
+@media (hover:hover) and (pointer:fine){
+  .rv-btn:not(:disabled):hover,.rv-zoom:hover{background:var(--card);color:var(--accent)}
+}
+.rv-btn:focus-visible,.rv-zoom:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+/* pages scroll sideways once zoomed past the screen width */
+.rv-stage{overflow-x:auto;padding:28px 24px 0}
+.rv-pages{display:flex;flex-direction:column;align-items:center;gap:18px;width:max-content;min-width:100%}
+.rv-page{position:relative;background:#fff;box-shadow:0 6px 24px rgba(10,23,41,.14);border-radius:4px;overflow:hidden}
+.rv-page canvas{display:block;width:100%;height:100%}
+.rv-page:not(.is-drawn)::after{content:attr(aria-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:#98a2b3;font-size:.86rem;font-weight:700}
+.rv-status{padding:80px 20px;color:var(--muted);font-weight:600}
+.rv-error{background:var(--card);max-width:520px;margin:40px auto}
+.rv-error .btn{margin:16px 4px 0}
+
+/* fullscreen: the viewer box itself scrolls */
+.rv-shell:fullscreen{overflow-y:auto;padding-bottom:24px}
+.rv-shell:fullscreen .rv-bar{top:0}
+
+.rv-siblings{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rv-sib{display:flex;flex-direction:column;gap:4px;padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+.rv-sib:last-child{text-align:right}
+.rv-sib small{font-size:.78rem;font-weight:700;color:var(--accent)}
+.rv-sib b{color:var(--ink);font-size:.96rem;line-height:1.45}
+.rv-sib span{font-size:.8rem;color:var(--muted)}
+@media (hover:hover) and (pointer:fine){ .rv-sib:hover{border-color:var(--accent)} }
+
+.rv-toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:80;background:var(--navy);color:#fff;
+  padding:10px 18px;border-radius:999px;font-size:.88rem;opacity:0;transition:opacity .2s;pointer-events:none}
+.rv-toast.show{opacity:1}
+
+@media (max-width:640px){
+  .rv-bar{gap:4px 10px;padding:6px 8px;justify-content:space-between}
+  .rv-actions{padding-left:6px}
+  .rv-btn{min-width:38px}
+  .rv-zoom{min-width:52px}
+  .rv-counter{min-width:54px}
+  .rv-stage{padding:14px 10px 0}
+  .rv-pages{gap:10px}
+  .rv-siblings{grid-template-columns:1fr}
+  .rv-sib:last-child{text-align:left}
+}
+@media (max-width:400px){
+  /* on the narrowest phones the zoom % label goes; − and + remain */
+  .rv-zoom{display:none}
+}
+
 /* nav items: tighten the spacing on narrower desktops before the burger takes over */
 @media (min-width:1025px) and (max-width:1320px){
   .menu{gap:16px}

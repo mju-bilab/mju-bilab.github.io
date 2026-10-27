@@ -7,7 +7,9 @@
      title   : "리포트 제목"
      summary : "한두 문장 요약"
      tags    : ["AI", "Retail"]                (선택) 키워드
-     pdf     : "files/reports/2026-W44.pdf"    PDF 파일 경로
+     pdf     : "files/reports/2026-W44.pdf"    PDF 파일 경로 (files/reports/ 에 올리기)
+               목록의 "리포트 보기"는 웹 뷰어 report.html?w=2026-W44 로 열립니다.
+               week 값이 주소가 되므로 리포트마다 겹치지 않게 적어 주세요.
 
    CARDNEWS_DATA 항목
      date    : "2026.10.27"
