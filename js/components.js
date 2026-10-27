@@ -9,6 +9,8 @@
     { href: "kaeda.html", label: "KAEDA", key: "kaeda", cls: "nav-kaeda" },
     { href: "publications.html", label: "Publications", key: "publications" },
     { href: "lectures.html", label: "Lectures", key: "lectures" },
+    { href: "reports.html", label: "Trend Report", key: "reports" },
+    { href: "cardnews.html", label: "Card News", key: "cardnews" },
     { href: "activity.html", label: "Our Lab", key: "activity" },
     { href: "contact.html", label: "Contact", key: "contact" },
   ];
@@ -30,8 +32,6 @@
       <div class="wrap">
         <span>Dept. of Industrial &amp; Management Engineering, Myongji University</span>
         <span class="tb-links">
-          <a href="https://mju-bilab.tistory.com/" target="_blank" rel="noopener">Tech Blog</a>
-          <span class="sep">|</span>
           <a href="https://ideamyongji.github.io" target="_blank" rel="noopener">IDEA 사업단</a>
           <span class="sep">|</span>
           <button type="button" id="themeToggle" class="theme-toggle" aria-label="다크 모드로 전환">Dark</button>
@@ -64,6 +64,8 @@
           <a href="${url("research.html")}">Research Areas</a>
           <a href="${url("publications.html")}">Publications</a>
           <a href="${url("lectures.html")}">Lectures</a>
+          <a href="${url("reports.html")}">Trend Report</a>
+          <a href="${url("cardnews.html")}">Card News</a>
           <a href="${url("activity.html")}">Our Lab</a>
         </div>
         <div class="foot-col">

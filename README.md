@@ -14,6 +14,8 @@ bilab/
 ├── lumenizer.html        Lumenizer(연구실 AI 논문 리더) 소개 · 기능 영상
 ├── publications.html    논문(저널/진행중/학술대회)
 ├── lectures.html         강의 목록
+├── reports.html          주간 비즈니스 트렌드 리포트
+├── cardnews.html         주간 카드뉴스 (슬라이드 뷰어)
 ├── activity.html         Our Lab (활동 아카이브 · 세미나)
 ├── contact.html          연락처 · 지도
 ├── 404.html              오류 페이지 (GitHub Pages가 자동으로 사용)
@@ -22,6 +24,8 @@ bilab/
 │   ├── components.js       공통 헤더/푸터, 모바일 메뉴(모달), 스크롤 효과
 │   ├── main.js             뉴스/활동 렌더링, 논문·구성원 탭 필터, 자동 카운트
 │   ├── news-data.js        뉴스·활동·졸업생 데이터 (여기만 수정하면 반영됨)
+│   ├── insights-data.js    트렌드 리포트·카드뉴스 목록 (매주 여기에 한 줄씩 추가)
+│   ├── insights.js         리포트 목록·카드뉴스 갤러리/뷰어 렌더링
 │   ├── theme-colors.js     캔버스 일러스트용 테마별 색상 (라이트/다크 연동)
 │   ├── pub-counts.js       논문 수 단일 진실원 (publications.html 마크업을 셈)
 │   ├── pub-links.js        논문 PDF·DOI 링크 렌더링
@@ -31,6 +35,8 @@ bilab/
 │   ├── research-interests.js    연구 관심분야 카드 일러스트
 │   └── lumenizer.js        Lumenizer 페이지 영상: 화면에 보일 때만 재생, reduced-motion이면 정지
 ├── files/publications/index.json   논문별 PDF 파일명 + DOI
+├── files/reports/        주간 트렌드 리포트 PDF (예: 2026-W44.pdf)
+├── files/cardnews/       주간 카드뉴스 이미지 (예: 2026-W44/01.png, 02.png …)
 ├── media/lumenizer/      Lumenizer 기능 영상(MP4·WebM)과 포스터 이미지
 │                         (paper-reader 저장소의 scripts/demo로 다시 녹화)
 └── images/
@@ -74,6 +80,12 @@ git push -u origin main
 
 ## 콘텐츠 업데이트 방법
 
+- **주간 트렌드 리포트 올리기**: PDF를 `files/reports/2026-W44.pdf`처럼 넣고,
+  `js/insights-data.js`의 `REPORT_DATA` 배열 **맨 위**에 항목 추가
+  (`week`, `date`, `title`, `summary`, `tags`, `pdf`). 맨 위 항목이 LATEST로 표시됩니다
+- **주간 카드뉴스 올리기**: 이미지를 `files/cardnews/2026-W44/01.png, 02.png …`로 넣고,
+  `CARDNEWS_DATA` 배열 **맨 위**에 항목 추가 (`date`, `title`, `summary`, `slides`).
+  `slides`의 첫 장이 목록 커버가 됩니다. 4:5(1080×1350) 이미지 권장
 - **새 소식 추가**: `js/news-data.js`의 `NEWS_DATA` 배열 맨 위에 항목 추가
 - **활동 사진/기록 추가**: `js/news-data.js`의 `ACTIVITY_DATA` 배열에 항목 추가. 사진을 넣으려면 `images/activity/` 폴더에 파일을 넣고 그 항목에 `photo: "images/activity/파일명.jpg"` 필드만 추가하면 자동으로 카드 썸네일에 표시됨 (없으면 기본 플레이스홀더 표시)
 - **구성원 추가/변경**: `members.html`의 `person-card` 블록 복사해서 수정

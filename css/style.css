@@ -964,3 +964,88 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .kd-key-head .kd-num{margin-bottom:0;background:var(--kaeda-ink);color:var(--card)}
 .kd-key h3{color:var(--kaeda-ink)}
 .kd-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;background:var(--kaeda-ink);color:var(--card);font-size:.75rem;font-weight:700;letter-spacing:.02em}
+/* ============ TREND REPORT / CARD NEWS (data: js/insights-data.js) ============ */
+.btn-sm{padding:9px 16px;font-size:.84rem}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px}
+.cta .btn-outline{border-color:rgba(255,255,255,.35);color:#fff}
+@media (hover:hover) and (pointer:fine){
+  .cta .btn-outline:hover{border-color:#fff;color:#fff}
+}
+.insight-empty{border:1.5px dashed var(--line);border-radius:var(--radius);padding:56px 24px;text-align:center}
+.insight-empty b{display:block;color:var(--ink);font-size:1.02rem;margin-bottom:6px}
+.insight-empty p{color:var(--muted);font-size:.92rem;margin:0}
+
+.report-list{display:flex;flex-direction:column}
+.report-row{display:grid;grid-template-columns:96px 1fr;gap:28px;padding:28px 0;border-top:1px solid var(--line)}
+.report-list .report-row:last-child{border-bottom:1px solid var(--line)}
+.report-week{display:flex;flex-direction:column;align-items:center;justify-content:center;height:84px;
+  border-radius:12px;background:var(--soft);border:1px solid var(--line)}
+.report-week b{font-size:1.45rem;font-weight:800;color:var(--ink);line-height:1.1}
+.report-week span{font-size:.74rem;font-weight:700;color:var(--dim);margin-top:4px}
+.report-row.latest .report-week{background:var(--accent);border-color:var(--accent)}
+/* navy disappears into the dark-theme page, so the report CTA uses the accent */
+.report-actions .btn-primary{background:var(--accent)}
+.report-row.latest .report-week b{color:#fff}
+.report-row.latest .report-week span{color:rgba(255,255,255,.78)}
+.report-body time{font-size:.8rem;color:var(--accent);font-weight:700;display:flex;align-items:center;gap:8px}
+.report-body time em{font-style:normal}
+.report-body h3{font-size:1.12rem;margin:8px 0 8px;color:var(--ink);line-height:1.45}
+.report-body p{font-size:.93rem;margin:0}
+.report-tags{margin-top:12px}
+.report-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+
+.cardnews-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.cardnews-grid.is-empty{display:block}
+.cardnews-card{display:flex;flex-direction:column;text-align:left;padding:0;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;
+  font:inherit;color:inherit;transition:box-shadow .2s,transform .2s}
+@media (hover:hover) and (pointer:fine){
+  .cardnews-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+}
+.cardnews-card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cardnews-cover{position:relative;display:block;aspect-ratio:4/5;background:linear-gradient(135deg,var(--soft2),var(--soft))}
+.cardnews-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cardnews-count{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:999px;
+  background:rgba(10,23,41,.72);color:#fff;font-size:.72rem;font-weight:700}
+.cardnews-body{display:flex;flex-direction:column;gap:6px;padding:18px 20px 20px}
+.cardnews-body time{font-size:.78rem;color:var(--accent);font-weight:700}
+.cardnews-body b{font-size:.98rem;color:var(--ink);line-height:1.45}
+.cardnews-body span{font-size:.86rem;color:var(--muted)}
+
+.cn-viewer{margin:auto;border:none;padding:0;background:transparent;max-width:none;max-height:none;
+  width:min(560px,100vw - 32px);overflow:visible;color:#fff}
+.cn-viewer::backdrop{background:rgba(6,14,26,.86)}
+.cn-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.cn-head b{flex:1;min-width:0;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cn-counter{font-size:.82rem;color:#c9d5ea;font-variant-numeric:tabular-nums}
+.cn-close{background:none;border:none;color:#fff;font-size:1.8rem;line-height:1;cursor:pointer;padding:2px 6px}
+.cn-stage{position:relative}
+.cn-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:12px;
+  max-height:calc(100dvh - 120px);background:#0A1729;outline:none}
+.cn-track::-webkit-scrollbar{display:none}
+.cn-slide{flex:0 0 100%;margin:0;scroll-snap-align:center;display:flex;align-items:center;justify-content:center}
+.cn-slide img{display:block;max-width:100%;max-height:calc(100dvh - 120px);object-fit:contain}
+.cn-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;
+  border:none;background:rgba(255,255,255,.92);color:#0E2038;font-size:1.6rem;line-height:1;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:2}
+.cn-prev{left:-22px}
+.cn-next{right:-22px}
+.cn-nav:disabled{opacity:0;pointer-events:none}
+@media (max-width:980px){ .cardnews-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:760px){
+  .report-row{grid-template-columns:64px 1fr;gap:16px}
+  .report-week{height:64px}
+  .report-week b{font-size:1.1rem}
+  .cardnews-grid{grid-template-columns:minmax(0,1fr)}
+  .cn-prev{left:6px}
+  .cn-next{right:6px}
+}
+/* 11 nav items: tighten the spacing on narrower desktops before the burger takes over */
+@media (min-width:1025px) and (max-width:1320px){
+  .menu{gap:16px}
+  .menu a{font-size:.86rem}
+}
+@media (min-width:1025px) and (max-width:1160px){
+  .menu{gap:12px}
+  .menu a{font-size:.82rem}
+}
