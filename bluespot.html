@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script>try{var t=localStorage.getItem('bilab-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blue Spot | BILAB</title>
+<meta name="description" content="BILAB 주간 비즈니스 트렌드 리포트와 카드뉴스 — 매주 비즈니스·제품·서비스·기술 트렌드를 분석해 발행합니다.">
+<link rel="icon" href="images/logo.png">
+<link rel="apple-touch-icon" href="images/logo.png">
+<link rel="canonical" href="https://mju-bilab.github.io/bluespot.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BILAB · Business Intelligence Lab, Myongji University">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="Blue Spot | BILAB">
+<meta property="og:description" content="BILAB 주간 비즈니스 트렌드 리포트와 카드뉴스 — 매주 비즈니스·제품·서비스·기술 트렌드를 분석해 발행합니다.">
+<meta property="og:url" content="https://mju-bilab.github.io/bluespot.html">
+<meta property="og:image" content="https://mju-bilab.github.io/images/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blue Spot | BILAB">
+<meta name="twitter:description" content="BILAB 주간 비즈니스 트렌드 리포트와 카드뉴스 — 매주 비즈니스·제품·서비스·기술 트렌드를 분석해 발행합니다.">
+<meta name="twitter:image" content="https://mju-bilab.github.io/images/logo.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="bluespot">
+
+<div id="site-header"></div>
+
+<main>
+  <section class="pagehero">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <span class="eyebrow">Weekly Business Trend</span>
+      <h1>Blue Spot</h1>
+      <p>비즈니스, 제품, 서비스, 기술 트렌드를 데이터로 분석해 매주 트렌드 리포트와 카드뉴스로 발행합니다</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="pub-tabs insight-tabs" role="tablist" aria-label="콘텐츠 종류">
+        <button type="button" class="pub-tab active" role="tab" data-target="report" aria-selected="true">트렌드 리포트</button>
+        <button type="button" class="pub-tab" role="tab" data-target="cardnews" aria-selected="false">카드뉴스</button>
+      </div>
+
+      <div data-insight-group="report" role="tabpanel">
+        <div class="section-head">
+          <span class="eyebrow">Trend Report</span>
+          <h2>주간 트렌드 리포트</h2>
+          <p>최신 리포트부터 순서대로 확인할 수 있습니다</p>
+        </div>
+        <div class="report-list" id="reportList"></div>
+      </div>
+
+      <div data-insight-group="cardnews" role="tabpanel" hidden>
+        <div class="section-head">
+          <span class="eyebrow">Card News</span>
+          <h2>주간 카드뉴스</h2>
+          <p>카드를 누르면 슬라이드로 넘겨 볼 수 있습니다</p>
+        </div>
+        <div class="cardnews-grid" id="cardnewsGrid"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div id="site-footer"></div></footer>
+
+<script src="js/insights-data.js"></script>
+<script src="js/insights.js"></script>
+<script src="js/theme-colors.js"></script>
+<script src="js/components.js"></script>
+<script src="js/hero-network.js"></script>
+<script src="js/bilab-chat.js" data-api="https://ttcxh3bwrc37modrr2bzwxy4440vvkza.lambda-url.ap-northeast-2.on.aws" defer></script>
+</body>
+</html>

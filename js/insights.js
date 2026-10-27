@@ -144,7 +144,30 @@
     track.focus();
   }
 
+  // Report / Card News tabs on one page. The hash (#report, #cardnews)
+  // selects the tab so the footer and home links can open either directly.
+  function initTabs() {
+    const tabs = document.querySelectorAll(".insight-tabs .pub-tab");
+    if (!tabs.length) return;
+    const panels = document.querySelectorAll("[data-insight-group]");
+    function activate(target, push) {
+      const tab = [...tabs].find((t) => t.dataset.target === target) || tabs[0];
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.classList.toggle("active", on);
+        t.setAttribute("aria-selected", String(on));
+      });
+      panels.forEach((p) => (p.hidden = p.dataset.insightGroup !== tab.dataset.target));
+      if (push) history.replaceState(null, "", "#" + tab.dataset.target);
+    }
+    tabs.forEach((t) => t.addEventListener("click", () => activate(t.dataset.target, true)));
+    const fromHash = () => activate(location.hash.slice(1), false);
+    window.addEventListener("hashchange", fromHash);
+    fromHash();
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
+    initTabs();
     renderReports();
     renderCardNews();
   });

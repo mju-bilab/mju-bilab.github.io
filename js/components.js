@@ -9,8 +9,7 @@
     { href: "kaeda.html", label: "KAEDA", key: "kaeda", cls: "nav-kaeda" },
     { href: "publications.html", label: "Publications", key: "publications" },
     { href: "lectures.html", label: "Lectures", key: "lectures" },
-    { href: "reports.html", label: "Trend Report", key: "reports" },
-    { href: "cardnews.html", label: "Card News", key: "cardnews" },
+    { href: "bluespot.html", label: "Blue Spot", key: "bluespot" },
     { href: "activity.html", label: "Our Lab", key: "activity" },
     { href: "contact.html", label: "Contact", key: "contact" },
   ];
@@ -64,8 +63,8 @@
           <a href="${url("research.html")}">Research Areas</a>
           <a href="${url("publications.html")}">Publications</a>
           <a href="${url("lectures.html")}">Lectures</a>
-          <a href="${url("reports.html")}">Trend Report</a>
-          <a href="${url("cardnews.html")}">Card News</a>
+          <a href="${url("bluespot.html")}">Trend Report</a>
+          <a href="${url("bluespot.html")}#cardnews">Card News</a>
           <a href="${url("activity.html")}">Our Lab</a>
         </div>
         <div class="foot-col">

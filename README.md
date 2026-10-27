@@ -14,8 +14,7 @@ bilab/
 ├── lumenizer.html        Lumenizer(연구실 AI 논문 리더) 소개 · 기능 영상
 ├── publications.html    논문(저널/진행중/학술대회)
 ├── lectures.html         강의 목록
-├── reports.html          주간 비즈니스 트렌드 리포트
-├── cardnews.html         주간 카드뉴스 (슬라이드 뷰어)
+├── bluespot.html         Blue Spot: 주간 트렌드 리포트 · 카드뉴스 (페이지 내 탭, #cardnews로 바로 열림)
 ├── activity.html         Our Lab (활동 아카이브 · 세미나)
 ├── contact.html          연락처 · 지도
 ├── 404.html              오류 페이지 (GitHub Pages가 자동으로 사용)
@@ -25,7 +24,7 @@ bilab/
 │   ├── main.js             뉴스/활동 렌더링, 논문·구성원 탭 필터, 자동 카운트
 │   ├── news-data.js        뉴스·활동·졸업생 데이터 (여기만 수정하면 반영됨)
 │   ├── insights-data.js    트렌드 리포트·카드뉴스 목록 (매주 여기에 한 줄씩 추가)
-│   ├── insights.js         리포트 목록·카드뉴스 갤러리/뷰어 렌더링
+│   ├── insights.js         리포트/카드뉴스 탭 전환, 리포트 목록·카드뉴스 갤러리/뷰어 렌더링
 │   ├── theme-colors.js     캔버스 일러스트용 테마별 색상 (라이트/다크 연동)
 │   ├── pub-counts.js       논문 수 단일 진실원 (publications.html 마크업을 셈)
 │   ├── pub-links.js        논문 PDF·DOI 링크 렌더링
