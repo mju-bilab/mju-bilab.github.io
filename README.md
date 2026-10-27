@@ -8,8 +8,8 @@
 ```
 bilab/
 ├── index.html          홈
-├── director.html       지도교수 소개
-├── members.html         현재 구성원 · 졸업생(Alumni)
+├── members.html         People: Director · Members · Alumni 탭 (#director / #members / #alumni)
+├── director.html       → members.html#director 로 이동 (예전 링크·명함 QR 호환용)
 ├── research.html         연구 분야 · 연구 과제
 ├── lumenizer.html        Lumenizer(연구실 AI 논문 리더) 소개 · 기능 영상
 ├── publications.html    논문(저널/진행중/학술대회)
@@ -91,7 +91,8 @@ git push -u origin main
 - **논문 추가**: `publications.html`의 해당 `pub-item` 블록 복사해서 수정 (`data-pub-id`를 고유하게 지정)
 - **논문 PDF·DOI 연결**: `files/publications/index.json`에서 해당 `data-pub-id` 항목의 `pdf`(파일명) / `doi` 값을 채우면 제목이 PDF 링크가 되고 DOI 링크가 붙습니다. PDF 파일은 `files/publications/`에 넣으세요
 - **활동 사진/종류**: `ACTIVITY_DATA` 항목에 `photo`를 넣으면 사진 카드, 없으면 종류별 아이콘 카드가 표시됩니다. 종류는 제목에서 자동 추론되며(`학술대회`/`학위수여식`/`세미나`), `kind: "conference" | "commencement" | "seminar"`로 직접 지정할 수도 있습니다
-- **메뉴/링크 변경**: `js/components.js`의 `NAV` 배열 수정 (모든 페이지에 자동 반영)
+- **메뉴/링크 변경**: `js/components.js`의 `NAV` 배열 수정 (모든 페이지에 자동 반영).
+  `children`을 가진 항목은 드롭다운이 됩니다 (현재 Research ▾ Research Areas / Publications)
 
 ## 배포 도메인 설정
 
@@ -105,9 +106,9 @@ git push -u origin main
 
 ## 남은 할 일 (실제 운영 전 확인 필요)
 
-- [x] 지도교수 실제 프로필 사진 적용 (`director.html`, `members.html`)
+- [x] 지도교수 실제 프로필 사진 적용 (`members.html`)
 - [ ] 지도교수 외 구성원 실제 프로필 사진 추가 (현재는 이름 2자 아바타로 대체)
-- [ ] Google Scholar 프로필 정확한 URL 연결 (`director.html`)
+- [ ] Google Scholar 프로필 정확한 URL 연결 (`members.html` Director 탭)
 - [x] 연구실 로고 이미지 적용 (`images/logo.png`, 헤더/푸터/파비콘)
 - [ ] Our Lab 활동 사진 추가 (`ACTIVITY_DATA`에 `photo` 필드로)
 - [ ] 실제 도메인 연결 여부 결정 (위 "배포 도메인 설정" 참고)

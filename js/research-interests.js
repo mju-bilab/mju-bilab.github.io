@@ -1,5 +1,5 @@
 /* Small interactive canvas illustrations for the four Research Interest
-   cards (director.html, research.html) — each visual nods to its topic
+   cards (members.html Director tab) — each visual nods to its topic
    and reacts to the cursor on hover. */
 (function () {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -360,7 +360,17 @@
       mouse.y = -999;
     });
 
-    window.addEventListener("resize", debounce(resize, 150));
+    // ResizeObserver rather than window resize: on members.html the cards
+    // can start in a hidden tab (#members / #alumni), measuring 0x0 until
+    // the Director tab is shown.
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(() => {
+        resize();
+        if (reduceMotion) renderer(ctx, w, h, 0, mouse, false, state);
+      }).observe(canvas);
+    } else {
+      window.addEventListener("resize", debounce(resize, 150));
+    }
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) stop();
       else start();

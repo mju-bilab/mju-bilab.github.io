@@ -2,12 +2,16 @@
 (function () {
   const NAV = [
     { href: "index.html", label: "Home", key: "home" },
-    { href: "director.html", label: "Director", key: "director" },
-    { href: "members.html", label: "Members", key: "members" },
-    { href: "research.html", label: "Research", key: "research" },
+    { href: "members.html", label: "People", key: "members" },
+    {
+      label: "Research",
+      children: [
+        { href: "research.html", label: "Research Areas", key: "research" },
+        { href: "publications.html", label: "Publications", key: "publications" },
+      ],
+    },
     { href: "lumenizer.html", label: "Lumenizer", key: "lumenizer", cls: "nav-lumen" },
     { href: "kaeda.html", label: "KAEDA", key: "kaeda", cls: "nav-kaeda" },
-    { href: "publications.html", label: "Publications", key: "publications" },
     { href: "lectures.html", label: "Lectures", key: "lectures" },
     { href: "bluespot.html", label: "Blue Spot", key: "bluespot" },
     { href: "activity.html", label: "Our Lab", key: "activity" },
@@ -21,10 +25,19 @@
   const url = (href) => (ABS ? "/" + href : href);
 
   function headerHTML(activeKey) {
-    const links = NAV.map(
-      (item) =>
-        `<a href="${url(item.href)}" class="${[item.key === activeKey ? "active" : "", item.cls || ""].join(" ").trim()}">${item.label}</a>`
-    ).join("");
+    const linkHTML = (item) =>
+      `<a href="${url(item.href)}" class="${[item.key === activeKey ? "active" : "", item.cls || ""].join(" ").trim()}"${item.key === activeKey ? ' aria-current="page"' : ""}>${item.label}</a>`;
+    // An item with `children` becomes a dropdown: a button that toggles
+    // its .sub list (see initDropdowns), marked active when one of its
+    // pages is the current one.
+    const links = NAV.map((item) => {
+      if (!item.children) return linkHTML(item);
+      const active = item.children.some((c) => c.key === activeKey);
+      return `<div class="hassub${active ? " active" : ""}">
+          <button type="button" class="top" aria-expanded="false">${item.label}<svg class="caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
+          <div class="sub">${item.children.map(linkHTML).join("")}</div>
+        </div>`;
+    }).join("");
 
     return `
     <div class="topbar">
@@ -69,8 +82,8 @@
         </div>
         <div class="foot-col">
           <h2>People</h2>
-          <a href="${url("director.html")}">Director</a>
-          <a href="${url("members.html")}">Members</a>
+          <a href="${url("members.html")}#director">Director</a>
+          <a href="${url("members.html")}#members">Members</a>
           <a href="${url("members.html")}#alumni">Alumni</a>
           <a href="https://ideamyongji.github.io" target="_blank" rel="noopener">IDEA 사업단 ↗</a>
         </div>
@@ -289,6 +302,41 @@
     });
   }
 
+  // Nav dropdowns open on click/tap and keyboard (CSS adds hover on
+  // desktop), and close on an outside click, ESC, or focus leaving them.
+  function initDropdowns() {
+    const subs = document.querySelectorAll(".menu .hassub");
+    if (!subs.length) return;
+    const setOpen = (sub, open) => {
+      sub.classList.toggle("open", open);
+      sub.querySelector(".top").setAttribute("aria-expanded", String(open));
+    };
+    subs.forEach((sub) => {
+      sub.querySelector(".top").addEventListener("click", () => {
+        const open = !sub.classList.contains("open");
+        subs.forEach((s) => setOpen(s, false));
+        setOpen(sub, open);
+      });
+      sub.addEventListener("focusout", (e) => {
+        if (!sub.contains(e.relatedTarget)) setOpen(sub, false);
+      });
+    });
+    document.addEventListener("click", (e) => {
+      subs.forEach((s) => {
+        if (!s.contains(e.target)) setOpen(s, false);
+      });
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      subs.forEach((s) => {
+        if (!s.classList.contains("open")) return;
+        setOpen(s, false);
+        // in the mobile panel ESC closes the whole menu (see mount)
+        if (!document.documentElement.classList.contains("nav-open")) s.querySelector(".top").focus();
+      });
+    });
+  }
+
   function mount() {
     const headerMount = document.getElementById("site-header");
     const footerMount = document.getElementById("site-footer");
@@ -349,7 +397,10 @@
           return;
         }
         if (e.key !== "Tab") return;
-        const stops = [burger, ...menu.querySelectorAll("a")];
+        // skip links inside a collapsed dropdown — they can't take focus
+        const stops = [burger, ...menu.querySelectorAll("a, button")].filter(
+          (el) => el.offsetParent !== null
+        );
         const i = stops.indexOf(document.activeElement);
         if (i === -1) return;
         e.preventDefault();
@@ -369,6 +420,7 @@
       );
     }
 
+    initDropdowns();
     initThemeToggle();
     initScrollReveal();
     initSplitReveal();

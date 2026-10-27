@@ -115,7 +115,7 @@
   function renderMemberCount() {
     const el = document.getElementById("memberCount");
     if (!el) return;
-    const n = document.querySelectorAll('[data-member-group="current"] .person-card').length;
+    const n = document.querySelectorAll('[data-member-group="members"] .person-card').length;
     if (n) el.textContent = String(n);
   }
 
@@ -322,9 +322,14 @@
     tabs.forEach((tab) => tab.addEventListener("click", () => activate(tab)));
 
     // Deep-link support, e.g. members.html#alumni opens straight to that tab.
-    const hashTarget = location.hash.slice(1);
-    const hashTab = [...tabs].find((t) => t.getAttribute("data-target") === hashTarget);
-    if (hashTab) activate(hashTab);
+    // Listens for later hash changes too, so the footer's People links
+    // switch tabs even when clicked from this same page.
+    const fromHash = () => {
+      const hashTab = [...tabs].find((t) => t.getAttribute("data-target") === location.hash.slice(1));
+      if (hashTab) activate(hashTab);
+    };
+    window.addEventListener("hashchange", fromHash);
+    fromHash();
   }
 
   document.addEventListener("DOMContentLoaded", async () => {

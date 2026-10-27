@@ -212,20 +212,29 @@ header.scrolled .menu a.nav-kaeda,header.scrolled .menu a.nav-kaeda.active{color
 header.scrolled .menu a.nav-kaeda::after{background:var(--kaeda-ink)}
 
 .menu .hassub{position:relative}
-.menu .hassub>.top{font-weight:600;font-size:.9rem;color:#e7edf6;padding:6px 0;cursor:pointer;display:flex;align-items:center;gap:4px}
+.menu .hassub>.top{font:inherit;font-weight:600;font-size:.9rem;color:#e7edf6;padding:6px 0;cursor:pointer;display:flex;align-items:center;gap:5px;
+  background:none;border:none;position:relative;white-space:nowrap}
+.menu .hassub>.top::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:width .25s}
+.menu .hassub.active>.top{color:#fff}
+.menu .hassub.active>.top::after{width:100%}
+.menu .caret{width:10px;height:6px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.menu .hassub.open .caret{transform:rotate(180deg)}
 header.scrolled .menu .hassub>.top{color:var(--ink)}
+header.scrolled .menu .hassub.active>.top{color:var(--accent)}
 .menu .sub{
   position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(10px);
   background:var(--card);border:1px solid var(--line);border-radius:12px;
   box-shadow:0 18px 44px rgba(19,41,75,.13);padding:8px;min-width:168px;
   opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s,transform .2s;display:flex;flex-direction:column;gap:2px;z-index:70;
 }
+/* invisible bridge over the 6px gap so hover survives the trip to the list */
+.menu .sub::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}
+.menu .hassub.open .sub{opacity:1;visibility:visible;transform:translateX(-50%) translateY(6px)}
+.menu .sub a.active{color:var(--accent) !important;background:var(--soft)}
 .menu .sub a{padding:9px 14px;border-radius:8px;font-size:.87rem;color:var(--ink) !important}
 .menu .sub a::after{display:none}
-/* .hassub has no JS-driven open state (see js/components.js) — it's purely
-   CSS-hover-driven and currently unused by any nav item. Gating it here is
-   correct for the desktop mouse case; if a dropdown nav item is ever added,
-   it will need a real click/focus toggle for touch, not just this. */
+/* .hassub (the Research dropdown) also opens on hover here; click, tap and
+   keyboard toggle its .open class via initDropdowns in js/components.js. */
 @media (hover:hover) and (pointer:fine){
   .menu a:hover::after{width:100%}
   .menu a:hover{color:#fff}
@@ -234,7 +243,9 @@ header.scrolled .menu .hassub>.top{color:var(--ink)}
   header.scrolled .menu a.nav-lumen:hover{color:var(--lumen-ink)}
   .menu a.nav-kaeda:hover{color:#F8C3CE}
   header.scrolled .menu a.nav-kaeda:hover{color:var(--kaeda-ink)}
-  .menu .hassub>.top:hover{color:var(--accent)}
+  .menu .hassub>.top:hover{color:#fff}
+  .menu .hassub>.top:hover::after{width:100%}
+  header.scrolled .menu .hassub>.top:hover{color:var(--accent)}
   .menu .hassub:hover .sub{opacity:1;visibility:visible;transform:translateX(-50%) translateY(6px)}
   .menu .sub a:hover{background:var(--soft);color:var(--accent) !important}
 }
@@ -465,20 +476,10 @@ section.tight{padding:64px 0}
 @media (hover:hover) and (pointer:fine){
   .person-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
 }
-/* The director's card holds far more than a student's (six interest tags,
-   an email); side by side in the same grid it made every row look ragged.
-   Given its own full-width lead row, the student grid stays even. */
-.lead-card{flex-direction:row;gap:26px;align-items:flex-start;margin-bottom:22px}
-.lead-card .avatar{width:104px;height:auto;aspect-ratio:3/4;border-radius:18px;font-size:1.8rem}
-.lead-card .lead-body{display:flex;flex-direction:column;gap:10px;min-width:0}
-.lead-card .contact{border-top:none;padding-top:0}
 /* one even grid for the students: equal-height cards, meta pinned to the
    bottom so the contact line lines up across the row */
 .member-grid .person-card{justify-content:flex-start}
 .member-grid .person-card .contact{margin-top:auto}
-@media (max-width:640px){
-  .lead-card{flex-direction:column;gap:16px}
-}
 .avatar{
   width:64px;height:64px;border-radius:50%;
   background:linear-gradient(135deg,var(--accent),var(--navy2));
@@ -843,8 +844,13 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .menu>a:last-child{border-bottom:none}
   .menu a::after{display:none}
   .menu .hassub{width:100%;flex-direction:column;align-items:flex-start}
-  .menu .sub{position:static;transform:none;opacity:1;visibility:visible;box-shadow:none;border:none;padding:0 0 0 12px;display:none;width:100%}
-  .menu .hassub.open .sub{display:flex}
+  .menu .hassub{border-bottom:1px solid var(--line)}
+  .menu .hassub>.top{justify-content:space-between}
+  .menu .hassub>.top::after{display:none}
+  .menu .hassub.active>.top{color:var(--accent) !important}
+  .menu .sub{position:static;transform:none;opacity:1;visibility:visible;box-shadow:none;border:none;padding:0 0 10px 12px;display:none;width:100%;background:none}
+  .menu .hassub.open .sub{display:flex;transform:none}
+  .menu .sub::before{display:none}
   .burger{display:flex}
   .burger span{background:var(--icon) !important}
 }
@@ -1040,7 +1046,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .cn-prev{left:6px}
   .cn-next{right:6px}
 }
-/* 11 nav items: tighten the spacing on narrower desktops before the burger takes over */
+/* nav items: tighten the spacing on narrower desktops before the burger takes over */
 @media (min-width:1025px) and (max-width:1320px){
   .menu{gap:16px}
   .menu a{font-size:.86rem}
