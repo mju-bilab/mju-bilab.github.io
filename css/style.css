@@ -1067,8 +1067,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .rp-meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;font-size:.8rem}
 .rp-meta b{color:var(--accent);font-weight:800}
 .rp-meta time{color:var(--dim);font-weight:600}
-.rp-author{color:var(--muted);font-weight:600}
-.rp-meta time+.rp-author::before{content:"·";margin-right:10px;color:var(--dim)}
+.rp-by{display:block;font-size:.8rem;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rp-meta em{font-style:normal}
 .rp-tags{display:flex;flex-wrap:wrap;gap:6px}
 .rp-tags span{background:var(--soft);border:1px solid var(--line);padding:3px 10px;border-radius:999px;font-size:.74rem;color:var(--ink)}
@@ -1091,6 +1090,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .rp-feature-body h3{font-size:clamp(1.3rem,1.05rem + 1vw,1.7rem);line-height:1.4;margin:12px 0 12px;color:var(--ink)}
 .rp-feature-body h3 a{color:inherit}
 .rp-feature-body p{font-size:.96rem;margin:0}
+.rp-feature-body .rp-by{margin:-4px 0 12px;font-size:.86rem}
 .rp-feature-body .rp-tags{margin-top:14px}
 .rp-feature-body .rp-tags span{background:var(--card)}
 .report-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
@@ -1123,6 +1123,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{
      so a rotated image would leave its corners empty */
   .rp-card:hover .rp-cover{z-index:2;box-shadow:var(--shadow);transform:translateY(-3px) rotate(-4deg) scale(1.03)}
   .rp-card:hover strong{color:var(--accent)}
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:reduce){
+  .rp-card:hover .rp-cover{transform:none}
 }
 .rp-card:focus-visible{outline:none}
 .rp-card:focus-visible .rp-cover{outline:2px solid var(--accent);outline-offset:3px}
@@ -1184,9 +1187,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .cardnews-count{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:999px;
   background:rgba(10,23,41,.72);color:#fff;font-size:.72rem;font-weight:700}
 .cardnews-body{display:flex;flex-direction:column;gap:6px;padding:18px 20px 20px}
-.cardnews-meta{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
 .cardnews-body time{font-size:.78rem;color:var(--accent);font-weight:700}
-.cardnews-body .cardnews-meta span{font-size:.78rem;color:var(--dim);font-weight:600}
+.cardnews-body .rp-by{font-size:.8rem}
 .cardnews-body b{font-size:.98rem;color:var(--ink);line-height:1.45}
 .cardnews-body span{font-size:.86rem;color:var(--muted)}
 
@@ -1195,7 +1197,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .cn-viewer::backdrop{background:rgba(6,14,26,.86)}
 .cn-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .cn-head b{flex:1;min-width:0;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cn-author{flex:none;font-size:.82rem;color:#c9d5ea}
+.cn-author{flex:0 1 auto;min-width:0;max-width:40%;font-size:.82rem;color:#c9d5ea;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* on a phone the title needs the room; the card under the viewer already names the authors */
+@media (max-width:520px){ .cn-author{display:none} }
 .cn-counter{font-size:.82rem;color:#c9d5ea;font-variant-numeric:tabular-nums}
 .cn-close{background:none;border:none;color:#fff;font-size:1.8rem;line-height:1;cursor:pointer;padding:2px 6px}
 .cn-stage{position:relative}

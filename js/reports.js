@@ -18,6 +18,13 @@
     return (Array.isArray(a) ? a : a ? [a] : []).filter(Boolean).join(", ");
   }
 
+  // its own line under the title: in the narrow two-column cards a name next to
+  // the date wraps and would start the new line with the separator
+  function bylineHTML(x) {
+    const a = authorOf(x);
+    return a ? `<span class="rp-by" title="${esc(a)}">${esc(a)}</span>` : "";
+  }
+
   const detailURL = (r) => `report.html?w=${encodeURIComponent(r.week)}`;
   const viewerURL = (r) => `report-view.html?w=${encodeURIComponent(r.week)}`;
 
@@ -51,13 +58,14 @@
       <a class="rp-card" href="${detailURL(r)}">
         ${coverHTML(r)}
         <span class="rp-card-body">
-          <span class="rp-meta"><b>${esc(wk.w)}</b><time>${esc(r.date)}</time>${authorOf(r) ? `<span class="rp-author">${esc(authorOf(r))}</span>` : ""}</span>
+          <span class="rp-meta"><b>${esc(wk.w)}</b><time>${esc(r.date)}</time></span>
           <strong>${esc(r.title)}</strong>
+          ${bylineHTML(r)}
           ${r.summary ? `<span class="rp-sum">${esc(r.summary)}</span>` : ""}
           ${tags ? `<span class="rp-tags">${tags}</span>` : ""}
         </span>
       </a>`;
   }
 
-  window.BlueSpot = { esc, authorOf, weekParts, detailURL, viewerURL, coverOf, coverHTML, cardHTML };
+  window.BlueSpot = { esc, authorOf, bylineHTML, weekParts, detailURL, viewerURL, coverOf, coverHTML, cardHTML };
 })();

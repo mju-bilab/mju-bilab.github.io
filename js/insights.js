@@ -41,8 +41,9 @@
       <article class="rp-feature">
         <a class="rp-feature-cover" href="${B.detailURL(r)}" tabindex="-1" aria-hidden="true">${B.coverHTML(r, true)}</a>
         <div class="rp-feature-body">
-          <span class="rp-meta"><em class="tag news">Latest</em><b>${esc(wk.y)} · ${esc(wk.w)}</b><time>${esc(r.date)}</time>${B.authorOf(r) ? `<span class="rp-author">${esc(B.authorOf(r))}</span>` : ""}</span>
+          <span class="rp-meta"><em class="tag news">Latest</em><b>${esc(wk.y)} · ${esc(wk.w)}</b><time>${esc(r.date)}</time></span>
           <h3><a href="${B.detailURL(r)}">${esc(r.title)}</a></h3>
+          ${B.bylineHTML(r)}
           ${r.summary ? `<p>${esc(r.summary)}</p>` : ""}
           ${tags ? `<div class="rp-tags">${tags}</div>` : ""}
           <div class="report-actions">
@@ -124,14 +125,14 @@
     }
     el.innerHTML = CARDNEWS_DATA.map((c, i) => {
       const n = (c.slides || []).length;
-      const author = window.BlueSpot ? window.BlueSpot.authorOf(c) : "";
       const cover = n ? `<img src="${esc(c.slides[0])}" alt="" loading="lazy">` : "";
       return `
       <button type="button" class="cardnews-card" data-index="${i}" aria-label="${esc(c.title)} 카드뉴스 보기 (${n}장)">
         <span class="cardnews-cover">${cover}<span class="cardnews-count">${n}장</span></span>
         <span class="cardnews-body">
-          <span class="cardnews-meta"><time>${esc(c.date)}</time>${author ? `<span>${esc(author)}</span>` : ""}</span>
+          <time>${esc(c.date)}</time>
           <b>${esc(c.title)}</b>
+          ${window.BlueSpot ? window.BlueSpot.bylineHTML(c) : ""}
           ${c.summary ? `<span>${esc(c.summary)}</span>` : ""}
         </span>
       </button>`;
