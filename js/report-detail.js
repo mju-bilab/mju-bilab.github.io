@@ -32,7 +32,7 @@
     $("#rdWeek").textContent = `Trend Report · ${wk.y} · ${wk.w}`;
     $("#rdTitle").textContent = report.title;
 
-    const facts = [["발행일", report.date], ["분량", report.pages ? `${report.pages}쪽` : ""], ["형식", report.pdf ? "PDF" : ""]];
+    const facts = [["작성", B.authorOf(report)], ["발행일", report.date], ["분량", report.pages ? `${report.pages}쪽` : ""], ["형식", report.pdf ? "PDF" : ""]];
     $("#rdFacts").innerHTML = facts
       .filter((f) => f[1])
       .map((f) => `<div><dt>${f[0]}</dt><dd>${esc(f[1])}</dd></div>`)

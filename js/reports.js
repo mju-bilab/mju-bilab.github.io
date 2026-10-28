@@ -12,6 +12,12 @@
     return m ? { y: m[1], w: "W" + m[2].padStart(2, "0") } : { y: "", w: week || "" };
   }
 
+  // author: "홍길동" or ["홍길동", "김철수"] → "홍길동, 김철수"
+  function authorOf(x) {
+    const a = x && x.author;
+    return (Array.isArray(a) ? a : a ? [a] : []).filter(Boolean).join(", ");
+  }
+
   const detailURL = (r) => `report.html?w=${encodeURIComponent(r.week)}`;
   const viewerURL = (r) => `report-view.html?w=${encodeURIComponent(r.week)}`;
 
@@ -45,7 +51,7 @@
       <a class="rp-card" href="${detailURL(r)}">
         ${coverHTML(r)}
         <span class="rp-card-body">
-          <span class="rp-meta"><b>${esc(wk.w)}</b><time>${esc(r.date)}</time></span>
+          <span class="rp-meta"><b>${esc(wk.w)}</b><time>${esc(r.date)}</time>${authorOf(r) ? `<span class="rp-author">${esc(authorOf(r))}</span>` : ""}</span>
           <strong>${esc(r.title)}</strong>
           ${r.summary ? `<span class="rp-sum">${esc(r.summary)}</span>` : ""}
           ${tags ? `<span class="rp-tags">${tags}</span>` : ""}
@@ -53,5 +59,5 @@
       </a>`;
   }
 
-  window.BlueSpot = { esc, weekParts, detailURL, viewerURL, coverOf, coverHTML, cardHTML };
+  window.BlueSpot = { esc, authorOf, weekParts, detailURL, viewerURL, coverOf, coverHTML, cardHTML };
 })();

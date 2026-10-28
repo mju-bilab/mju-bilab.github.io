@@ -5,6 +5,7 @@
      week    : "2026-W44"                      ISO 주차 (목록의 주차 배지)
      date    : "2026.10.27"                    발행일
      title   : "리포트 제목"
+     author  : "홍길동"                         작성자 — 여러 명이면 ["홍길동", "김철수"]
      summary : "한두 문장 요약"
      tags    : ["AI", "Retail"]                (선택) 키워드 — 목록의 키워드 필터와 관련 리포트 추천에 쓰입니다
      pdf     : "files/reports/2026-W44.pdf"    PDF 파일 경로 (files/reports/ 에 올리기)
@@ -22,6 +23,7 @@
    CARDNEWS_DATA 항목
      date    : "2026.10.27"
      title   : "카드뉴스 제목"
+     author  : "홍길동"                         작성자 — 여러 명이면 ["홍길동", "김철수"]
      summary : "한 줄 소개"                    (선택)
      slides  : ["files/cardnews/2026-W44/01.png", "files/cardnews/2026-W44/02.png", ...]
                첫 장이 목록의 커버로 쓰입니다. 4:5(1080×1350) 또는 1:1 이미지 권장.
@@ -35,6 +37,7 @@ const REPORT_DATA = [
     week: "2026-W44",
     date: "2026.10.29",
     title: "커피 앱이 기억해야 할 것들",
+    author: "한민탁",
     summary: "늘 먹던 메뉴를 다시 고르고, 익숙한 요청을 다시 적고, 내 커피가 맞는지 다시 확인하는 순간들. 스타벅스·메가MGC커피·컴포즈커피 앱의 최근 90일 공개 리뷰 269건으로 주문부터 음료 수령까지의 불편과 편리함을 살폈습니다.",
     tags: ["커피", "모바일 주문", "앱 리뷰"],
     pdf: "files/reports/2026-W44.pdf",
@@ -53,6 +56,7 @@ const CARDNEWS_DATA = [
     week: "2026-W44",
     date: "2026.10.29",
     title: "커피 앱이 기억해야 할 것들",
+    author: "한민탁",
     summary: "커피 앱 리뷰 269건에서 찾은 주문부터 음료 수령까지의 불편과 편리함",
     slides: [
       "files/cardnews/2026-W44/01.jpg", "files/cardnews/2026-W44/02.png", "files/cardnews/2026-W44/03.png", "files/cardnews/2026-W44/04.png",

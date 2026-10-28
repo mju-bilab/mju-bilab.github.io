@@ -42,6 +42,8 @@
     $("#rvWeek").textContent = "Trend Report · " + weekLabel(report.week);
     $("#rvTitle").textContent = report.title;
     $("#rvDate").textContent = report.date || "";
+    const author = [].concat(report.author || []).filter(Boolean).join(", ");
+    $("#rvAuthor").textContent = author ? " · " + author : "";
     if (report.summary) $("#rvSummary").textContent = report.summary;
     $("#rvTags").innerHTML = (report.tags || []).map((t) => `<span>${esc(t)}</span>`).join("");
     document.title = `${report.title} | Blue Spot | BILAB`;

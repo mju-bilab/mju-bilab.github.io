@@ -87,9 +87,9 @@ git push -u origin main
 
 - **주간 트렌드 리포트 올리기**: PDF를 `files/reports/2026-W44.pdf`처럼 넣고,
   `js/insights-data.js`의 `REPORT_DATA` 배열 **맨 위**에 항목 추가
-  (`week`, `date`, `title`, `summary`, `tags`, `pdf`). 맨 위 항목이 LATEST로 표시됩니다
+  (`week`, `date`, `title`, `author`, `summary`, `tags`, `pdf`). 맨 위 항목이 LATEST로 표시됩니다
 - **주간 카드뉴스 올리기**: 이미지를 `files/cardnews/2026-W44/01.png, 02.png …`로 넣고,
-  `CARDNEWS_DATA` 배열 **맨 위**에 항목 추가 (`date`, `title`, `summary`, `slides`).
+  `CARDNEWS_DATA` 배열 **맨 위**에 항목 추가 (`date`, `title`, `author`, `summary`, `slides`).
   `slides`의 첫 장이 목록 커버가 됩니다. 4:5(1080×1350) 이미지 권장
 - **새 소식 추가**: `js/news-data.js`의 `NEWS_DATA` 배열 맨 위에 항목 추가
 - **활동 사진/기록 추가**: `js/news-data.js`의 `ACTIVITY_DATA` 배열에 항목 추가. 사진을 넣으려면 `images/activity/` 폴더에 파일을 넣고 그 항목에 `photo: "images/activity/파일명.jpg"` 필드만 추가하면 자동으로 카드 썸네일에 표시됨 (없으면 기본 플레이스홀더 표시)

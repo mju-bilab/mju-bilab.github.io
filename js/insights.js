@@ -20,7 +20,7 @@
       <article class="rp-feature">
         <a class="rp-feature-cover" href="${B.detailURL(r)}" tabindex="-1" aria-hidden="true">${B.coverHTML(r, true)}</a>
         <div class="rp-feature-body">
-          <span class="rp-meta"><em class="tag news">Latest</em><b>${esc(wk.y)} · ${esc(wk.w)}</b><time>${esc(r.date)}</time></span>
+          <span class="rp-meta"><em class="tag news">Latest</em><b>${esc(wk.y)} · ${esc(wk.w)}</b><time>${esc(r.date)}</time>${B.authorOf(r) ? `<span class="rp-author">${esc(B.authorOf(r))}</span>` : ""}</span>
           <h3><a href="${B.detailURL(r)}">${esc(r.title)}</a></h3>
           ${r.summary ? `<p>${esc(r.summary)}</p>` : ""}
           ${tags ? `<div class="rp-tags">${tags}</div>` : ""}
@@ -101,12 +101,13 @@
     }
     el.innerHTML = CARDNEWS_DATA.map((c, i) => {
       const n = (c.slides || []).length;
+      const author = window.BlueSpot ? window.BlueSpot.authorOf(c) : "";
       const cover = n ? `<img src="${esc(c.slides[0])}" alt="" loading="lazy">` : "";
       return `
       <button type="button" class="cardnews-card" data-index="${i}" aria-label="${esc(c.title)} 카드뉴스 보기 (${n}장)">
         <span class="cardnews-cover">${cover}<span class="cardnews-count">${n}장</span></span>
         <span class="cardnews-body">
-          <time>${esc(c.date)}</time>
+          <span class="cardnews-meta"><time>${esc(c.date)}</time>${author ? `<span>${esc(author)}</span>` : ""}</span>
           <b>${esc(c.title)}</b>
           ${c.summary ? `<span>${esc(c.summary)}</span>` : ""}
         </span>
@@ -120,7 +121,7 @@
   // Slide viewer: a native <dialog> (focus trap + ESC for free) holding a
   // horizontal scroll-snap track, so touch swipe works without any gesture
   // code; the buttons and arrow keys just scroll the track one slide over.
-  let dialog, track, counter, titleEl, prevBtn, nextBtn, opener;
+  let dialog, track, counter, titleEl, authorEl, prevBtn, nextBtn, opener;
 
   function buildViewer() {
     dialog = document.createElement("dialog");
@@ -129,6 +130,7 @@
     dialog.innerHTML = `
       <div class="cn-head">
         <b id="cnTitle"></b>
+        <span class="cn-author" hidden></span>
         <span class="cn-counter" aria-live="polite"></span>
         <button type="button" class="cn-close" aria-label="닫기">×</button>
       </div>
@@ -142,6 +144,7 @@
     track = dialog.querySelector(".cn-track");
     counter = dialog.querySelector(".cn-counter");
     titleEl = dialog.querySelector("#cnTitle");
+    authorEl = dialog.querySelector(".cn-author");
     prevBtn = dialog.querySelector(".cn-prev");
     nextBtn = dialog.querySelector(".cn-next");
 
@@ -182,6 +185,9 @@
     if (!dialog) buildViewer();
     opener = from;
     titleEl.textContent = c.title;
+    const author = window.BlueSpot ? window.BlueSpot.authorOf(c) : "";
+    authorEl.textContent = author;
+    authorEl.hidden = !author;
     // alts: each slide's text, for screen readers and search; else "제목 N장"
     const alts = c.alts || [];
     track.innerHTML = (c.slides || [])
