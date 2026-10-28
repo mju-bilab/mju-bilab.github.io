@@ -5,7 +5,7 @@
 <script>try{var t=localStorage.getItem('bilab-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trend Report | Blue Spot | BILAB</title>
-<meta name="description" content="BILAB Blue Spot 주간 비즈니스 트렌드 리포트를 웹에서 바로 읽어 보세요.">
+<meta name="description" content="BILAB Blue Spot 주간 비즈니스 트렌드 리포트 — 이번 호의 요약과 핵심 내용을 확인하고 웹에서 바로 읽어 보세요.">
 <link rel="icon" href="images/logo.png">
 <link rel="apple-touch-icon" href="images/logo.png">
 <meta property="og:type" content="article">
@@ -25,44 +25,43 @@
 <div id="site-header"></div>
 
 <main>
-  <section class="pagehero rv-hero">
+  <section class="pagehero rd-hero">
     <canvas class="hero-canvas" aria-hidden="true"></canvas>
     <div class="wrap">
       <a class="rv-back" href="bluespot.html">← 리포트 목록</a>
-      <span class="eyebrow" id="rvWeek">Trend Report</span>
-      <h1 id="rvTitle">리포트를 불러오는 중…</h1>
-      <p class="rv-meta"><time id="rvDate"></time></p>
-      <p class="rv-summary" id="rvSummary"></p>
-      <div class="rv-tags" id="rvTags"></div>
+      <div class="rd-head">
+        <div class="rd-cover" id="rdCover"></div>
+        <div class="rd-info">
+          <span class="eyebrow" id="rdWeek">Trend Report</span>
+          <h1 id="rdTitle">리포트를 불러오는 중…</h1>
+          <dl class="rd-facts" id="rdFacts"></dl>
+          <p class="rv-summary" id="rdSummary"></p>
+          <div class="rv-tags" id="rdTags"></div>
+          <div class="rd-actions" id="rdActions"></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="rv-shell" id="rvShell" aria-label="리포트 뷰어">
-    <div class="rv-bar" id="rvBar" hidden>
-      <div class="rv-group">
-        <button type="button" class="rv-btn" id="rvPrev" aria-label="이전 쪽"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <span class="rv-counter" id="rvCounter" aria-live="polite">1 / 1</span>
-        <button type="button" class="rv-btn" id="rvNext" aria-label="다음 쪽"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
-      </div>
-      <div class="rv-group">
-        <button type="button" class="rv-btn" id="rvZoomOut" aria-label="축소"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
-        <button type="button" class="rv-zoom" id="rvFit" aria-label="화면 폭에 맞추기"><span id="rvZoom">100%</span></button>
-        <button type="button" class="rv-btn" id="rvZoomIn" aria-label="확대"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-      </div>
-      <div class="rv-group rv-actions">
-        <a class="rv-btn" id="rvDownload" href="#" aria-label="PDF 다운로드" title="PDF 다운로드"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
-        <button type="button" class="rv-btn" id="rvShare" aria-label="공유" title="공유"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></svg></button>
-        <button type="button" class="rv-btn" id="rvFull" aria-label="전체 화면" aria-pressed="false" title="전체 화면"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
-      </div>
-    </div>
-    <div class="rv-stage" id="rvStage">
-      <div class="rv-pages" id="rvPages"><p class="rv-status" id="rvStatus">리포트를 불러오는 중…</p></div>
-    </div>
-  </section>
-
-  <section class="tight">
+  <section class="rd-points" id="rdPointsSection" hidden>
     <div class="wrap">
-      <nav class="rv-siblings" id="rvSiblings" aria-label="다른 리포트"></nav>
+      <div class="section-head">
+        <span class="eyebrow">Key Points</span>
+        <h2>이번 호 핵심</h2>
+      </div>
+      <ol class="rd-points-list" id="rdPoints"></ol>
+      <div class="rd-points-cta" id="rdPointsCta"></div>
+    </div>
+  </section>
+
+  <section class="tight rd-related" id="rdRelatedSection" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">More Reports</span>
+        <h2>함께 읽으면 좋은 리포트</h2>
+      </div>
+      <div class="rp-grid" id="rdRelated"></div>
+      <nav class="rv-siblings" id="rdSiblings" aria-label="이전·다음 리포트"></nav>
     </div>
   </section>
 </main>
@@ -71,10 +70,11 @@
 <div class="rv-toast" id="rvToast" role="status"></div>
 
 <script src="js/insights-data.js"></script>
+<script src="js/reports.js"></script>
+<script src="js/report-detail.js"></script>
 <script src="js/theme-colors.js"></script>
 <script src="js/components.js"></script>
 <script src="js/hero-network.js"></script>
-<script src="js/report-viewer.js"></script>
 <script src="js/bilab-chat.js" data-api="https://ttcxh3bwrc37modrr2bzwxy4440vvkza.lambda-url.ap-northeast-2.on.aws" defer></script>
 </body>
 </html>

@@ -11,7 +11,8 @@ bilab/
 ├── members.html         People: Director · Members · Alumni 탭 (#director / #members / #alumni)
 ├── director.html       → members.html#director 로 이동 (예전 링크·명함 QR 호환용)
 ├── research.html         연구 분야 · 연구 과제
-├── report.html         Blue Spot 트렌드 리포트 PDF 뷰어 (report.html?w=2026-W44)
+├── report.html         Blue Spot 트렌드 리포트 상세: 표지·요약·이번 호 핵심·관련 리포트 (report.html?w=2026-W44)
+├── report-view.html    Blue Spot 트렌드 리포트 PDF 뷰어 (report-view.html?w=2026-W44)
 ├── lumenizer.html        Lumenizer(연구실 AI 논문 리더) 소개 · 기능 영상
 ├── publications.html    논문(저널/진행중/학술대회)
 ├── lectures.html         강의 목록
@@ -25,7 +26,10 @@ bilab/
 │   ├── main.js             뉴스/활동 렌더링, 논문·구성원 탭 필터, 자동 카운트
 │   ├── news-data.js        뉴스·활동·졸업생 데이터 (여기만 수정하면 반영됨)
 │   ├── insights-data.js    트렌드 리포트·카드뉴스 목록 (매주 여기에 한 줄씩 추가)
-│   ├── insights.js         리포트/카드뉴스 탭 전환, 리포트 목록·카드뉴스 갤러리/뷰어 렌더링
+│   ├── insights.js         리포트/카드뉴스 탭 전환, 최신 리포트·키워드 필터·카드 그리드, 카드뉴스 갤러리/뷰어
+│   ├── reports.js          리포트 표지·카드 공용 헬퍼 (목록·상세 페이지가 함께 사용)
+│   ├── report-detail.js    리포트 상세 페이지 (report.html)
+│   ├── report-viewer.js    리포트 PDF 뷰어 (report-view.html)
 │   ├── theme-colors.js     캔버스 일러스트용 테마별 색상 (라이트/다크 연동)
 │   ├── pub-counts.js       논문 수 단일 진실원 (publications.html 마크업을 셈)
 │   ├── pub-links.js        논문 PDF·DOI 링크 렌더링
@@ -35,7 +39,8 @@ bilab/
 │   ├── research-interests.js    연구 관심분야 카드 일러스트
 │   └── lumenizer.js        Lumenizer 페이지 영상: 화면에 보일 때만 재생, reduced-motion이면 정지
 ├── files/publications/index.json   논문별 PDF 파일명 + DOI
-├── files/reports/        주간 트렌드 리포트 PDF (예: 2026-W44.pdf)
+├── files/reports/        주간 트렌드 리포트 PDF와 표지 (예: 2026-W44.pdf, 2026-W44.jpg)
+├── tools/report-cover.py  PDF 첫 쪽으로 리포트 표지 .jpg 만들기 (pip install pymupdf)
 ├── files/cardnews/       주간 카드뉴스 이미지 (예: 2026-W44/01.png, 02.png …)
 ├── media/lumenizer/      Lumenizer 기능 영상(MP4·WebM)과 포스터 이미지
 │                         (paper-reader 저장소의 scripts/demo로 다시 녹화)

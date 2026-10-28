@@ -9,43 +9,85 @@
     return `<div class="insight-empty"><b>${title}</b><p>${text}</p></div>`;
   }
 
-  // "2026-W44" → "W44", shown as the row's badge with the year beneath.
-  function weekParts(week) {
-    const m = /^(\d{4})-W(\d{1,2})$/.exec(week || "");
-    return m ? { y: m[1], w: "W" + m[2].padStart(2, "0") } : { y: "", w: week || "" };
-  }
+  /* ---------- Trend Report: latest report up top, then a filterable card grid ---------- */
+  const PAGE = 9; // cards shown before "더 보기"
 
-  function reportRowHTML(r, latest) {
-    const wk = weekParts(r.week);
+  function featuredHTML(r) {
+    const B = window.BlueSpot;
+    const wk = B.weekParts(r.week);
     const tags = (r.tags || []).map((t) => `<span>${esc(t)}</span>`).join("");
-    // "리포트 보기" opens the in-site viewer (report.html), which also
-    // works on phones and in-app browsers that can't show a PDF themselves
-    const view = `report.html?w=${encodeURIComponent(r.week)}`;
-    const pdf = r.pdf
-      ? `<div class="report-actions">
-           <a href="${view}" class="btn btn-primary btn-sm">리포트 보기 →</a>
-           <a href="${esc(r.pdf)}" download class="btn btn-outline btn-sm">PDF 다운로드</a>
-         </div>`
-      : "";
     return `
-      <article class="report-row${latest ? " latest" : ""}">
-        <div class="report-week"><b>${esc(wk.w)}</b><span>${esc(wk.y)}</span></div>
-        <div class="report-body">
-          <time>${esc(r.date)}${latest ? ' <em class="tag news">Latest</em>' : ""}</time>
-          <h3>${r.pdf ? `<a href="${view}">${esc(r.title)}</a>` : esc(r.title)}</h3>
+      <article class="rp-feature">
+        <a class="rp-feature-cover" href="${B.detailURL(r)}" tabindex="-1" aria-hidden="true">${B.coverHTML(r, true)}</a>
+        <div class="rp-feature-body">
+          <span class="rp-meta"><em class="tag news">Latest</em><b>${esc(wk.y)} · ${esc(wk.w)}</b><time>${esc(r.date)}</time></span>
+          <h3><a href="${B.detailURL(r)}">${esc(r.title)}</a></h3>
           ${r.summary ? `<p>${esc(r.summary)}</p>` : ""}
-          ${tags ? `<div class="people report-tags">${tags}</div>` : ""}
-          ${pdf}
+          ${tags ? `<div class="rp-tags">${tags}</div>` : ""}
+          <div class="report-actions">
+            <a href="${B.detailURL(r)}" class="btn btn-primary btn-sm">리포트 소개 →</a>
+            ${r.pdf ? `<a href="${B.viewerURL(r)}" class="btn btn-outline btn-sm">바로 읽기</a>` : ""}
+          </div>
         </div>
       </article>`;
   }
 
   function renderReports() {
     const el = document.getElementById("reportList");
-    if (!el || typeof REPORT_DATA === "undefined") return;
-    el.innerHTML = REPORT_DATA.length
-      ? REPORT_DATA.map((r, i) => reportRowHTML(r, i === 0)).join("")
-      : emptyHTML("첫 리포트를 준비하고 있습니다", "매주 발행되는 비즈니스 트렌드 리포트가 이곳에 차례로 게시됩니다");
+    if (!el || typeof REPORT_DATA === "undefined" || !window.BlueSpot) return;
+    if (!REPORT_DATA.length) {
+      el.innerHTML = emptyHTML("첫 리포트를 준비하고 있습니다", "매주 발행되는 비즈니스 트렌드 리포트가 이곳에 차례로 게시됩니다");
+      return;
+    }
+
+    // tags ordered by how many reports use them
+    const counts = {};
+    REPORT_DATA.forEach((r) => (r.tags || []).forEach((t) => (counts[t] = (counts[t] || 0) + 1)));
+    const tags = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+
+    el.innerHTML = `
+      <div class="rp-feature-slot"></div>
+      <div class="rp-toolbar"${REPORT_DATA.length > 1 ? "" : " hidden"}>
+        <h3 class="rp-toolbar-title">지난 리포트</h3>
+        ${tags.length > 1 ? `<div class="rp-filter" role="group" aria-label="키워드로 거르기">
+          <button type="button" aria-pressed="true" data-tag="">전체</button>
+          ${tags.map((t) => `<button type="button" aria-pressed="false" data-tag="${esc(t)}">${esc(t)}</button>`).join("")}
+        </div>` : ""}
+      </div>
+      <div class="rp-grid"></div>
+      <div class="rp-more" hidden><button type="button" class="btn btn-outline btn-sm">더 보기</button></div>`;
+
+    const slot = el.querySelector(".rp-feature-slot");
+    const toolbar = el.querySelector(".rp-toolbar");
+    const title = el.querySelector(".rp-toolbar-title");
+    const grid = el.querySelector(".rp-grid");
+    const more = el.querySelector(".rp-more");
+    let tag = "", shown = PAGE;
+
+    function draw() {
+      // "전체": the latest report is featured and the grid holds the rest;
+      // a keyword: every matching report, the latest included, goes in the grid
+      const items = tag ? REPORT_DATA.filter((r) => (r.tags || []).includes(tag)) : REPORT_DATA.slice(1);
+      slot.innerHTML = tag ? "" : featuredHTML(REPORT_DATA[0]);
+      title.textContent = tag ? `‘${tag}’ 리포트 ${items.length}편` : "지난 리포트";
+      grid.innerHTML = items.slice(0, shown).map(window.BlueSpot.cardHTML).join("");
+      more.hidden = items.length <= shown;
+      toolbar.hidden = REPORT_DATA.length < 2;
+    }
+
+    el.querySelectorAll(".rp-filter button").forEach((b) =>
+      b.addEventListener("click", () => {
+        tag = b.dataset.tag;
+        shown = PAGE;
+        el.querySelectorAll(".rp-filter button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        draw();
+      })
+    );
+    more.querySelector("button").addEventListener("click", () => {
+      shown += PAGE;
+      draw();
+    });
+    draw();
   }
 
   /* ---------- Card News ---------- */

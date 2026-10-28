@@ -1016,24 +1016,107 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .insight-empty b{display:block;color:var(--ink);font-size:1.02rem;margin-bottom:6px}
 .insight-empty p{color:var(--muted);font-size:.92rem;margin:0}
 
-.report-list{display:flex;flex-direction:column}
-.report-row{display:grid;grid-template-columns:96px 1fr;gap:28px;padding:28px 0;border-top:1px solid var(--line)}
-.report-list .report-row:last-child{border-bottom:1px solid var(--line)}
-.report-week{display:flex;flex-direction:column;align-items:center;justify-content:center;height:84px;
-  border-radius:12px;background:var(--soft);border:1px solid var(--line)}
-.report-week b{font-size:1.45rem;font-weight:800;color:var(--ink);line-height:1.1}
-.report-week span{font-size:.74rem;font-weight:700;color:var(--dim);margin-top:4px}
-.report-row.latest .report-week{background:var(--accent);border-color:var(--accent)}
+/* Trend Report list: latest issue up top, then a filterable card grid (js/insights.js, js/reports.js) */
+.rp-list{display:flex;flex-direction:column;gap:36px}
+.rp-meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;font-size:.8rem}
+.rp-meta b{color:var(--accent);font-weight:800}
+.rp-meta time{color:var(--dim);font-weight:600}
+.rp-meta em{font-style:normal}
+.rp-tags{display:flex;flex-wrap:wrap;gap:6px}
+.rp-tags span{background:var(--soft);border:1px solid var(--line);padding:3px 10px;border-radius:999px;font-size:.74rem;color:var(--ink)}
+
+/* cover: the PDF's first page; a designed placeholder shows if the image is missing.
+   --cover-ratio sets every cover's shape (A4-ish portrait). */
+.rp-cover{--cover-ratio:3/4;position:relative;display:block;aspect-ratio:var(--cover-ratio);overflow:hidden;
+  border-radius:10px;background:linear-gradient(150deg,var(--navy2) 0%,var(--navy) 55%,#1B3A8C 100%)}
+.rp-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;display:block;background:#fff}
+.rp-cover-ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:9% 10%;color:#fff}
+.rp-cover-ph::before{content:"";position:absolute;right:-18%;top:-12%;width:75%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,rgba(110,134,232,.55),rgba(110,134,232,0) 70%)}
+.rp-cover-ph small{font-size:.66rem;font-weight:800;letter-spacing:.18em;color:#8fb2ff}
+.rp-cover-ph b{font-size:clamp(1.6rem,1rem + 2vw,2.6rem);font-weight:800;line-height:1.05;margin-top:6px}
+.rp-cover-ph span{font-size:.8rem;font-weight:700;color:#c9d5ea;margin-top:2px}
+
+.rp-feature{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:40px;align-items:center;
+  padding:32px;border:1px solid var(--line);border-radius:var(--radius);background:var(--soft)}
+.rp-feature-cover .rp-cover{box-shadow:0 14px 34px rgba(14,32,56,.18)}
+.rp-feature-body h3{font-size:clamp(1.3rem,1.05rem + 1vw,1.7rem);line-height:1.4;margin:12px 0 12px;color:var(--ink)}
+.rp-feature-body h3 a{color:inherit}
+.rp-feature-body p{font-size:.96rem;margin:0}
+.rp-feature-body .rp-tags{margin-top:14px}
+.rp-feature-body .rp-tags span{background:var(--card)}
+.report-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 /* navy disappears into the dark-theme page, so the report CTA uses the accent */
 .report-actions .btn-primary{background:var(--accent)}
-.report-row.latest .report-week b{color:#fff}
-.report-row.latest .report-week span{color:rgba(255,255,255,.78)}
-.report-body time{font-size:.8rem;color:var(--accent);font-weight:700;display:flex;align-items:center;gap:8px}
-.report-body time em{font-style:normal}
-.report-body h3{font-size:1.12rem;margin:8px 0 8px;color:var(--ink);line-height:1.45}
-.report-body p{font-size:.93rem;margin:0}
-.report-tags{margin-top:12px}
-.report-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+
+.rp-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 24px;
+  padding-top:8px;margin-bottom:-12px}
+.rp-toolbar[hidden]{display:none}
+.rp-toolbar-title{font-size:1.15rem;color:var(--ink);margin:0}
+.rp-filter{display:flex;flex-wrap:wrap;gap:6px}
+.rp-filter button{padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);
+  font:inherit;font-size:.8rem;font-weight:700;color:var(--muted);cursor:pointer}
+.rp-filter button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.rp-filter button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){ .rp-filter button[aria-pressed="false"]:hover{border-color:var(--accent);color:var(--accent)} }
+
+.rp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 22px}
+.rp-grid:empty{display:none}
+.rp-card{display:flex;flex-direction:column;gap:14px;color:inherit}
+.rp-card .rp-cover{border:1px solid var(--line);transition:box-shadow .2s,transform .2s}
+.rp-card-body{display:flex;flex-direction:column;gap:6px}
+.rp-card strong{font-size:1rem;line-height:1.45;color:var(--ink)}
+.rp-sum{font-size:.86rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rp-card .rp-tags{margin-top:4px}
+@media (hover:hover) and (pointer:fine){
+  .rp-card:hover .rp-cover{box-shadow:var(--shadow);transform:translateY(-3px)}
+  .rp-card:hover strong{color:var(--accent)}
+}
+.rp-card:focus-visible{outline:none}
+.rp-card:focus-visible .rp-cover{outline:2px solid var(--accent);outline-offset:3px}
+.rp-more{text-align:center}
+.rp-more[hidden]{display:none}
+
+/* Trend Report detail (report.html, js/report-detail.js) */
+.rd-hero{padding-bottom:56px}
+.rd-head{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:48px;align-items:center}
+.rd-head.is-empty{grid-template-columns:1fr}
+.rd-cover .rp-cover{box-shadow:0 20px 50px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.12)}
+.rd-cover a{display:block;border-radius:10px}
+.rd-cover a:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.rd-info h1{line-height:1.35;margin-top:4px}
+.rd-facts{display:flex;flex-wrap:wrap;gap:6px 22px;margin:14px 0 0}
+.rd-facts div{display:flex;gap:8px;font-size:.86rem}
+.rd-facts dt{color:#8fb2ff;font-weight:700}
+.rd-facts dd{margin:0;color:#fff;font-weight:600}
+.pagehero .rd-info .rv-summary{max-width:640px}
+.rd-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.rd-actions .btn-primary{background:var(--accent)}
+.rd-actions .btn-outline{border-color:rgba(255,255,255,.35);color:#fff;background:none;font:inherit;font-weight:700;font-size:.92rem;cursor:pointer}
+@media (hover:hover) and (pointer:fine){ .rd-actions .btn-outline:hover{border-color:#fff;color:#fff} }
+
+.rd-points-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;counter-reset:pt}
+.rd-points-list li{counter-increment:pt;position:relative;padding:22px 24px 22px 70px;border:1px solid var(--line);
+  border-radius:var(--radius);background:var(--card);color:var(--ink);font-size:.98rem;line-height:1.6}
+.rd-points-list li::before{content:counter(pt,decimal-leading-zero);position:absolute;left:24px;top:21px;
+  font-weight:800;font-size:1.05rem;color:var(--accent)}
+.rd-points-cta{margin-top:28px}
+.rd-points-cta .btn-primary{background:var(--accent)}
+.rd-points-cta:empty{display:none}
+.rd-related{background:var(--soft)}
+.rd-related .rv-siblings{margin-top:44px}
+.rd-related .rv-siblings:empty{display:none}
+
+@media (max-width:980px){ .rp-grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (max-width:760px){ .rp-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:760px){
+  .rp-feature{grid-template-columns:minmax(0,1fr);gap:24px;padding:20px}
+  .rp-feature-cover{width:min(220px,62%)}
+  .rd-head{grid-template-columns:minmax(0,1fr);gap:28px}
+  .rd-cover{width:min(200px,56%)}
+  .rd-points-list{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){ .rp-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px} .rp-sum,.rp-card .rp-tags{display:none} }
 
 .cardnews-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .cardnews-grid.is-empty{display:block}
@@ -1074,14 +1157,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .cn-nav:disabled{opacity:0;pointer-events:none}
 @media (max-width:980px){ .cardnews-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:760px){
-  .report-row{grid-template-columns:64px 1fr;gap:16px}
-  .report-week{height:64px}
-  .report-week b{font-size:1.1rem}
   .cardnews-grid{grid-template-columns:minmax(0,1fr)}
   .cn-prev{left:6px}
   .cn-next{right:6px}
 }
-/* ============ TREND REPORT VIEWER (report.html, js/report-viewer.js) ============ */
+/* ============ TREND REPORT VIEWER (report-view.html, js/report-viewer.js) ============ */
 .rv-hero{padding-bottom:44px}
 .rv-back{display:flex;width:fit-content;font-size:.84rem;font-weight:700;color:#a9bade;margin-bottom:16px;padding:6px 0}
 .rv-hero .rv-meta{margin-top:8px;font-size:.88rem;font-weight:700;color:#8fb2ff}
@@ -1125,7 +1205,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .rv-shell:fullscreen{overflow-y:auto;padding-bottom:24px}
 .rv-shell:fullscreen .rv-bar{top:0}
 
-.rv-siblings{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+/* height:auto undoes the site header's nav{height:74px}, which clipped the stacked links on phones */
+.rv-siblings{display:grid;grid-template-columns:1fr 1fr;gap:16px;height:auto}
 .rv-sib{display:flex;flex-direction:column;gap:4px;padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
 .rv-sib:last-child{text-align:right}
 .rv-sib small{font-size:.78rem;font-weight:700;color:var(--accent)}

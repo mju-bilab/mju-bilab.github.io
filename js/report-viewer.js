@@ -1,4 +1,5 @@
-/* Trend Report PDF viewer (report.html?w=2026-W44, data: js/insights-data.js).
+/* Trend Report PDF viewer (report-view.html?w=2026-W44, data: js/insights-data.js).
+   Opened from the report's detail page (report.html?w=…), which "← 리포트 소개" returns to.
    PDF.js draws each page onto a canvas, so the report reads the same in
    desktop browsers, phones and in-app browsers (Instagram, KakaoTalk) that
    would otherwise download the file or show only its first page. Pages
@@ -44,6 +45,7 @@
     if (report.summary) $("#rvSummary").textContent = report.summary;
     $("#rvTags").innerHTML = (report.tags || []).map((t) => `<span>${esc(t)}</span>`).join("");
     document.title = `${report.title} | Blue Spot | BILAB`;
+    $("#rvBack").href = `report.html?w=${encodeURIComponent(report.week)}`;
     const dl = $("#rvDownload");
     dl.href = report.pdf;
     dl.setAttribute("download", (report.week || "report") + ".pdf");
