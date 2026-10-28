@@ -79,9 +79,10 @@
           <h2>Explore</h2>
           <a href="${url("research.html")}">Research Areas</a>
           <a href="${url("publications.html")}">Publications</a>
+          <a href="${url("lumenizer.html")}" class="nav-lumen">Lumenizer</a>
+          <a href="${url("kaeda.html")}" class="nav-kaeda">KAEDA</a>
+          <a href="${url("bluespot.html")}" class="nav-blue">Blue Spot</a>
           <a href="${url("lectures.html")}">Lectures</a>
-          <a href="${url("bluespot.html")}">Trend Report</a>
-          <a href="${url("bluespot.html")}#cardnews">Card News</a>
           <a href="${url("activity.html")}">Our Lab</a>
         </div>
         <div class="foot-col">

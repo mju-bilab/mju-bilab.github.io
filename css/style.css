@@ -639,8 +639,15 @@ footer{background:var(--navy);color:#c8d4e8;padding:64px 0 26px}
 .foot-brand b{color:#fff;font-size:1.2rem;font-weight:800}
 .foot-col h2{color:#fff;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
 .foot-col a,.foot-col span{display:block;color:#a9bade;font-size:.88rem;margin-bottom:10px}
+/* the footer is always navy, so the brand links keep the header's on-dark colours */
+.foot-col a.nav-lumen{color:#FBBF24}
+.foot-col a.nav-kaeda{color:#F29AAB}
+.foot-col a.nav-blue{color:#7DD3FC}
 @media (hover:hover) and (pointer:fine){
   .foot-col a:hover{color:#fff}
+  .foot-col a.nav-lumen:hover{color:#FDE68A}
+  .foot-col a.nav-kaeda:hover{color:#F8C3CE}
+  .foot-col a.nav-blue:hover{color:#BAE6FD}
 }
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:.8rem;color:#7f93b8;flex-wrap:wrap;gap:10px}
 
