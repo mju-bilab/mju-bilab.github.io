@@ -32,6 +32,9 @@
     { label: "Refereed Journals", count: 7, y: 0.3 },
     { label: "Conference Papers", count: 19, y: 0.72 },
   ];
+  // the hub's count is this page's own Research Projects list, so it
+  // follows whatever .tl-item entries research.html holds
+  const PROJECTS = document.querySelectorAll(".timeline .tl-item").length;
 
   let w = 0, h = 0, raf = null;
   const mouse = { x: -999, y: -999, active: false };
@@ -163,7 +166,7 @@
     ctx.fillText("Research Projects", hub.x, hub.y - 20 * k);
     ctx.font = `800 ${13 * k}px Pretendard, sans-serif`;
     ctx.fillStyle = allActive ? rgba(TEAL, 1) : rgba(ACCENT, 1);
-    ctx.fillText("8건", hub.x, hub.y + 20 * k);
+    if (PROJECTS) ctx.fillText(PROJECTS + "건", hub.x, hub.y + 20 * k);
 
     // publication nodes + labels (label to the left of the dot)
     ctx.textAlign = "right";
@@ -238,6 +241,8 @@
       if (!counts) return;
       PUBS[0].count = counts.refereed;
       PUBS[1].count = counts.conf;
+      // the animation loop picks this up; a still (reduced-motion) graph needs a redraw
+      if (reduceMotion) draw(0);
     });
   }
 })();
