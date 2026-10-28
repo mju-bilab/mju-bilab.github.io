@@ -1,4 +1,4 @@
-/* 무지갯빛 유리 구 + 고리 3D 장면 (Iris Glass) */
+/* 빛나는 유리 구 + 고리 3D 장면 — BILAB 로고의 "spot"을 블루 톤으로 */
 import * as THREE from "three";
 
 const canvas = document.getElementById("scene");
@@ -20,15 +20,15 @@ const pmrem = new THREE.PMREMGenerator(renderer);
 // 네온 빛 패널로 만든 환경맵: 유리 표면에 핑크·시안·바이올렛이 비치게 함
 function neonEnvironment() {
   const env = new THREE.Scene();
-  env.background = new THREE.Color(0x141a46);
+  env.background = new THREE.Color(0x0e2038);
   const panel = (color, w, h, pos, intensity = 1) => {
     const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(intensity), side: THREE.DoubleSide }));
     m.position.set(...pos); m.lookAt(0, 0, 0); env.add(m);
   };
-  panel(0xe889c6, 8, 6, [6, 4, 3], 2.2);    // glow-pink
-  panel(0x7fd3ec, 7, 6, [-6, -1, 4], 2.0);  // glow-cyan
-  panel(0x7462c2, 10, 5, [0, -6, -2], 1.6); // grad-mid
-  panel(0xb9a3ec, 6, 6, [-3, 5, -6], 1.4);  // grad-end
+  panel(0x7dd3fc, 8, 6, [6, 4, 3], 2.2);    // sky
+  panel(0x8fb2ff, 7, 6, [-6, -1, 4], 2.0);  // light blue
+  panel(0x3454d1, 10, 5, [0, -6, -2], 1.6); // accent blue
+  panel(0x4a63d8, 6, 6, [-3, 5, -6], 1.4);  // blue
   panel(0xffffff, 3, 2, [-2, 6, 5], 3.0);   // key highlight
   panel(0xe6e9ff, 4, 1.5, [5, -3, 6], 1.5);
   return env;
@@ -38,24 +38,24 @@ scene.environment = pmrem.fromScene(neonEnvironment(), 0.02).texture;
 const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
 camera.position.set(0, 0, 9);
 
-// 네온 빛 (glow-pink, glow-cyan, grad-mid)
-const pink = new THREE.PointLight(0xe889c6, 420, 40); pink.position.set(4, 4, 5);
-const cyan = new THREE.PointLight(0x7fd3ec, 380, 40); cyan.position.set(-5, -2, 4);
-const violet = new THREE.PointLight(0x7462c2, 260, 40); violet.position.set(0, -5, -2);
+// 블루 계열 빛 (sky, light blue, accent)
+const sky = new THREE.PointLight(0x7dd3fc, 420, 40); sky.position.set(4, 4, 5);
+const light = new THREE.PointLight(0x8fb2ff, 380, 40); light.position.set(-5, -2, 4);
+const blue = new THREE.PointLight(0x3454d1, 260, 40); blue.position.set(0, -5, -2);
 const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(-3, 5, 6);
 scene.add(key);
-scene.add(pink, cyan, violet, new THREE.AmbientLight(0x2b3f7e, 0.6));
+scene.add(sky, light, blue, new THREE.AmbientLight(0x163863, 0.6));
 
 const iris = (opts = {}) => new THREE.MeshPhysicalMaterial({
-  color: 0xe9e6ff, metalness: 0.55, roughness: 0.06,
-  iridescence: 1, iridescenceIOR: 1.35, iridescenceThicknessRange: [120, 820],
+  color: 0xe3eafb, metalness: 0.55, roughness: 0.06,
+  iridescence: 0.55, iridescenceIOR: 1.35, iridescenceThicknessRange: [120, 820],
   clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.6, ...opts,
 });
 
 const group = new THREE.Group();
 scene.add(group);
 
-const orb = new THREE.Mesh(new THREE.SphereGeometry(1.25, 128, 128), iris({ sheen: 1, sheenColor: new THREE.Color(0xf0a6dc) }));
+const orb = new THREE.Mesh(new THREE.SphereGeometry(1.25, 128, 128), iris({ sheen: 1, sheenColor: new THREE.Color(0xbae6fd) }));
 group.add(orb);
 
 const ring = new THREE.Mesh(new THREE.TorusGeometry(2.05, 0.1, 64, 240), iris({ metalness: 0.4, roughness: 0.12 }));

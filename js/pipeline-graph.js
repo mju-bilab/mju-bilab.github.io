@@ -37,6 +37,11 @@
   const PROJECTS = document.querySelectorAll(".timeline .tl-item").length;
 
   let w = 0, h = 0, raf = null;
+  // phones: top-to-bottom layout (sources in two rows, hub, then papers) so
+  // labels keep a readable size instead of shrinking with the width
+  // same breakpoint as the taller canvas in css/style.css (.pipeline-illustration)
+  const phone = window.matchMedia("(max-width:600px)");
+  let vertical = false;
   const mouse = { x: -999, y: -999, active: false };
 
   function rgba(c, a) {
@@ -53,6 +58,7 @@
     const rect = canvas.getBoundingClientRect();
     w = rect.width;
     h = rect.height;
+    vertical = phone.matches;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
@@ -64,6 +70,14 @@
   }
 
   function nodePositions() {
+    if (vertical) {
+      const sources = SOURCES.map((label, i) => ({
+        x: (0.17 + (i % 3) * 0.33) * w, y: (i < 3 ? 0.07 : 0.24) * h, label,
+      }));
+      const hub = { x: 0.5 * w, y: 0.55 * h };
+      const pubs = PUBS.map((p, i) => ({ x: (0.27 + i * 0.46) * w, y: 0.82 * h, label: p.label, count: p.count }));
+      return { sources, hub, pubs };
+    }
     const sources = SOURCES.map((label, i) => ({ x: SOURCE_X * w, y: sourceY(i), label }));
     const hub = { x: HUB_X * w, y: 0.5 * h };
     const pubs = PUBS.map((p) => ({ x: PUB_X * w, y: p.y * h, label: p.label, count: p.count }));
@@ -91,7 +105,7 @@
   function draw(t) {
     ctx.clearRect(0, 0, w, h);
     const { sources, hub, pubs } = nodePositions();
-    const k = Math.max(0.6, Math.min(1, w / 640));
+    const k = vertical ? 1.1 : Math.max(0.85, Math.min(1, w / 640));
 
     const hoverIdx = mouse.active
       ? nearest(mouse.x, mouse.y, [...sources, hub, ...pubs])
@@ -139,7 +153,7 @@
     // source nodes + labels (label to the right of the dot)
     ctx.font = `${600} ${10 * k}px Pretendard, sans-serif`;
     ctx.textBaseline = "middle";
-    ctx.textAlign = "left";
+    ctx.textAlign = vertical ? "center" : "left";
     sources.forEach((s, i) => {
       const active = allActive || hoverSource === i;
       ctx.beginPath();
@@ -147,7 +161,8 @@
       ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(ACCENT, 0.7);
       ctx.fill();
       ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(INK, 0.8);
-      ctx.fillText(s.label, s.x + 9 * k, s.y);
+      if (vertical) ctx.fillText(s.label, s.x, s.y + 14 * k);
+      else ctx.fillText(s.label, s.x + 9 * k, s.y);
     });
 
     // hub node
@@ -160,16 +175,18 @@
     ctx.arc(hub.x, hub.y, 6 * k, 0, Math.PI * 2);
     ctx.fillStyle = allActive ? rgba(TEAL, 1) : rgba(ACCENT, 0.9);
     ctx.fill();
-    ctx.textAlign = "center";
+    // vertical: label to the hub's right, clear of the lines above and below
+    const hx = vertical ? hub.x + 20 * k : hub.x;
+    ctx.textAlign = vertical ? "left" : "center";
     ctx.font = `700 ${10.5 * k}px Pretendard, sans-serif`;
     ctx.fillStyle = rgba(INK, 0.85);
-    ctx.fillText("Research Projects", hub.x, hub.y - 20 * k);
+    ctx.fillText("Research Projects", hx, vertical ? hub.y - 8 * k : hub.y - 20 * k);
     ctx.font = `800 ${13 * k}px Pretendard, sans-serif`;
     ctx.fillStyle = allActive ? rgba(TEAL, 1) : rgba(ACCENT, 1);
-    if (PROJECTS) ctx.fillText(PROJECTS + "건", hub.x, hub.y + 20 * k);
+    if (PROJECTS) ctx.fillText(PROJECTS + "건", hx, vertical ? hub.y + 9 * k : hub.y + 20 * k);
 
     // publication nodes + labels (label to the left of the dot)
-    ctx.textAlign = "right";
+    ctx.textAlign = vertical ? "center" : "right";
     pubs.forEach((p, i) => {
       const active = allActive || hoverPub === i;
       ctx.beginPath();
@@ -178,9 +195,10 @@
       ctx.fill();
       ctx.font = `700 ${10 * k}px Pretendard, sans-serif`;
       ctx.fillStyle = active ? rgba(TEAL, 1) : rgba(INK, 0.8);
-      ctx.fillText(p.label, p.x - 10 * k, p.y - 7 * k);
+      const lx = vertical ? p.x : p.x - 10 * k;
+      ctx.fillText(p.label, lx, vertical ? p.y + 16 * k : p.y - 7 * k);
       ctx.font = `800 ${12 * k}px Pretendard, sans-serif`;
-      ctx.fillText(p.count + "편", p.x - 10 * k, p.y + 8 * k);
+      ctx.fillText(p.count + "편", lx, vertical ? p.y + 32 * k : p.y + 8 * k);
     });
   }
 

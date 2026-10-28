@@ -327,6 +327,22 @@ header.scrolled .burger span{background:var(--icon)}
 .pagehero .eyebrow{color:#8fb2ff}
 .pagehero h1{color:#fff;font-size:clamp(1.7rem,1.25rem + 1.8vw,2.3rem)}
 .pagehero p{color:#c9d5ea;max-width:600px;margin-top:12px}
+/* Blue Spot pages: a sky glow and the logo's glowing "spot" with its ring */
+.bs-hero{background:
+  radial-gradient(560px 400px at 80% 45%,rgba(125,211,252,.26),transparent 65%),
+  linear-gradient(160deg,var(--navy) 0%,#14336B 100%)}
+.bs-hero::before{content:"";position:absolute;z-index:0;pointer-events:none;
+  /* centred on the content below the fixed header (topbar 36 + header 74) */
+  right:max(4%,calc(50% - 560px));top:calc(50% + 55px);width:260px;aspect-ratio:1;transform:translateY(-50%);border-radius:50%;
+  background:
+    radial-gradient(circle,transparent 68%,rgba(125,211,252,.28) 68.6%,transparent 69.6%),
+    radial-gradient(circle,#BAE6FD 0%,#7DD3FC 24%,rgba(125,211,252,.24) 48%,rgba(125,211,252,0) 64%)}
+.bs-hero.rd-hero::before{opacity:.5}
+.pagehero.bs-hero .eyebrow{color:#7DD3FC}
+@media (max-width:760px){
+  .bs-hero::before{width:170px;top:96px;right:-36px;transform:none;opacity:.65}
+  .bs-hero.rd-hero::before{opacity:.35}
+}
 .crumb{font-size:.82rem;color:#a9bade;margin-bottom:14px}
 @media (hover:hover) and (pointer:fine){
   .crumb a:hover{color:#fff}
@@ -575,6 +591,8 @@ section.tight{padding:64px 0}
   padding:8px 26px;margin:26px 0 10px;
 }
 .pipeline-illustration canvas{width:100%;height:230px;display:block}
+/* phones: js/pipeline-graph.js switches to a top-to-bottom layout at this same breakpoint */
+@media (max-width:600px){ .pipeline-illustration{padding:8px 12px} .pipeline-illustration canvas{height:340px} }
 
 /* ============ LECTURES ============ */
 .lec-table{width:100%;border-collapse:collapse;margin-top:10px}

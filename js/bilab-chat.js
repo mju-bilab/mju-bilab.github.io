@@ -54,6 +54,9 @@
     '  box-shadow: 0 18px 50px rgba(0,0,0,.28); border: 1px solid var(--line); }',
     '.panel.open { display: flex; }',
     '.wrap.open .launch { display: none; }',
+    // 스크롤을 내리면 문구를 접고 동그란 버튼만 남겨 본문(표 끝, 카드 모서리)을 가리지 않습니다.
+    '.wrap.compact .launch { width: 52px; height: 52px; padding: 0; justify-content: center; font-size: 20px; }',
+    '.wrap.compact .launch .lbl { display: none; }',
     '.head { display: flex; align-items: center; justify-content: space-between; gap: 10px;',
     '  padding: 14px 16px; background: var(--accent); color: #fff; }',
     '.head h2 { margin: 0; font-size: 15px; font-weight: 700; }',
@@ -109,7 +112,7 @@
   root.innerHTML =
     '<style>:host{ --accent:' + ACCENT + '; }\n' + STYLE + '</style>' +
     '<div class="wrap">' +
-      '<button class="launch" type="button" aria-label="' + TITLE + ' 열기">' +
+      '<button class="launch" type="button" aria-label="' + TITLE + ' 열기" title="무엇이든 물어보세요">' +
         '<span aria-hidden="true">💬</span><span class="lbl">무엇이든 물어보세요</span>' +
       '</button>' +
       '<section class="panel" role="dialog" aria-modal="false" aria-label="' + TITLE + '">' +
@@ -127,6 +130,12 @@
     '</div>';
 
   var wrap = root.querySelector('.wrap');
+
+  function compactOnScroll() {
+    wrap.classList.toggle('compact', window.scrollY > 240);
+  }
+  compactOnScroll();
+  window.addEventListener('scroll', compactOnScroll, { passive: true });
 
   // 사이트의 테마를 그대로 따라갑니다.
   // data-theme 이 dark/light 면 그 값을, 없으면 시스템 설정을 씁니다.

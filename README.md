@@ -118,17 +118,19 @@ git push -u origin main
 - [x] 연구실 로고 적용 — "bi" 마크, i의 점이 빛나는 원(Blue Spot). 헤더/푸터는 `components.js`의 인라인 SVG(테마·스크롤에 따라 색 변경),
       파비콘 `images/favicon.svg`(브라우저 다크 모드 대응), 512px PNG `images/logo.png`(apple-touch·OG·검색엔진),
       단독 파일 `images/logo.svg`(남색)·`images/logo-white.svg`(흰색). 원본 디자인: Figma "Blue Spot 카드뉴스 템플릿" Logo 페이지
+      (디지털 명함 `card/`도 같은 남색·블루 톤과 bi 마크로 통일)
 - [ ] Our Lab 활동 사진 추가 (`ACTIVITY_DATA`에 `photo` 필드로)
 - [ ] 실제 도메인 연결 여부 결정 (위 "배포 도메인 설정" 참고)
-- [ ] **공유용 OG 이미지 제작** — 현재 `images/logo.png`를 쓰고 있으나
-      카톡·슬랙 카드에는 1200×630 커버 이미지가 적합합니다
-- [ ] **Lectures 종료 학기 확인** — 아래 4과목은 Status가 `Closed`인데 종료 학기가
+- [x] 공유용 OG 이미지(1200×630) — 사이트 공통 `images/og-image.jpg`, Blue Spot·리포트 페이지 `images/og-bluespot.jpg`.
+      Lumenizer·KAEDA·명함은 각자 전용 이미지를 씁니다. 검색엔진용 로고(JSON-LD)는 정사각형 `logo.png` 유지
+- [ ] **Lectures 종료 학기 확인** — 아래 2과목은 Status가 `Closed`인데 종료 학기가
       기록되어 있지 않아 "YYYY SEASON 개설"로만 표시 중입니다.
       실제 종료 학기를 알려주시면 반영합니다.
-      - 인간공학 및 작업관리 (2021 SPRING 개설)
-      - 기술 혁신과 비즈니스 모델 (2025 SPRING 개설)
       - 텍스트 애널리틱스 (2022 FALL 개설)
       - 테크놀로지 인텔리전스 (2024 SPRING 개설)
+      (참고: "AI 기반 디자인 의사결정"의 2027 SPRING – Ongoing은 의도된 표기입니다)
 - [ ] (선택) Pretendard 셀프 호스팅 — 현재 jsdelivr CDN 사용. CDN 장애 시
       `Malgun Gothic`으로 폴백되며 레이아웃이 흔들립니다
-- [ ] 논문 DOI 채우기 (`files/publications/index.json`)
+- [x] 국제저널 7편 DOI 연결 (`files/publications/index.json`)
+- [ ] 논문 PDF 추가 — 공개 가능한 파일만(오픈 액세스 또는 저자 최종 원고). Sustainability 2023은 CC BY라
+      바로 올릴 수 있음. 학회 발표·진행 중 연구의 DOI/PDF도 필요 시 같은 파일에 추가
