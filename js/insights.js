@@ -12,6 +12,27 @@
   /* ---------- Trend Report: latest report up top, then a filterable card grid ---------- */
   const PAGE = 9; // cards shown before "더 보기"
 
+  // Cards rise in as they scroll into view, 0.05s apart within each batch that
+  // enters together (one row, or the first screenful). The delay stops growing
+  // after the sixth card so a long batch doesn't drag. Only the first render
+  // animates; cards swapped in by the filter or "더 보기" just appear.
+  function revealCards(grid) {
+    const cards = grid.querySelectorAll(".rp-card");
+    if (!cards.length || matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    cards.forEach((c) => c.classList.add("rp-rise"));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.filter((e) => e.isIntersecting).forEach((e, i) => {
+          e.target.style.transitionDelay = Math.min(i, 5) * 0.05 + "s";
+          e.target.classList.add("rp-rise-in");
+          io.unobserve(e.target);
+        });
+      },
+      { rootMargin: "0px 0px -40px 0px" }
+    );
+    cards.forEach((c) => io.observe(c));
+  }
+
   function featuredHTML(r) {
     const B = window.BlueSpot;
     const wk = B.weekParts(r.week);
@@ -62,7 +83,7 @@
     const title = el.querySelector(".rp-toolbar-title");
     const grid = el.querySelector(".rp-grid");
     const more = el.querySelector(".rp-more");
-    let tag = "", shown = PAGE;
+    let tag = "", shown = PAGE, first = true;
 
     function draw() {
       // "전체": the latest report is featured and the grid holds the rest;
@@ -73,6 +94,8 @@
       grid.innerHTML = items.slice(0, shown).map(window.BlueSpot.cardHTML).join("");
       more.hidden = items.length <= shown;
       toolbar.hidden = REPORT_DATA.length < 2;
+      if (first) revealCards(grid);
+      first = false;
     }
 
     el.querySelectorAll(".rp-filter button").forEach((b) =>

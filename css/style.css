@@ -1111,13 +1111,17 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .rp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 22px}
 .rp-grid:empty{display:none}
 .rp-card{display:flex;flex-direction:column;gap:14px;color:inherit}
-.rp-card .rp-cover{border:1px solid var(--line);transition:box-shadow .2s,transform .2s}
+.rp-card .rp-cover{border:1px solid var(--line);transition:box-shadow .3s,transform .3s ease}
+.rp-rise{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.rp-rise-in{opacity:1;transform:none}
 .rp-card-body{display:flex;flex-direction:column;gap:6px}
 .rp-card strong{font-size:1rem;line-height:1.45;color:var(--ink)}
 .rp-sum{font-size:.86rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .rp-card .rp-tags{margin-top:4px}
 @media (hover:hover) and (pointer:fine){
-  .rp-card:hover .rp-cover{box-shadow:var(--shadow);transform:translateY(-3px)}
+  /* the whole cover turns, not the image inside it: the cover clips its image,
+     so a rotated image would leave its corners empty */
+  .rp-card:hover .rp-cover{z-index:2;box-shadow:var(--shadow);transform:translateY(-3px) rotate(-4deg) scale(1.03)}
   .rp-card:hover strong{color:var(--accent)}
 }
 .rp-card:focus-visible{outline:none}
