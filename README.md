@@ -115,7 +115,9 @@ git push -u origin main
 - [x] 지도교수 실제 프로필 사진 적용 (`members.html`)
 - [ ] 지도교수 외 구성원 실제 프로필 사진 추가 (현재는 이름 2자 아바타로 대체)
 - [ ] Google Scholar 프로필 정확한 URL 연결 (`members.html` Director 탭)
-- [x] 연구실 로고 이미지 적용 (`images/logo.png`, 헤더/푸터/파비콘)
+- [x] 연구실 로고 적용 — "bi" 마크, i의 점이 빛나는 원(Blue Spot). 헤더/푸터는 `components.js`의 인라인 SVG(테마·스크롤에 따라 색 변경),
+      파비콘 `images/favicon.svg`(브라우저 다크 모드 대응), 512px PNG `images/logo.png`(apple-touch·OG·검색엔진),
+      단독 파일 `images/logo.svg`(남색)·`images/logo-white.svg`(흰색). 원본 디자인: Figma "Blue Spot 카드뉴스 템플릿" Logo 페이지
 - [ ] Our Lab 활동 사진 추가 (`ACTIVITY_DATA`에 `photo` 필드로)
 - [ ] 실제 도메인 연결 여부 결정 (위 "배포 도메인 설정" 참고)
 - [ ] **공유용 OG 이미지 제작** — 현재 `images/logo.png`를 쓰고 있으나

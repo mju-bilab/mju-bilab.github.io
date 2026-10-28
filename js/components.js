@@ -53,7 +53,7 @@
     <header id="siteHeader">
       <nav class="wrap">
         <a href="${url("index.html")}" class="brand">
-          <span class="mark"><img src="${url("images/logo.png")}" alt="BILAB logo"></span>
+          <span class="mark">${MARK}</span>
           <span class="bt"><b>BILAB</b><span>Business Intelligence Lab · MJU</span></span>
         </a>
         <div class="menu" id="mainMenu">${links}</div>
@@ -62,12 +62,16 @@
     </header>`;
   }
 
+  // BILAB mark ("bi" with the i's dot as a glowing spot). Inline so it takes
+  // its colours from CSS: .mark sets currentColor and --spot per context.
+  const MARK = `<svg viewBox="-6 -11 132 132" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M0 12a12 12 0 0 1 12-12H30V30H84V108a12 12 0 0 1-12 12H12a12 12 0 0 1-12-12Z M30 60H56V90H30Z"/><rect x="89" y="30" width="31" height="90" rx="10" fill="currentColor"/><circle class="halo" cx="104.5" cy="11" r="21"/><circle class="spot" cx="104.5" cy="11" r="13"/></svg>`;
+
   function footerHTML() {
     return `
     <div class="wrap">
       <div class="foot-grid">
         <div class="foot-col">
-          <div class="foot-brand"><span class="mark mark-sm"><img src="${url("images/logo.png")}" alt="BILAB logo"></span><b>BILAB</b></div>
+          <div class="foot-brand"><span class="mark mark-sm">${MARK}</span><b>BILAB</b></div>
           <span>비즈니스 인텔리전스 연구실<br>Business Intelligence Laboratory</span>
           <span>Dept. of Industrial &amp; Management Engineering<br>Myongji University</span>
         </div>

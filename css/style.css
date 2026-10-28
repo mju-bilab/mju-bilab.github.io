@@ -193,7 +193,13 @@ nav{display:flex;align-items:center;justify-content:space-between;height:74px}
   width:38px;height:38px;flex:none;
   display:inline-flex;align-items:center;justify-content:center;
 }
-.mark img{width:100%;height:100%;object-fit:contain;display:block}
+/* BILAB mark: white with a sky spot on the dark hero and footer, navy/ink with
+   the accent spot once the header turns light (dark theme: ink is light) */
+.mark{color:#fff;--spot:#8FB2FF}
+.mark svg{width:100%;height:100%;display:block;overflow:visible}
+.mark .spot{fill:var(--spot)}
+.mark .halo{fill:var(--spot);opacity:.22}
+header.scrolled .mark{color:var(--ink);--spot:var(--accent)}
 .brand .bt{display:flex;flex-direction:column}
 .brand .bt b{font-weight:800;font-size:1.42rem;letter-spacing:.02em;line-height:1;color:#fff;display:block}
 .brand .bt span{font-size:.62rem;line-height:1;margin-top:3px;color:#c8d4e8;letter-spacing:.03em;white-space:nowrap}
