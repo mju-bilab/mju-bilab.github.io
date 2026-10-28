@@ -462,6 +462,9 @@ section.tight{padding:64px 0}
   text-transform:uppercase;padding:2px 7px;border-radius:5px;margin-right:8px;
   background:var(--soft2);color:var(--accent-d);vertical-align:1px;
 }
+/* conference scope: add intl / dom (theme-aware chip colours) */
+.pub-scope.intl{background:var(--chip3-bg);color:var(--chip3-ink)}
+.pub-scope.dom{background:var(--chip1-bg);color:var(--chip1-ink)}
 .pub-item h4{font-size:1rem;color:var(--ink);font-weight:700;margin-bottom:6px;line-height:1.5}
 .pub-item h4 a.pub-pdf-link{color:inherit}
 @media (hover:hover) and (pointer:fine){
