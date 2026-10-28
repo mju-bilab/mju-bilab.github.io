@@ -488,6 +488,10 @@ section.tight{padding:64px 0}
   .pub-doi:hover{text-decoration:underline}
 }
 .status-pill{font-size:.7rem;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--spark-bg);color:var(--spark-ink);letter-spacing:.03em}
+/* Work in Progress stage: add review / ready / prep to the pill (theme-aware chip colours) */
+.status-pill.review{background:var(--chip0-bg);color:var(--chip0-ink)}
+.status-pill.ready{background:var(--chip1-bg);color:var(--chip1-ink)}
+.status-pill.prep{background:var(--chip2-bg);color:var(--chip2-ink)}
 
 /* ============ PEOPLE ============ */
 .person-card{
