@@ -136,7 +136,8 @@
         <button type="button" class="cn-nav cn-prev" aria-label="이전 장">‹</button>
         <div class="cn-track" tabindex="0"></div>
         <button type="button" class="cn-nav cn-next" aria-label="다음 장">›</button>
-      </div>`;
+      </div>
+      <a class="cn-report" hidden></a>`;
     document.body.appendChild(dialog);
     track = dialog.querySelector(".cn-track");
     counter = dialog.querySelector(".cn-counter");
@@ -170,18 +171,34 @@
     nextBtn.disabled = i >= total - 1;
   }
 
+  function reportOf(c) {
+    if (!c.week || typeof REPORT_DATA === "undefined") return null;
+    return REPORT_DATA.find((r) => r.week === c.week) || null;
+  }
+
   function openViewer(index, from) {
     const c = CARDNEWS_DATA[index];
     if (!c) return;
     if (!dialog) buildViewer();
     opener = from;
     titleEl.textContent = c.title;
+    // alts: each slide's text, for screen readers and search; else "제목 N장"
+    const alts = c.alts || [];
     track.innerHTML = (c.slides || [])
       .map(
         (src, i) =>
-          `<figure class="cn-slide"><img src="${esc(src)}" alt="${esc(c.title)} ${i + 1}장" ${i > 1 ? 'loading="lazy"' : ""}></figure>`
+          `<figure class="cn-slide"><img src="${esc(src)}" alt="${esc(alts[i] || `${c.title} ${i + 1}장`)}" ${i > 1 ? 'loading="lazy"' : ""}></figure>`
       )
       .join("");
+    // same-week report, if any: a link under the slides
+    const report = reportOf(c);
+    const link = dialog.querySelector(".cn-report");
+    link.hidden = !report;
+    dialog.classList.toggle("has-report", !!report);
+    if (report) {
+      link.href = `report.html?w=${encodeURIComponent(report.week)}`;
+      link.textContent = "이번 호 리포트 전체 보기 →";
+    }
     dialog.showModal();
     document.documentElement.classList.add("nav-open"); // reuses the menu's scroll lock
     track.scrollLeft = 0;
@@ -211,9 +228,19 @@
     fromHash();
   }
 
+  // bluespot.html?cn=2026-W44#cardnews opens that week's card news straight away
+  // (the report detail page links here)
+  function openFromURL() {
+    const want = new URLSearchParams(location.search).get("cn");
+    if (!want || typeof CARDNEWS_DATA === "undefined") return;
+    const i = CARDNEWS_DATA.findIndex((c) => c.week === want);
+    if (i >= 0) openViewer(i, document.querySelector(`.cardnews-card[data-index="${i}"]`));
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initTabs();
     renderReports();
     renderCardNews();
+    openFromURL();
   });
 })();

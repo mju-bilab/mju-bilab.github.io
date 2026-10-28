@@ -43,9 +43,18 @@
     $("#rdActions").innerHTML = report.pdf
       ? `<a href="${B.viewerURL(report)}" class="btn btn-primary">리포트 읽기 →</a>
          <a href="${esc(report.pdf)}" download="${esc(report.week)}.pdf" class="btn btn-outline">PDF 다운로드</a>
+         ${cardnewsButton()}
          <button type="button" class="btn btn-outline" id="rdShare">공유</button>`
-      : `<button type="button" class="btn btn-outline" id="rdShare">공유</button>`;
+      : `${cardnewsButton()}<button type="button" class="btn btn-outline" id="rdShare">공유</button>`;
     $("#rdShare").addEventListener("click", share);
+  }
+
+  // the same week's card news, opened in the Blue Spot slide viewer
+  function cardnewsButton() {
+    const has = typeof CARDNEWS_DATA !== "undefined" && CARDNEWS_DATA.some((c) => c.week === report.week);
+    return has
+      ? `<a href="bluespot.html?cn=${encodeURIComponent(report.week)}#cardnews" class="btn btn-outline">카드뉴스로 보기</a>`
+      : "";
   }
 
   function fillPoints() {

@@ -1155,6 +1155,13 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .cn-prev{left:-22px}
 .cn-next{right:-22px}
 .cn-nav:disabled{opacity:0;pointer-events:none}
+.cn-report{display:block;width:fit-content;margin:14px auto 0;padding:10px 20px;border-radius:999px;
+  background:var(--accent);color:#fff;font-size:.88rem;font-weight:700}
+.cn-report[hidden]{display:none}
+/* leave room for the report link under the slides */
+.cn-viewer.has-report .cn-track,.cn-viewer.has-report .cn-slide img{max-height:calc(100dvh - 176px)}
+.cn-report:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (hover:hover) and (pointer:fine){ .cn-report:hover{background:var(--accent-d)} }
 @media (max-width:980px){ .cardnews-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:760px){
   .cardnews-grid{grid-template-columns:minmax(0,1fr)}
