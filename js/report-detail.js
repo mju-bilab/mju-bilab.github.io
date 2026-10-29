@@ -24,12 +24,11 @@
   }
 
   function fillHead() {
-    const wk = B.weekParts(report.week);
     document.title = `${report.title} | Blue Spot | BILAB`;
     $("#rdCover").innerHTML = report.pdf
       ? `<a href="${B.viewerURL(report)}" aria-label="리포트 읽기">${B.coverHTML(report, true)}</a>`
       : B.coverHTML(report, true);
-    $("#rdWeek").textContent = `Blue Spot Magazine · ${wk.y} · ${wk.w}`;
+    $("#rdWeek").textContent = "Blue Spot Magazine";
     $("#rdTitle").textContent = report.title;
 
     const facts = [["작성", B.authorOf(report)], ["발행일", report.date], ["분량", report.pages ? `${report.pages}쪽` : ""], ["형식", report.pdf ? "PDF" : ""]];
@@ -42,7 +41,7 @@
 
     $("#rdActions").innerHTML = report.pdf
       ? `<a href="${B.viewerURL(report)}" class="btn btn-primary">리포트 읽기 →</a>
-         <a href="${esc(report.pdf)}" download="${esc(report.week)}.pdf" class="btn btn-outline">PDF 다운로드</a>
+         <a href="${esc(report.pdf)}" download="${esc(B.fileName(report))}" class="btn btn-outline">PDF 다운로드</a>
          ${cardnewsButton()}
          <button type="button" class="btn btn-outline" id="rdShare">공유</button>`
       : `${cardnewsButton()}<button type="button" class="btn btn-outline" id="rdShare">공유</button>`;

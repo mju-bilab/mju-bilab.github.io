@@ -33,13 +33,8 @@
     });
   }
 
-  function weekLabel(week) {
-    const m = /^(\d{4})-W(\d{1,2})$/.exec(week || "");
-    return m ? `${m[1]} · W${m[2].padStart(2, "0")}` : week || "";
-  }
-
   function fillHeader() {
-    $("#rvWeek").textContent = "Blue Spot Magazine · " + weekLabel(report.week);
+    $("#rvWeek").textContent = "Blue Spot Magazine";
     $("#rvTitle").textContent = report.title;
     $("#rvDate").textContent = report.date || "";
     const author = [].concat(report.author || []).filter(Boolean).join(", ");
@@ -50,7 +45,7 @@
     $("#rvBack").href = `report.html?w=${encodeURIComponent(report.week)}`;
     const dl = $("#rvDownload");
     dl.href = report.pdf;
-    dl.setAttribute("download", (report.week || "report") + ".pdf");
+    dl.setAttribute("download", (report.title || "report").replace(/[\\/:*?"<>|]/g, "").trim() + ".pdf");
   }
 
   // older / newer reports at the bottom (REPORT_DATA is newest first)

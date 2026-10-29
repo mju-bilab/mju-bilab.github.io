@@ -35,13 +35,12 @@
 
   function featuredHTML(r) {
     const B = window.BlueSpot;
-    const wk = B.weekParts(r.week);
     const tags = (r.tags || []).map((t) => `<span>${esc(t)}</span>`).join("");
     return `
       <article class="rp-feature">
         <a class="rp-feature-cover" href="${B.detailURL(r)}" tabindex="-1" aria-hidden="true">${B.coverHTML(r, true)}</a>
         <div class="rp-feature-body">
-          <span class="rp-meta"><em class="tag news">Latest</em><b>${esc(wk.y)} · ${esc(wk.w)}</b><time>${esc(r.date)}</time></span>
+          <span class="rp-meta"><em class="tag news">Latest</em><time>${esc(r.date)}</time></span>
           <h3><a href="${B.detailURL(r)}">${esc(r.title)}</a></h3>
           ${B.bylineHTML(r)}
           ${r.summary ? `<p>${esc(r.summary)}</p>` : ""}
