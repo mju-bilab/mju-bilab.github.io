@@ -39,7 +39,7 @@
   }
 
   function fillHeader() {
-    $("#rvWeek").textContent = "Trend Report · " + weekLabel(report.week);
+    $("#rvWeek").textContent = "Blue Spot Magazine · " + weekLabel(report.week);
     $("#rvTitle").textContent = report.title;
     $("#rvDate").textContent = report.date || "";
     const author = [].concat(report.author || []).filter(Boolean).join(", ");

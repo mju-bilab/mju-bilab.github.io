@@ -13,11 +13,11 @@
   const report = list[index];
 
   function notFound() {
-    $("#rdWeek").textContent = "Trend Report";
+    $("#rdWeek").textContent = "Blue Spot Magazine";
     $("#rdTitle").textContent = list.length ? "리포트를 찾을 수 없습니다" : "첫 리포트를 준비하고 있습니다";
     $("#rdSummary").textContent = list.length
       ? "주소가 바뀌었거나 삭제된 리포트입니다. 목록에서 다시 찾아 주세요."
-      : "매주 발행되는 비즈니스 트렌드 리포트가 곧 이곳에 게시됩니다.";
+      : "매주 발행되는 Blue Spot Magazine 리포트가 곧 이곳에 게시됩니다.";
     $("#rdActions").innerHTML = `<a href="bluespot.html" class="btn btn-primary">리포트 목록 →</a>`;
     $("#rdCover").hidden = true;
     document.querySelector(".rd-head").classList.add("is-empty");
@@ -29,7 +29,7 @@
     $("#rdCover").innerHTML = report.pdf
       ? `<a href="${B.viewerURL(report)}" aria-label="리포트 읽기">${B.coverHTML(report, true)}</a>`
       : B.coverHTML(report, true);
-    $("#rdWeek").textContent = `Trend Report · ${wk.y} · ${wk.w}`;
+    $("#rdWeek").textContent = `Blue Spot Magazine · ${wk.y} · ${wk.w}`;
     $("#rdTitle").textContent = report.title;
 
     const facts = [["작성", B.authorOf(report)], ["발행일", report.date], ["분량", report.pages ? `${report.pages}쪽` : ""], ["형식", report.pdf ? "PDF" : ""]];

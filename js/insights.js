@@ -58,7 +58,7 @@
     const el = document.getElementById("reportList");
     if (!el || typeof REPORT_DATA === "undefined" || !window.BlueSpot) return;
     if (!REPORT_DATA.length) {
-      el.innerHTML = emptyHTML("첫 리포트를 준비하고 있습니다", "매주 발행되는 비즈니스 트렌드 리포트가 이곳에 차례로 게시됩니다");
+      el.innerHTML = emptyHTML("첫 리포트를 준비하고 있습니다", "매주 발행되는 Blue Spot Magazine 리포트가 이곳에 차례로 게시됩니다");
       return;
     }
 
