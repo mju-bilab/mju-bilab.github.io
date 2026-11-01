@@ -310,5 +310,10 @@
     fillHeader();
     fillSiblings();
     open();
+    // reader counts (js/view-counter.js; does nothing until GoatCounter is set up)
+    if (window.BlueSpotViews) {
+      window.BlueSpotViews.viewer(report);
+      $("#rvDownload").addEventListener("click", () => window.BlueSpotViews.pdf(report));
+    }
   });
 })();

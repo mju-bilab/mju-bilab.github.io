@@ -6,6 +6,7 @@
   const B = window.BlueSpot;
   const $ = (sel) => document.querySelector(sel);
   const esc = B.esc;
+  const Views = window.BlueSpotViews;
 
   const list = typeof REPORT_DATA !== "undefined" ? REPORT_DATA : [];
   const want = new URLSearchParams(location.search).get("w");
@@ -31,7 +32,7 @@
     $("#rdWeek").textContent = "Blue Spot Magazine";
     $("#rdTitle").textContent = report.title;
 
-    const facts = [["작성", B.authorOf(report)], ["발행일", report.date], ["분량", report.pages ? `${report.pages}쪽` : ""], ["형식", report.pdf ? "PDF" : ""]];
+    const facts = [["작성", B.authorOf(report)], ["발행일", report.date], ["분량", report.pages ? `${report.pages}쪽` : ""], ["읽는 시간", report.minutes ? `약 ${report.minutes}분` : ""], ["형식", report.pdf ? "PDF" : ""]];
     $("#rdFacts").innerHTML = facts
       .filter((f) => f[1])
       .map((f) => `<div><dt>${f[0]}</dt><dd>${esc(f[1])}</dd></div>`)
@@ -46,6 +47,18 @@
          <button type="button" class="btn btn-outline" id="rdShare">공유</button>`
       : `${cardnewsButton()}<button type="button" class="btn btn-outline" id="rdShare">공유</button>`;
     $("#rdShare").addEventListener("click", share);
+    const pdfLink = document.querySelector("#rdActions a[download]");
+    if (pdfLink) pdfLink.addEventListener("click", () => Views && Views.pdf(report));
+    fillReaders();
+  }
+
+  // "읽은 사람" fact and a one-line notice, only when GoatCounter is set up (js/view-counter.js)
+  async function fillReaders() {
+    if (!Views || !Views.enabled || !report.pdf) return;
+    $("#rdActions").insertAdjacentHTML("afterend", `<p class="rd-count-note">읽은 사람은 웹 뷰어를 열거나 PDF를 받은 방문자 수입니다. 쿠키 없이 GoatCounter로 세며 개인을 알아볼 수 있는 정보는 저장하지 않습니다.</p>`);
+    const n = await Views.readers(report);
+    if (n == null) return;
+    $("#rdFacts").insertAdjacentHTML("beforeend", `<div><dt>읽은 사람</dt><dd>${n.toLocaleString("ko-KR")}명</dd></div>`);
   }
 
   // the same week's card news, opened in the Blue Spot slide viewer

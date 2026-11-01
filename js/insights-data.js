@@ -10,6 +10,8 @@
      tags    : ["AI", "Retail"]                (선택) 키워드 — 목록의 키워드 필터와 관련 리포트 추천에 쓰입니다
      pdf     : "files/reports/2026-W44.pdf"    PDF 파일 경로 (files/reports/ 에 올리기)
      pages   : 18                              (선택) 쪽수 — 상세 페이지에 "분량 18쪽"으로 표시
+     minutes : 15                              (선택) 읽는 시간 — "읽는 시간 약 15분". 원고 글자 수 ÷ 분당 500자
+               (Brand-Insight에서 node scripts/reading-minutes.mjs 로 계산)
      highlights : ["핵심 1", "핵심 2", ...]    (선택) 상세 페이지 "이번 호 핵심" (3~4개 권장)
      cover   : "files/reports/2026-W44.jpg"    (선택) 표지 이미지. 비워 두면 PDF와 같은 이름의 .jpg를 씁니다.
                python tools/report-cover.py files/reports/2026-W44.pdf
@@ -42,6 +44,7 @@ const REPORT_DATA = [
     tags: ["XR 헤드셋", "스마트 안경", "웹 후기"],
     pdf: "files/reports/2026-W48.pdf",
     pages: 12,
+    minutes: 14,
     highlights: [
       "헤드셋 웹 후기 51건 중 25건이 이마·광대·머리 압박, 앞으로 쏠린 무게, 두통 같은 착용 부담을 말했다. 협찬 여부가 불분명한 글을 빼고 보면 33건 중 11건이다",
       "스마트 안경 웹 후기 31건 중 11건이 쓰는 목적을 적었고, 번역, 업무 미팅, 핸즈프리 촬영, 이동 중 음성 안내처럼 하던 일을 하면서 쓰는 이야기가 많았다",
@@ -58,6 +61,7 @@ const REPORT_DATA = [
     tags: ["중고거래", "안전결제", "앱 리뷰"],
     pdf: "files/reports/2026-W47.pdf",
     pages: 14,
+    minutes: 23,
     highlights: [
       "당근 바로구매 매물에서 채팅 없이 '질문하기'만 된다고 말한 리뷰가 적어도 223건 있었다. 결제 전에 판매자에게 직접 묻는 길은 좁아졌다",
       "번개장터 리뷰 735건 가운데 465건(63%)이 수수료를 말했다. 보호의 비용과 시간을 누가 얼마나 지는지는 앱마다 달랐다",
@@ -74,6 +78,7 @@ const REPORT_DATA = [
     tags: ["스마트홈", "AI 가전", "앱 리뷰"],
     pdf: "files/reports/2026-W46.pdf",
     pages: 10,
+    minutes: 17,
     highlights: [
       "밖에서 켜고 끄는 편리함은 앱이 보여 주는 상태와 예약을 믿을 수 있을 때 성립하는 것으로 보인다. 상태가 실제와 달랐다는 리뷰가 적어도 28건 있었다",
       "SmartThings 9월 29일 개편 뒤, 세탁기 남은 시간을 보려고 아이콘을 눌렀다가 세탁기가 꺼졌다는 리뷰가 있었다",
@@ -90,6 +95,7 @@ const REPORT_DATA = [
     tags: ["배달앱", "무료배달", "앱 리뷰"],
     pdf: "files/reports/2026-W45.pdf",
     pages: 9,
+    minutes: 24,
     highlights: [
       "늦어지는 것 자체보다, 늦어지는 이유와 남은 시간을 알 수 없을 때 불편이 더 컸다",
       "한집배달을 골랐는데 여러 곳을 들렀다거나, 멤버십에 가입했는데 배달비를 냈다는 리뷰가 있었다. 배민클럽 배달팁 무료는 입점 가게와 알뜰배달에만 적용된다",
@@ -106,6 +112,7 @@ const REPORT_DATA = [
     tags: ["커피", "모바일 주문", "앱 리뷰"],
     pdf: "files/reports/2026-W44.pdf",
     pages: 9,
+    minutes: 19,
     highlights: [
       "빠른 주문 기능이 매장·메뉴·결제수단만 저장하면, 매번 같은 요청사항을 적어야 하는 이용자는 그 기능을 쓰지 못한다",
       "불편은 주문 버튼을 누르기 전에도 생긴다 — 위치 확인, 결제 후 화면 이동, 앱 반응 속도",
